@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {UserService} from './service/user.service';
+import {ProgressService} from './service/progress.service';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +11,12 @@ export class AppComponent {
 
   private title = 'CrowdSourcing';
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private progressService: ProgressService) {
 
   }
 
   async logout() {
     await this.userService.logout();
   }
-
 
 }
