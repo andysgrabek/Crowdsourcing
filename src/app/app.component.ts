@@ -9,9 +9,9 @@ import {ProgressService} from './service/progress.service';
 })
 export class AppComponent {
 
-  private title = 'CrowdSourcing';
+  title = 'CrowdSourcing';
 
-  constructor(private userService: UserService, private progressService: ProgressService) {
+  constructor(public userService: UserService, public progressService: ProgressService) {
 
   }
 

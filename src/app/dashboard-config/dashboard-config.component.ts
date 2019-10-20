@@ -10,9 +10,9 @@ import * as firebase from 'firebase';
 export class DashboardConfigComponent implements OnInit {
 
   @Input()
-  private model: firebase.User;
+  model: firebase.User;
 
-  constructor(private userService: UserService) { }
+  constructor(public userService: UserService) { }
 
   ngOnInit() {
   }
