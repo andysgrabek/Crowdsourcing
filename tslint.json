@@ -52,6 +52,7 @@
       "timeEnd",
       "trace"
     ],
+    "no-trailing-whitespace": false,
     "no-empty": false,
     "no-inferrable-types": [
       true,

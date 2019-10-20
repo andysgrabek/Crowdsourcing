@@ -1,5 +1,10 @@
 <div>
   <mat-toolbar>
-    <span>CrowdSourcingWeb</span>
+    <span>{{title}}</span>
+    <button *ngIf="!userService.currentUser" mat-button routerLink="/login" routerLinkActive="active">LOGIN</button>
+    <button *ngIf="userService.currentUser" mat-button (click)="logout()">LOGOUT</button>
   </mat-toolbar>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
 </div>
