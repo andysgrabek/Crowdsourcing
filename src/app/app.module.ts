@@ -5,9 +5,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
   MatButtonToggleModule,
-  MatDialog, MatDialogModule,
+  MatDialog, MatDialogModule, MatFormFieldModule, MatInputModule,
   MatListModule,
-  MatProgressSpinnerModule, MatSnackBar, MatSnackBarModule,
+  MatProgressSpinnerModule, MatSlideToggleModule, MatSnackBar, MatSnackBarModule,
   MatToolbarModule
 } from '@angular/material';
 import { AngularFireModule } from '@angular/fire';
@@ -29,12 +29,13 @@ import { ResearchTutorialComponent } from './research-tutorial/research-tutorial
 import { ResearchStepComponent } from './research-step/research-step.component';
 import { ResearchComponent } from './research/research.component';
 import { ResearchSurveyComponent } from './research-survey/research-survey.component';
-import { ResearchSurveyConfigComponent } from './research-survey-config/research-survey-config.component';
 import { DashboardConfigComponent } from './dashboard-config/dashboard-config.component';
 import { ResearchConfigListComponent } from './research-config-list/research-config-list.component';
 import {AngularFireAuthGuard} from '@angular/fire/auth-guard';
 import { RegisterComponent } from './register/register.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { ResearchConfigSurveyComponent } from './research-config-survey/research-config-survey.component';
+import { ConsentEditDialogComponent } from './consent-edit-dialog/consent-edit-dialog.component';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDCS3sTMmqiPP64asRfKh4lo0hFUvjb5v4',
@@ -63,11 +64,12 @@ const firebaseConfig = {
     ResearchStepComponent,
     ResearchComponent,
     ResearchSurveyComponent,
-    ResearchSurveyConfigComponent,
     DashboardConfigComponent,
     ResearchConfigListComponent,
     RegisterComponent,
     ConfirmDialogComponent,
+    ResearchConfigSurveyComponent,
+    ConsentEditDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,11 +86,17 @@ const firebaseConfig = {
     AngularFireStorageModule,
     FormsModule,
     MatProgressSpinnerModule,
-    MatListModule
+    MatListModule,
+    MatSlideToggleModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [AngularFireAuthGuard],
   bootstrap: [AppComponent],
-  entryComponents: [ConfirmDialogComponent]
+  entryComponents: [
+    ConfirmDialogComponent,
+    ConsentEditDialogComponent
+  ]
 })
 export class AppModule {
 

@@ -9,7 +9,7 @@ import {ResearchConfigService} from '../service/research-config.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public userService: UserService, private researchConfigService: ResearchConfigService) { }
+  constructor(public userService: UserService, public researchConfigService: ResearchConfigService) { }
 
   ngOnInit() {
 

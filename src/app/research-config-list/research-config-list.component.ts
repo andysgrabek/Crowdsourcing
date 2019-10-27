@@ -3,6 +3,7 @@ import {ResearchConfig} from '../dto/ResearchConfig';
 import {Router} from '@angular/router';
 import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
 import {MatDialog, MatSnackBar} from '@angular/material';
+import {ResearchConfigService} from '../service/research-config.service';
 
 @Component({
   selector: 'app-research-config-list',
@@ -16,7 +17,8 @@ export class ResearchConfigListComponent implements OnInit {
 
   constructor(private dialog: MatDialog,
               private snackBack: MatSnackBar,
-              private router: Router) {
+              private router: Router,
+              private researchConfigService: ResearchConfigService) {
 
   }
 
@@ -24,7 +26,6 @@ export class ResearchConfigListComponent implements OnInit {
   }
 
   async onEdit(id: string) {
-    id = 'dummy';
     await this.router.navigateByUrl('research-config/' + id);
   }
 
@@ -33,8 +34,11 @@ export class ResearchConfigListComponent implements OnInit {
     dialogRef.componentInstance.text = 'Are you sure?';
     dialogRef.componentInstance.onConfirm = () => {
       dialogRef.close();
-      // delete research with id from ResearchConfigService
-      // TODO if success -> show success snackbar, else show fail snackbar
+      if (this.researchConfigService.deleteResearch(id)) {
+        this.snackBack.open('Successfully removed research');
+      } else {
+        this.snackBack.open('Failed to remove research');
+      }
     };
     dialogRef.componentInstance.onCancel = () => {
       dialogRef.close();

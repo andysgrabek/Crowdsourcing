@@ -1,1 +1,10 @@
-<p>research-config-consent works!</p>
+<div>
+  <mat-list>
+    <mat-list-item *ngFor="let consent of researchConfig.consents">
+      <h3>{{consent.text}}</h3>
+      <p>Mandatory {{consent.mandatory ? "Yes" : "No"}}</p>
+      <button mat-raised-button (click)="onEdit(consent)">Edit</button>
+      <button mat-raised-button (click)="onDelete(consent)">Delete</button>
+    </mat-list-item>
+  </mat-list>
+</div>

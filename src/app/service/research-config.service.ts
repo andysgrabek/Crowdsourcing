@@ -16,12 +16,23 @@ export class ResearchConfigService {
     return [ new ResearchConfig() ];
   }
 
-  getByResearchId(researchId: string): ResearchConfig {
-    return  new ResearchConfig();
+  getById(id: string): ResearchConfig {
+    return new ResearchConfig();
   }
 
-  getById(id: string): ResearchConfig {
-    return  new ResearchConfig();
+  setResearchLive(id: string, isLive: boolean): boolean {
+    console.log('Implement me! (publish research)');
+    return true;
+  }
+
+  deleteResearch(id: string): boolean {
+    console.log('Implement me! (delete research)');
+    return true;
+  }
+
+  updateResearch(researchConfig: ResearchConfig): boolean {
+    console.log('Implement me! (update research)');
+    return true;
   }
 
 }
