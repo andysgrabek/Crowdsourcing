@@ -14,7 +14,7 @@ import {ConsentEditDialogComponent} from '../consent-edit-dialog/consent-edit-di
 })
 export class ResearchConfigConsentComponent implements OnInit {
 
-  private researchConfig: ResearchConfig;
+  public researchConfig: ResearchConfig;
 
   constructor(private dialog: MatDialog,
               private snackBar: MatSnackBar,

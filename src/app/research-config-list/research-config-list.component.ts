@@ -13,12 +13,12 @@ import {ResearchConfigService} from '../service/research-config.service';
 export class ResearchConfigListComponent implements OnInit {
 
   @Input()
-  private model: [ResearchConfig];
+  public model: [ResearchConfig];
 
   constructor(private dialog: MatDialog,
               private snackBack: MatSnackBar,
               private router: Router,
-              private researchConfigService: ResearchConfigService) {
+              public researchConfigService: ResearchConfigService) {
 
   }
 
