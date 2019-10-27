@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
 
   { path: 'dashboard', component: DashboardComponent, canActivate: [AngularFireAuthGuard] },
-  { path: 'research-config', component: ResearchConfigComponent, canActivate: [AngularFireAuthGuard] },
+  { path: 'research-config/:id', component: ResearchConfigComponent, canActivate: [AngularFireAuthGuard] },
   { path: 'research-config-consent', component: ResearchConfigConsentComponent, canActivate: [AngularFireAuthGuard] },
   { path: 'research-config-survey', component: ResearchSurveyConfigComponent, canActivate: [AngularFireAuthGuard] },
   { path: 'research-config-tutorial', component: ResearchConfigTutorialComponent, canActivate: [AngularFireAuthGuard] },

@@ -1,1 +1,7 @@
-<p>research-config-list works!</p>
+<mat-list>
+  <mat-list-item *ngFor="let research of model" >
+    <h3>Research id: {{research.id}}</h3>
+    <button mat-raised-button (click)="onEdit(research.id)">Edit</button>
+    <button mat-raised-button (click)="onDelete(research.id)">Delete</button>
+  </mat-list-item>
+</mat-list>

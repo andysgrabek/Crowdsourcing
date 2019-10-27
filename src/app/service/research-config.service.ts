@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {ResearchConfig} from '../dto/ResearchConfig';
 
 @Injectable({
   providedIn: 'root'

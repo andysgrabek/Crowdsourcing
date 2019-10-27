@@ -2,7 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule, MatButtonToggleModule, MatProgressSpinnerModule, MatToolbarModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatDialog, MatDialogModule,
+  MatListModule,
+  MatProgressSpinnerModule, MatSnackBar, MatSnackBarModule,
+  MatToolbarModule
+} from '@angular/material';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
@@ -27,6 +34,7 @@ import { DashboardConfigComponent } from './dashboard-config/dashboard-config.co
 import { ResearchConfigListComponent } from './research-config-list/research-config-list.component';
 import {AngularFireAuthGuard} from '@angular/fire/auth-guard';
 import { RegisterComponent } from './register/register.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDCS3sTMmqiPP64asRfKh4lo0hFUvjb5v4',
@@ -59,10 +67,13 @@ const firebaseConfig = {
     DashboardConfigComponent,
     ResearchConfigListComponent,
     RegisterComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
     appRoutingModule,
+    MatDialogModule,
+    MatSnackBarModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatToolbarModule,
@@ -72,10 +83,12 @@ const firebaseConfig = {
     AngularFireAuthModule,
     AngularFireStorageModule,
     FormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatListModule
   ],
   providers: [AngularFireAuthGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ConfirmDialogComponent]
 })
 export class AppModule {
 
