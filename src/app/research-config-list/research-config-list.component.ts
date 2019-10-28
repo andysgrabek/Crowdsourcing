@@ -12,7 +12,6 @@ import {ResearchConfigService} from '../service/research-config.service';
 })
 export class ResearchConfigListComponent implements OnInit {
 
-  @Input()
   public model: [ResearchConfig];
 
   constructor(private dialog: MatDialog,
@@ -23,6 +22,8 @@ export class ResearchConfigListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.model = this.researchConfigService.getAll();
+    // Todo get by userId
   }
 
   async onEdit(id: string) {
