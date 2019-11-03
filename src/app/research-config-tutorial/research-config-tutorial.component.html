@@ -1,1 +1,11 @@
-<p>research-config-tutorial works!</p>
+<div>
+  <mat-list>
+    <mat-list-item *ngFor="let tutorial of researchConfig.tutorials">
+      <h3>{{tutorial.name}}</h3>
+      <p>{{tutorial.text}}</p>
+      <p>{{tutorial.type}}</p>
+      <button mat-raised-button (click)="onEdit(tutorial)">Edit</button>
+      <button mat-raised-button (click)="onDelete(tutorial)">Delete</button>
+    </mat-list-item>
+  </mat-list>
+</div>

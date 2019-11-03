@@ -1,4 +1,4 @@
-export class ResearchConsent {
+export default class ResearchConsent {
   text: string;
   mandatory: boolean;
 

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {TextFieldModule} from '@angular/cdk/text-field';
-import {ResearchConsent} from '../dto/ResearchConsent';
+import ResearchConsent from '../dto/ResearchConsent';
 
 @Component({
   selector: 'app-consent-edit-dialog',

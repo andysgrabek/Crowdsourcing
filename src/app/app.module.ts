@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
   MatButtonToggleModule,
-  MatDialog, MatDialogModule, MatFormFieldModule, MatInputModule,
+  MatDialogModule, MatFormFieldModule, MatInputModule,
   MatListModule,
   MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule, MatSnackBar, MatSnackBarModule,
   MatToolbarModule
@@ -38,6 +38,9 @@ import { ResearchConfigSurveyComponent } from './research-config-survey/research
 import { ConsentEditDialogComponent } from './consent-edit-dialog/consent-edit-dialog.component';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {CookieService} from 'ngx-cookie-service';
+import { TextTutorialEditorComponent } from './text-tutorial-editor/text-tutorial-editor.component';
+import { ImageTutorialEditorComponent } from './image-tutorial-editor/image-tutorial-editor.component';
+import { VideoTutorialEditorComponent } from './video-tutorial-editor/video-tutorial-editor.component';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDCS3sTMmqiPP64asRfKh4lo0hFUvjb5v4',
@@ -72,6 +75,9 @@ const firebaseConfig = {
     ConfirmDialogComponent,
     ResearchConfigSurveyComponent,
     ConsentEditDialogComponent,
+    TextTutorialEditorComponent,
+    ImageTutorialEditorComponent,
+    VideoTutorialEditorComponent,
   ],
   imports: [
     BrowserModule,
@@ -104,7 +110,10 @@ const firebaseConfig = {
   ],
   entryComponents: [
     ConfirmDialogComponent,
-    ConsentEditDialogComponent
+    ConsentEditDialogComponent,
+    TextTutorialEditorComponent,
+    ImageTutorialEditorComponent,
+    VideoTutorialEditorComponent
   ]
 })
 export class AppModule {

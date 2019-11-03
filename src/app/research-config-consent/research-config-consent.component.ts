@@ -3,7 +3,7 @@ import {MatDialog} from '@angular/material';
 import {ResearchConfigService} from '../service/research-config.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ResearchConfig} from '../dto/ResearchConfig';
-import {ResearchConsent} from '../dto/ResearchConsent';
+import ResearchConsent from '../dto/ResearchConsent';
 import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
 import {ConsentEditDialogComponent} from '../consent-edit-dialog/consent-edit-dialog.component';
 
