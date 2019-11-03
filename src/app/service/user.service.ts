@@ -8,7 +8,9 @@ import {ProgressService} from './progress.service';
 })
 export class UserService {
 
-  constructor(private afAuth: AngularFireAuth, private router: Router, private progressService: ProgressService) { }
+  constructor(private afAuth: AngularFireAuth,
+              private router: Router,
+              private progressService: ProgressService) { }
 
   async login(credentials: { email: string, password: string}) {
     this.progressService.loading = true;
@@ -34,15 +36,19 @@ export class UserService {
   }
 
   async beginChangePassword() {
+    this.progressService.loading = true;
     const actionCodeSettings = {
       url: 'http://' + window.location.host + '/',
       handleCodeInApp: false
     };
     await this.afAuth.auth.sendPasswordResetEmail(this.afAuth.auth.currentUser.email, actionCodeSettings);
+    this.progressService.loading = false;
   }
 
   async beginRegisterUser(credentials: { email: string, password: string}) {
+    this.progressService.loading = true;
     await this.afAuth.auth.createUserWithEmailAndPassword(credentials.email, credentials.password);
+    this.progressService.loading = false;
   }
 
 }

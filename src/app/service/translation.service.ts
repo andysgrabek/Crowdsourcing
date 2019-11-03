@@ -9,9 +9,7 @@ export class TranslationService {
 
   private locale = 'en-US'; // default and only one available locale for now
 
-  constructor(private db: AngularFireDatabase) {
-
-  }
+  constructor(private db: AngularFireDatabase) {}
 
   getBundle(key: string): TranslationBundle {
     const translationPath = 'translation/' + this.locale + '/' + key;
