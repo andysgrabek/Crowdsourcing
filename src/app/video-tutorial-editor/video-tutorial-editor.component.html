@@ -29,6 +29,9 @@
                (keyup)="onUrlChange($event.target.value)">
       </mat-form-field>
     </div>
+    <div>
+      <iframe [src]="ytUrl" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
   </div>
   <div>
     <span><button *ngIf="showCancel" mat-raised-button (click)="onCancel()">Cancel</button></span>

@@ -23,7 +23,7 @@ export class ResearchConfig {
         'video tutorial',
         'video description',
         'video',
-        'https://www.youtube.com/watch?v=M1BEfcXBNLI'),
+        'https://www.youtube.com/embed/odWxQ5eEnfE'),
       new ResearchTutorial(
         'text tutorial',
         'text description',
