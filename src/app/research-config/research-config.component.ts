@@ -32,21 +32,13 @@ export class ResearchConfigComponent implements OnInit {
       dialogRef.componentInstance.text = 'Are you sure you want to unpublish your research?';
       dialogRef.componentInstance.onConfirm = () => {
         dialogRef.close();
-        if (this.researchConfigService.setResearchLive(this.researchConfig.id, false)) {
-          this.snackBar.open('Successfully unpublished research');
-        } else {
-          this.snackBar.open('Failed to unpublish research');
-        }
+        this.researchConfigService.setResearchLive(this.researchConfig.id, false);
       };
     } else {
       dialogRef.componentInstance.text = 'Are you sure you want to publish your research?';
       dialogRef.componentInstance.onConfirm = () => {
         dialogRef.close();
-        if (this.researchConfigService.setResearchLive(this.researchConfig.id, true)) {
-          this.snackBar.open('Successfully published research');
-        } else {
-          this.snackBar.open('Failed to publish research');
-        }
+        this.researchConfigService.setResearchLive(this.researchConfig.id, true);
       };
     }
     dialogRef.componentInstance.onCancel = () => {

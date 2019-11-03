@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MatSnackBar} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {ResearchConfigService} from '../service/research-config.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ResearchConfig} from '../dto/ResearchConfig';
@@ -17,7 +17,6 @@ export class ResearchConfigConsentComponent implements OnInit {
   public researchConfig: ResearchConfig;
 
   constructor(private dialog: MatDialog,
-              private snackBar: MatSnackBar,
               private researchConfigService: ResearchConfigService,
               private router: Router,
               private route: ActivatedRoute) { }
@@ -32,20 +31,11 @@ export class ResearchConfigConsentComponent implements OnInit {
     dialogRef.componentInstance.onConfirm = (newConsent) => {
       dialogRef.close();
       Object.assign(this.researchConfig.consents.find(con => con === consent), newConsent);
-      // todo assign new consent object returned from edit dialog
-      this.handleUpdate();
+      this.researchConfigService.updateResearch(this.researchConfig);
     };
     dialogRef.componentInstance.onCancel = () => {
       dialogRef.close();
     };
-  }
-
-  private handleUpdate() {
-    if (this.researchConfigService.updateResearch(this.researchConfig)) {
-      this.snackBar.open('Successfully updated consent');
-    } else {
-      this.snackBar.open('Failed to update consent');
-    }
   }
 
   async onDelete(consent: ResearchConsent) {
@@ -54,11 +44,7 @@ export class ResearchConfigConsentComponent implements OnInit {
     dialogRef.componentInstance.onConfirm = () => {
       dialogRef.close();
       this.researchConfig.consents = this.researchConfig.consents.filter(con => con !== consent);
-      if (this.researchConfigService.updateResearch(this.researchConfig)) {
-        this.snackBar.open('Successfully updated consent');
-      } else {
-        this.snackBar.open('Failed to update consent');
-      }
+      this.researchConfigService.updateResearch(this.researchConfig);
     };
     dialogRef.componentInstance.onCancel = () => {
       dialogRef.close();

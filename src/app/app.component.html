@@ -1,9 +1,9 @@
 <div>
   <mat-toolbar>
-    <span>{{title}}</span>
-    <button *ngIf="!userService.getCurrentUser()" mat-button routerLink="/login" routerLinkActive="active">LOGIN</button>
-    <button *ngIf="!userService.getCurrentUser()" mat-button routerLink="/register" routerLinkActive="active">REGISTER</button>
-    <button *ngIf="userService.getCurrentUser()" mat-button (click)="logout()">LOGOUT</button>
+    <span>{{rb.get('title')}}</span>
+    <button *ngIf="!userService.getCurrentUser()" mat-button routerLink="/login" routerLinkActive="active">{{rb.get('login')}}</button>
+    <button *ngIf="!userService.getCurrentUser()" mat-button routerLink="/register" routerLinkActive="active">{{rb.get('register')}}</button>
+    <button *ngIf="userService.getCurrentUser()" mat-button (click)="logout()">{{rb.get('logout')}}</button>
   </mat-toolbar>
   <div *ngIf="!this.progressService.loading">
     <router-outlet></router-outlet>

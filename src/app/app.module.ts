@@ -36,6 +36,7 @@ import { RegisterComponent } from './register/register.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { ResearchConfigSurveyComponent } from './research-config-survey/research-config-survey.component';
 import { ConsentEditDialogComponent } from './consent-edit-dialog/consent-edit-dialog.component';
+import {AngularFireDatabase} from '@angular/fire/database';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDCS3sTMmqiPP64asRfKh4lo0hFUvjb5v4',
@@ -91,8 +92,13 @@ const firebaseConfig = {
     MatFormFieldModule,
     MatInputModule
   ],
-  providers: [AngularFireAuthGuard],
-  bootstrap: [AppComponent],
+  providers: [
+    AngularFireAuthGuard,
+    AngularFireDatabase
+  ],
+  bootstrap: [
+    AppComponent
+  ],
   entryComponents: [
     ConfirmDialogComponent,
     ConsentEditDialogComponent
