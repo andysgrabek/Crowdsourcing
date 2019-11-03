@@ -4,9 +4,12 @@
     <button *ngIf="!userService.getCurrentUser()" mat-button routerLink="/login" routerLinkActive="active">{{rb.get('login')}}</button>
     <button *ngIf="!userService.getCurrentUser()" mat-button routerLink="/register" routerLinkActive="active">{{rb.get('register')}}</button>
     <button *ngIf="userService.getCurrentUser()" mat-button (click)="logout()">{{rb.get('logout')}}</button>
+    <mat-form-field>
+      <mat-select [(value)]="tr.currentLocale" (selectionChange)="setLocale($event.source.value)">
+        <mat-option *ngFor="let locale of tr.availableLocales" [value]="locale">{{locale}}</mat-option>
+      </mat-select>
+    </mat-form-field>
   </mat-toolbar>
-  <div *ngIf="!this.progressService.loading">
-    <router-outlet></router-outlet>
-  </div>
+  <div *ngIf="!this.progressService.loading"><router-outlet></router-outlet></div>
   <div *ngIf="this.progressService.loading"><mat-spinner></mat-spinner></div>
 </div>

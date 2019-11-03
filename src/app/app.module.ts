@@ -7,7 +7,7 @@ import {
   MatButtonToggleModule,
   MatDialog, MatDialogModule, MatFormFieldModule, MatInputModule,
   MatListModule,
-  MatProgressSpinnerModule, MatSlideToggleModule, MatSnackBar, MatSnackBarModule,
+  MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule, MatSnackBar, MatSnackBarModule,
   MatToolbarModule
 } from '@angular/material';
 import { AngularFireModule } from '@angular/fire';
@@ -37,6 +37,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { ResearchConfigSurveyComponent } from './research-config-survey/research-config-survey.component';
 import { ConsentEditDialogComponent } from './consent-edit-dialog/consent-edit-dialog.component';
 import {AngularFireDatabase} from '@angular/fire/database';
+import {CookieService} from 'ngx-cookie-service';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDCS3sTMmqiPP64asRfKh4lo0hFUvjb5v4',
@@ -90,11 +91,13 @@ const firebaseConfig = {
     MatListModule,
     MatSlideToggleModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule
   ],
   providers: [
     AngularFireAuthGuard,
-    AngularFireDatabase
+    AngularFireDatabase,
+    CookieService
   ],
   bootstrap: [
     AppComponent

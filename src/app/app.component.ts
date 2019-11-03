@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {UserService} from './service/user.service';
 import {ProgressService} from './service/progress.service';
 import {TranslationBundle, TranslationService} from './service/translation.service';
+import {MatSelectChange} from '@angular/material';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +14,10 @@ export class AppComponent {
 
   rb: TranslationBundle;
 
-  constructor(public userService: UserService, public progressService: ProgressService, private tr: TranslationService) {
+  constructor(public userService: UserService,
+              public progressService: ProgressService,
+              public tr: TranslationService,
+              private router: Router) {
     this.rb = this.tr.getBundle('component/app');
   }
 
@@ -20,4 +25,8 @@ export class AppComponent {
     await this.userService.logout();
   }
 
+  async setLocale(locale: string) {
+    this.tr.setLocale(locale);
+    window.location.reload();
+  }
 }

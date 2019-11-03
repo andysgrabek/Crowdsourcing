@@ -12,7 +12,7 @@ export class ResearchConfigService {
 
   getAll(): [ResearchConfig] {
     this.progressService.loading = true;
-    
+
     this.progressService.loading = false;
     return [ new ResearchConfig() ];
   }
