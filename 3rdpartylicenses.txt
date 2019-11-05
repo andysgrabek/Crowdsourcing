@@ -333,6 +333,9 @@ Apache-2.0
    limitations under the License.
 
 
+@firebase/database
+Apache-2.0
+
 @firebase/firestore
 Apache-2.0
 
@@ -374,6 +377,8 @@ THE SOFTWARE.
 firebase/app
 
 firebase/auth
+
+firebase/database
 
 firebase/firestore
 
