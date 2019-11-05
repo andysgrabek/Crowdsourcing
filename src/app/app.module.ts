@@ -36,7 +36,7 @@ import { RegisterComponent } from './register/register.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { ResearchConfigSurveyComponent } from './research-config-survey/research-config-survey.component';
 import { ConsentEditDialogComponent } from './consent-edit-dialog/consent-edit-dialog.component';
-import {AngularFireDatabase} from '@angular/fire/database';
+import {AngularFireDatabase, AngularFireDatabaseModule} from '@angular/fire/database';
 import {CookieService} from 'ngx-cookie-service';
 import { TextTutorialEditorComponent } from './text-tutorial-editor/text-tutorial-editor.component';
 import { ImageTutorialEditorComponent } from './image-tutorial-editor/image-tutorial-editor.component';
@@ -88,10 +88,11 @@ const firebaseConfig = {
     MatButtonModule,
     MatToolbarModule,
     MatButtonToggleModule,
-    AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    AngularFireDatabaseModule,
     AngularFireStorageModule,
+    AngularFireModule.initializeApp(firebaseConfig),
     FormsModule,
     MatProgressSpinnerModule,
     MatListModule,
