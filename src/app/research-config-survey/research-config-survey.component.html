@@ -1,1 +1,18 @@
-<p>research-config-survey works!</p>
+<div>
+  <mat-list>
+    <mat-list-item *ngFor="let survey of researchConfig.surveys">
+      <h3>{{survey.name}}</h3>
+      <p>{{survey.text}}</p>
+      <p>{{survey.type}}</p>
+      <button mat-raised-button (click)="onEdit(survey)">Edit</button>
+      <button mat-raised-button (click)="onDelete(survey)">Delete</button>
+    </mat-list-item>
+  </mat-list>
+  <button mat-raised-button [matMenuTriggerFor]="menu">Add survey</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="onAddNew('radio')">Radio</button>
+    <button mat-menu-item (click)="onAddNew('checkbox')">Checkbox</button>
+    <button mat-menu-item (click)="onAddNew('text')">Text</button>
+  </mat-menu>
+
+</div>

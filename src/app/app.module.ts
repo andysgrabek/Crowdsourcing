@@ -6,7 +6,7 @@ import {
   MatButtonModule,
   MatButtonToggleModule,
   MatDialogModule, MatFormFieldModule, MatInputModule,
-  MatListModule,
+  MatListModule, MatMenuModule,
   MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule, MatSnackBar, MatSnackBarModule,
   MatToolbarModule
 } from '@angular/material';
@@ -41,6 +41,8 @@ import {CookieService} from 'ngx-cookie-service';
 import { TextTutorialEditorComponent } from './text-tutorial-editor/text-tutorial-editor.component';
 import { ImageTutorialEditorComponent } from './image-tutorial-editor/image-tutorial-editor.component';
 import { VideoTutorialEditorComponent } from './video-tutorial-editor/video-tutorial-editor.component';
+import { TextSurveyEditorComponent } from './text-survey-editor/text-survey-editor.component';
+import { MultipleChoiceSurveyEditorComponent } from './multiple-choice-survey-editor/multiple-choice-survey-editor.component';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDCS3sTMmqiPP64asRfKh4lo0hFUvjb5v4',
@@ -78,6 +80,8 @@ const firebaseConfig = {
     TextTutorialEditorComponent,
     ImageTutorialEditorComponent,
     VideoTutorialEditorComponent,
+    TextSurveyEditorComponent,
+    MultipleChoiceSurveyEditorComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,7 +103,8 @@ const firebaseConfig = {
     MatSlideToggleModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatMenuModule
   ],
   providers: [
     AngularFireAuthGuard,
@@ -114,7 +119,9 @@ const firebaseConfig = {
     ConsentEditDialogComponent,
     TextTutorialEditorComponent,
     ImageTutorialEditorComponent,
-    VideoTutorialEditorComponent
+    VideoTutorialEditorComponent,
+    TextSurveyEditorComponent,
+    MultipleChoiceSurveyEditorComponent
   ]
 })
 export class AppModule {
