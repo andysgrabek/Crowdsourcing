@@ -1,10 +1,27 @@
 <div>
-  <mat-list>
-    <mat-list-item *ngFor="let consent of researchConfig.consents">
-      <h3>{{consent.text}}</h3>
-      <p>Mandatory {{consent.mandatory ? "Yes" : "No"}}</p>
-      <button mat-raised-button (click)="onEdit(consent)">Edit</button>
-      <button mat-raised-button (click)="onDelete(consent)">Delete</button>
-    </mat-list-item>
-  </mat-list>
+  <table mat-table [dataSource]="researchConfig.consents" class="table-aligned" #researchTable>
+    <ng-container matColumnDef="text">
+      <th mat-header-cell *matHeaderCellDef> Text </th>
+      <td mat-cell *matCellDef="let element"> {{element.text}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="mandatory">
+      <th mat-header-cell *matHeaderCellDef> Mandatory </th>
+      <td mat-cell *matCellDef="let element"> {{element.mandatory}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element" class="action-link">
+        <button mat-raised-button (click)="onEdit(element)">Edit</button>
+        <button mat-raised-button (click)="onDelete(element)">Delete</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <button mat-raised-button (click)="onAddNew()">Add consent</button>
+
 </div>

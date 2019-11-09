@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ComponentType} from '@angular/cdk/overlay';
 import {ResearchConfig} from '../dto/ResearchConfig';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatTable} from '@angular/material';
 import {ResearchConfigService} from '../service/research-config.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import ResearchTutorial from '../dto/ResearchTutorial';
 import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
 import {AbstractSurveyEditor} from '../abstract-survey-editor/abstract-survey-editor';
 import {TextSurveyEditorComponent} from '../text-survey-editor/text-survey-editor.component';
@@ -14,22 +13,23 @@ import ResearchSurvey from '../dto/ResearchSurvey';
 @Component({
   selector: 'app-research-config-survey',
   templateUrl: './research-config-survey.component.html',
-  styleUrls: ['./research-config-survey.component.css']
+  styleUrls: ['./research-config-survey.component.css', '../app.component.css']
 })
 export class ResearchConfigSurveyComponent implements OnInit {
 
+  @ViewChild(MatTable, {static: true}) researchTable: MatTable<any>;
   private readonly editors = new Map<string, ComponentType<AbstractSurveyEditor>>([
     ['text', TextSurveyEditorComponent],
     ['radio', MultipleChoiceSurveyEditorComponent],
     ['checkbox', MultipleChoiceSurveyEditorComponent]
   ]);
   public researchConfig: ResearchConfig;
+  displayedColumns = ['name', 'type', 'action'];
 
   constructor(private dialog: MatDialog,
               private researchConfigService: ResearchConfigService,
               private router: Router,
               private route: ActivatedRoute) {
-
   }
 
   ngOnInit() {
@@ -62,7 +62,9 @@ export class ResearchConfigSurveyComponent implements OnInit {
   private onConfirmSurveyAdd(dialogRef, survey: ResearchSurvey) {
     dialogRef.close();
     this.researchConfig.surveys.push(survey);
-    this.researchConfigService.updateResearch(this.researchConfig);
+    if (this.researchConfigService.updateResearch(this.researchConfig)) {
+      this.researchTable.renderRows();
+    }
   }
 
   private onConfirmSurveyEdit(dialogRef, survey: ResearchSurvey, newSurvey) {

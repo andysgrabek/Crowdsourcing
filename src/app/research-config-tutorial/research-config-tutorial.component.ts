@@ -1,9 +1,7 @@
-import {Component, OnInit, TemplateRef} from '@angular/core';
-import ResearchConsent from '../dto/ResearchConsent';
-import {ConsentEditDialogComponent} from '../consent-edit-dialog/consent-edit-dialog.component';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
 import {ResearchConfig} from '../dto/ResearchConfig';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatTable} from '@angular/material';
 import {ResearchConfigService} from '../service/research-config.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import ResearchTutorial from '../dto/ResearchTutorial';
@@ -12,20 +10,24 @@ import {TextTutorialEditorComponent} from '../text-tutorial-editor/text-tutorial
 import {VideoTutorialEditorComponent} from '../video-tutorial-editor/video-tutorial-editor.component';
 import {ComponentType} from '@angular/cdk/overlay';
 import {AbstractTutorialEditor} from '../abstract-tutorial-editor/abstract-tutorial-editor';
+import ResearchConsent from '../dto/ResearchConsent';
+import ResearchSurvey from '../dto/ResearchSurvey';
 
 @Component({
   selector: 'app-research-config-tutorial',
   templateUrl: './research-config-tutorial.component.html',
-  styleUrls: ['./research-config-tutorial.component.css']
+  styleUrls: ['./research-config-tutorial.component.css', '../app.component.css']
 })
 export class ResearchConfigTutorialComponent implements OnInit {
 
+  @ViewChild(MatTable, {static: true}) researchTable: MatTable<ResearchConsent>;
   private readonly editors = new Map<string, ComponentType<AbstractTutorialEditor>>([
     ['text', TextTutorialEditorComponent],
     ['image', ImageTutorialEditorComponent],
     ['video', VideoTutorialEditorComponent]
   ]);
   public researchConfig: ResearchConfig;
+  displayedColumns = ['name', 'type', 'action'];
 
   constructor(private dialog: MatDialog,
               private researchConfigService: ResearchConfigService,
@@ -63,4 +65,22 @@ export class ResearchConfigTutorialComponent implements OnInit {
     this.researchConfig.tutorials = this.researchConfig.tutorials.filter(con => con !== consent);
     this.researchConfigService.updateResearch(this.researchConfig);
   }
+
+  async onAddNew(type: string) {
+    const dialogRef = this.dialog.open(this.editors.get(type));
+    const tutorial = new ResearchTutorial();
+    tutorial.type = type;
+    dialogRef.componentInstance.tutorial = tutorial;
+    dialogRef.componentInstance.onConfirm = (newSurvey) => this.onConfirmTutorialAdd(dialogRef, newSurvey);
+    dialogRef.componentInstance.onCancel = () => dialogRef.close();
+  }
+
+  private onConfirmTutorialAdd(dialogRef, tutorial: ResearchTutorial) {
+    dialogRef.close();
+    this.researchConfig.tutorials.push(tutorial);
+    if (this.researchConfigService.updateResearch(this.researchConfig)) {
+      this.researchTable.renderRows();
+    }
+  }
+
 }

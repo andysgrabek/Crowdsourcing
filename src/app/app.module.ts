@@ -7,7 +7,7 @@ import {
   MatButtonToggleModule,
   MatDialogModule, MatFormFieldModule, MatInputModule,
   MatListModule, MatMenuModule,
-  MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule, MatSnackBar, MatSnackBarModule,
+  MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule, MatSnackBar, MatSnackBarModule, MatTableModule,
   MatToolbarModule
 } from '@angular/material';
 import { AngularFireModule } from '@angular/fire';
@@ -104,7 +104,8 @@ const firebaseConfig = {
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTableModule
   ],
   providers: [
     AngularFireAuthGuard,

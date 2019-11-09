@@ -1,11 +1,33 @@
 <div>
-  <mat-list>
-    <mat-list-item *ngFor="let tutorial of researchConfig.tutorials">
-      <h3>{{tutorial.name}}</h3>
-      <p>{{tutorial.text}}</p>
-      <p>{{tutorial.type}}</p>
-      <button mat-raised-button (click)="onEdit(tutorial)">Edit</button>
-      <button mat-raised-button (click)="onDelete(tutorial)">Delete</button>
-    </mat-list-item>
-  </mat-list>
+
+  <table mat-table [dataSource]="researchConfig.tutorials" class="table-aligned" #researchTable>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let tutorial" class="action-link">
+        <button mat-raised-button (click)="onEdit(tutorial)">Edit</button>
+        <button mat-raised-button (click)="onDelete(tutorial)">Delete</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <button mat-raised-button [matMenuTriggerFor]="menu">Add tutorial</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="onAddNew('video')">Video</button>
+    <button mat-menu-item (click)="onAddNew('image')">Image</button>
+    <button mat-menu-item (click)="onAddNew('text')">Text</button>
+  </mat-menu>
+
 </div>

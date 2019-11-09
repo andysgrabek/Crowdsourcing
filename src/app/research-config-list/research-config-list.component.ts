@@ -1,18 +1,21 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {ResearchConfig} from '../dto/ResearchConfig';
 import {Router} from '@angular/router';
 import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
-import {MatDialog, MatSnackBar} from '@angular/material';
+import {MatDialog, MatSnackBar, MatTable} from '@angular/material';
 import {ResearchConfigService} from '../service/research-config.service';
+import ResearchSurvey from '../dto/ResearchSurvey';
 
 @Component({
   selector: 'app-research-config-list',
   templateUrl: './research-config-list.component.html',
-  styleUrls: ['./research-config-list.component.css']
+  styleUrls: ['./research-config-list.component.css', '../app.component.css']
 })
 export class ResearchConfigListComponent implements OnInit {
 
+  @ViewChild(MatTable, {static: true}) researchTable: MatTable<any>;
   public model: [ResearchConfig];
+  public displayedColumns: string[] = ['id', 'action'];
 
   constructor(private dialog: MatDialog,
               private snackBack: MatSnackBar,
@@ -37,6 +40,7 @@ export class ResearchConfigListComponent implements OnInit {
       dialogRef.close();
       if (this.researchConfigService.deleteResearch(id)) {
         this.snackBack.open('Successfully removed research');
+        this.researchTable.renderRows();
       } else {
         this.snackBack.open('Failed to remove research');
       }
@@ -45,4 +49,5 @@ export class ResearchConfigListComponent implements OnInit {
       dialogRef.close();
     };
   }
+
 }

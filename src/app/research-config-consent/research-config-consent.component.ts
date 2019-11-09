@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import {MatDialog} from '@angular/material';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatDialog, MatTable} from '@angular/material';
 import {ResearchConfigService} from '../service/research-config.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ResearchConfig} from '../dto/ResearchConfig';
 import ResearchConsent from '../dto/ResearchConsent';
 import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
 import {ConsentEditDialogComponent} from '../consent-edit-dialog/consent-edit-dialog.component';
+import ResearchSurvey from '../dto/ResearchSurvey';
 
 @Component({
   selector: 'app-research-config-consent',
   templateUrl: './research-config-consent.component.html',
-  styleUrls: ['./research-config-consent.component.css']
+  styleUrls: ['./research-config-consent.component.css', '../app.component.css']
 })
 export class ResearchConfigConsentComponent implements OnInit {
 
+  @ViewChild(MatTable, {static: true}) researchTable: MatTable<ResearchConsent>;
   public researchConfig: ResearchConfig;
+  public displayedColumns: string[] = ['text', 'mandatory', 'action'];
 
   constructor(private dialog: MatDialog,
               private researchConfigService: ResearchConfigService,
@@ -49,6 +52,21 @@ export class ResearchConfigConsentComponent implements OnInit {
     dialogRef.componentInstance.onCancel = () => {
       dialogRef.close();
     };
+  }
+
+  async onAddNew() {
+    const dialogRef = this.dialog.open(ConsentEditDialogComponent);
+    dialogRef.componentInstance.consent = new ResearchConsent();
+    dialogRef.componentInstance.onConfirm = (c) => this.onConfirmConsentAdd(dialogRef, c);
+    dialogRef.componentInstance.onCancel = () => dialogRef.close();
+  }
+
+  private onConfirmConsentAdd(dialogRef, consent: ResearchConsent) {
+    dialogRef.close();
+    this.researchConfig.consents.push(consent);
+    if (this.researchConfigService.updateResearch(this.researchConfig)) {
+      this.researchTable.renderRows();
+    }
   }
 
 }
