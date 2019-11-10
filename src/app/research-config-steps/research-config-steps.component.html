@@ -1,1 +1,32 @@
-<p>research-config-steps works!</p>
+<div>
+  <table mat-table [dataSource]="researchConfig.steps" class="table-aligned" #researchTable>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let survey"> {{survey.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let survey"> {{survey.type}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let survey" class="action-link">
+        <button mat-raised-button (click)="onEdit(survey)">Edit</button>
+        <button mat-raised-button (click)="onDelete(survey)">Delete</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <button mat-raised-button [matMenuTriggerFor]="menu">Add step</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="onAddNew('video')">Video</button>
+    <button mat-menu-item (click)="onAddNew('image')">Image</button>
+  </mat-menu>
+
+</div>

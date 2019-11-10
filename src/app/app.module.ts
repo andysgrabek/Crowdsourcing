@@ -43,6 +43,8 @@ import { ImageTutorialEditorComponent } from './image-tutorial-editor/image-tuto
 import { VideoTutorialEditorComponent } from './video-tutorial-editor/video-tutorial-editor.component';
 import { TextSurveyEditorComponent } from './text-survey-editor/text-survey-editor.component';
 import { MultipleChoiceSurveyEditorComponent } from './multiple-choice-survey-editor/multiple-choice-survey-editor.component';
+import { VideoStepEditorComponent } from './video-step-editor/video-step-editor.component';
+import { ImageStepEditorComponent } from './image-step-editor/image-step-editor.component';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDCS3sTMmqiPP64asRfKh4lo0hFUvjb5v4',
@@ -82,6 +84,8 @@ const firebaseConfig = {
     VideoTutorialEditorComponent,
     TextSurveyEditorComponent,
     MultipleChoiceSurveyEditorComponent,
+    VideoStepEditorComponent,
+    ImageStepEditorComponent,
   ],
   imports: [
     BrowserModule,
@@ -122,7 +126,9 @@ const firebaseConfig = {
     ImageTutorialEditorComponent,
     VideoTutorialEditorComponent,
     TextSurveyEditorComponent,
-    MultipleChoiceSurveyEditorComponent
+    MultipleChoiceSurveyEditorComponent,
+    VideoStepEditorComponent,
+    ImageStepEditorComponent
   ]
 })
 export class AppModule {

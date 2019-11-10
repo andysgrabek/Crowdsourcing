@@ -38,8 +38,14 @@ export class ResearchConfig {
       new ResearchSurvey('checkbox question', 'question text', 'checkbox', [{val: 'a'}, {val: 'a'}, {val: 'a'}]),
     ];
     this.steps = [
-      new ResearchStep(),
-      new ResearchStep()
+      new ResearchStep('video step',
+        'this is a video step do as I say',
+        'video',
+        'https://www.youtube.com/embed/odWxQ5eEnfE'),
+      new ResearchStep('image step',
+        'this is an image step do as I say',
+        'image',
+        'https://assetsds.cdnedge.bluemix.net/sites/default/files/styles/very_big_1/public/feature/images/education_24.jpg?itok=v4vx6ron')
     ];
   }
 

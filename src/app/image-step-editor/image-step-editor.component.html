@@ -1,0 +1,37 @@
+<div>
+  <div>
+    <div>
+      <mat-form-field>
+        <mat-label>Step name</mat-label>
+        <input matInput
+               [value]="step.name"
+               (keyup)="onNameChange($event.target.value)">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>Step text</mat-label>
+        <textarea matInput
+                  cdkTextareaAutosize
+                  #autosize="cdkTextareaAutosize"
+                  cdkAutosizeMinRows="1"
+                  cdkAutosizeMaxRows="5"
+                  [value]="step.text"
+                  (keyup)="onTextChange($event.target.value)">
+      </textarea>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>Tutorial image url</mat-label>
+        <input matInput
+               [value]="step.url"
+               (keyup)="onUrlChange($event.target.value)">
+      </mat-form-field>
+    </div>
+  </div>
+  <div>
+    <span><button *ngIf="showCancel" mat-raised-button (click)="onCancel()">Cancel</button></span>
+    <span><button *ngIf="showConfirm" mat-raised-button (click)="onConfirm(step)">Confirm</button></span>
+  </div>
+</div>
