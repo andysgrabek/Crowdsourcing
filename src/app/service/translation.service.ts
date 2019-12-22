@@ -23,6 +23,7 @@ export class TranslationService {
 
   setLocale(locale: string) {
     this.currentLocale = locale;
+    this.cookieService.delete(this.currentLocaleCookieName);
     this.cookieService.set(this.currentLocaleCookieName, locale);
   }
 
