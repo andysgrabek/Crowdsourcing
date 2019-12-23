@@ -50,7 +50,11 @@ export class UserService {
     try {
       const res = await this.afAuth.auth.createUserWithEmailAndPassword(credentials.email, credentials.password);
       if (!res.user.emailVerified) {
-        await res.user.sendEmailVerification();
+        const actionCodeSettings = {
+          url: 'http://' + window.location.host + '/',
+          handleCodeInApp: false
+        };
+        await res.user.sendEmailVerification(actionCodeSettings);
       }
     } catch (err) {
       console.log(err);
