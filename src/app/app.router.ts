@@ -11,6 +11,7 @@ import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import {ResearchComponent} from './research/research.component';
 import {RegisterComponent} from './register/register.component';
 import {ResearchConfigSurveyComponent} from './research-config-survey/research-config-survey.component';
+import {ResearchLiveGuardService} from './guard/research-live-guard.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -24,7 +25,7 @@ const routes: Routes = [
   { path: 'research-config-tutorial/:id', component: ResearchConfigTutorialComponent, canActivate: [AngularFireAuthGuard] },
   { path: 'research-config-steps/:id', component: ResearchConfigStepsComponent, canActivate: [AngularFireAuthGuard] },
   { path: 'research-data/:id', component: ResearchDataComponent, canActivate: [AngularFireAuthGuard] },
-  { path: 'research/:id', component: ResearchComponent },
+  { path: 'research/:userId/:researchId', component: ResearchComponent, canActivate: [ResearchLiveGuardService] },
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
 ];

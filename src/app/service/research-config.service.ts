@@ -33,6 +33,14 @@ export class ResearchConfigService {
     return observable;
   }
 
+  getByIdUnauthenticated(userId: string, researchId: string) {
+    this.progressService.loading = true;
+    const accessPath = 'users/' + userId + '/research/' + researchId;
+    const observable = this.db.object(accessPath).valueChanges() as Observable<ResearchConfig>;
+    this.progressService.loading = false;
+    return observable;
+  }
+
   setResearchLive(id: string, research: ResearchConfig, isLive: boolean): boolean {
     this.progressService.loading = true;
     research.isLive = isLive;
