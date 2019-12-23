@@ -47,7 +47,14 @@ export class UserService {
 
   async beginRegisterUser(credentials: { email: string, password: string}) {
     this.progressService.loading = true;
-    await this.afAuth.auth.createUserWithEmailAndPassword(credentials.email, credentials.password);
+    try {
+      const res = await this.afAuth.auth.createUserWithEmailAndPassword(credentials.email, credentials.password);
+      if (!res.user.emailVerified) {
+        await res.user.sendEmailVerification();
+      }
+    } catch (err) {
+      console.log(err);
+    }
     this.progressService.loading = false;
   }
 

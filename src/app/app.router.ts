@@ -24,8 +24,7 @@ const routes: Routes = [
   { path: 'research-config-tutorial/:id', component: ResearchConfigTutorialComponent, canActivate: [AngularFireAuthGuard] },
   { path: 'research-config-steps/:id', component: ResearchConfigStepsComponent, canActivate: [AngularFireAuthGuard] },
   { path: 'research-data/:id', component: ResearchDataComponent, canActivate: [AngularFireAuthGuard] },
-
-  { path: 'research', component: ResearchComponent },
+  { path: 'research/:id', component: ResearchComponent },
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
 ];
