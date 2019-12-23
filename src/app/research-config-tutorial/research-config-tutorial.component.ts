@@ -28,6 +28,7 @@ export class ResearchConfigTutorialComponent implements OnInit {
   ]);
   public researchConfig: ResearchConfig;
   displayedColumns = ['name', 'type', 'action'];
+  private id: string;
 
   constructor(private dialog: MatDialog,
               private researchConfigService: ResearchConfigService,
@@ -37,7 +38,10 @@ export class ResearchConfigTutorialComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.researchConfig = this.researchConfigService.getById(this.route.snapshot.paramMap.get('id'));
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.researchConfigService.getById(this.id).subscribe(res => {
+      this.researchConfig = res;
+    });
   }
 
   async onEdit(tutorial: ResearchTutorial) {
@@ -57,13 +61,13 @@ export class ResearchConfigTutorialComponent implements OnInit {
   private onConfirmTutorialEdit(dialogRef, tutorial: ResearchTutorial, newTutorial) {
     dialogRef.close();
     Object.assign(this.researchConfig.tutorials.find(con => con === tutorial), newTutorial);
-    this.researchConfigService.updateResearch(this.researchConfig);
+    this.researchConfigService.updateResearch(this.id, this.researchConfig);
   }
 
   private onConfirmTutorialDelete(dialogRef, consent: ResearchTutorial) {
     dialogRef.close();
     this.researchConfig.tutorials = this.researchConfig.tutorials.filter(con => con !== consent);
-    this.researchConfigService.updateResearch(this.researchConfig);
+    this.researchConfigService.updateResearch(this.id, this.researchConfig);
   }
 
   async onAddNew(type: string) {
@@ -78,7 +82,7 @@ export class ResearchConfigTutorialComponent implements OnInit {
   private onConfirmTutorialAdd(dialogRef, tutorial: ResearchTutorial) {
     dialogRef.close();
     this.researchConfig.tutorials.push(tutorial);
-    if (this.researchConfigService.updateResearch(this.researchConfig)) {
+    if (this.researchConfigService.updateResearch(this.id, this.researchConfig)) {
       this.researchTable.renderRows();
     }
   }

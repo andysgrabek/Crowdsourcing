@@ -21,6 +21,7 @@ export class ResearchConfigStepsComponent implements OnInit {
   @ViewChild(MatTable, {static: true}) researchTable: MatTable<ResearchStep>;
   public researchConfig: ResearchConfig;
   public displayedColumns: string[] = ['name', 'type', 'action'];
+  private id: string;
   private readonly editors = new Map<string, ComponentType<AbstractStepEditor>>([
     ['image', ImageStepEditorComponent],
     ['video', VideoStepEditorComponent]
@@ -32,7 +33,10 @@ export class ResearchConfigStepsComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.researchConfig = this.researchConfigService.getById(this.route.snapshot.paramMap.get('id'));
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.researchConfigService.getById(this.id).subscribe(res => {
+      this.researchConfig = res;
+    });
   }
 
   async onEdit(step: ResearchStep) {
@@ -41,7 +45,7 @@ export class ResearchConfigStepsComponent implements OnInit {
     dialogRef.componentInstance.onConfirm = (newStep) => {
       dialogRef.close();
       Object.assign(this.researchConfig.steps.find(con => con === step), newStep);
-      this.researchConfigService.updateResearch(this.researchConfig);
+      this.researchConfigService.updateResearch(this.id, this.researchConfig);
     };
     dialogRef.componentInstance.onCancel = () => {
       dialogRef.close();
@@ -54,7 +58,7 @@ export class ResearchConfigStepsComponent implements OnInit {
     dialogRef.componentInstance.onConfirm = () => {
       dialogRef.close();
       this.researchConfig.steps = this.researchConfig.steps.filter(con => con !== step);
-      this.researchConfigService.updateResearch(this.researchConfig);
+      this.researchConfigService.updateResearch(this.id, this.researchConfig);
     };
     dialogRef.componentInstance.onCancel = () => {
       dialogRef.close();
@@ -71,7 +75,7 @@ export class ResearchConfigStepsComponent implements OnInit {
   private onConfirmStepAdd(dialogRef, step: ResearchStep) {
     dialogRef.close();
     this.researchConfig.steps.push(step);
-    if (this.researchConfigService.updateResearch(this.researchConfig)) {
+    if (this.researchConfigService.updateResearch(this.id, this.researchConfig)) {
       this.researchTable.renderRows();
     }
   }

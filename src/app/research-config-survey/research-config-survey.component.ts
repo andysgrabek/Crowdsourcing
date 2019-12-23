@@ -25,6 +25,7 @@ export class ResearchConfigSurveyComponent implements OnInit {
   ]);
   public researchConfig: ResearchConfig;
   displayedColumns = ['name', 'type', 'action'];
+  private id: string;
 
   constructor(private dialog: MatDialog,
               private researchConfigService: ResearchConfigService,
@@ -33,7 +34,10 @@ export class ResearchConfigSurveyComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.researchConfig = this.researchConfigService.getById(this.route.snapshot.paramMap.get('id'));
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.researchConfigService.getById(this.id).subscribe(res => {
+      this.researchConfig = res;
+    });
   }
 
   async onEdit(survey: ResearchSurvey) {
@@ -62,7 +66,7 @@ export class ResearchConfigSurveyComponent implements OnInit {
   private onConfirmSurveyAdd(dialogRef, survey: ResearchSurvey) {
     dialogRef.close();
     this.researchConfig.surveys.push(survey);
-    if (this.researchConfigService.updateResearch(this.researchConfig)) {
+    if (this.researchConfigService.updateResearch(this.id, this.researchConfig)) {
       this.researchTable.renderRows();
     }
   }
@@ -70,13 +74,13 @@ export class ResearchConfigSurveyComponent implements OnInit {
   private onConfirmSurveyEdit(dialogRef, survey: ResearchSurvey, newSurvey) {
     dialogRef.close();
     Object.assign(this.researchConfig.surveys.find(con => con === survey), newSurvey);
-    this.researchConfigService.updateResearch(this.researchConfig);
+    this.researchConfigService.updateResearch(this.id, this.researchConfig);
   }
 
   private onConfirmSurveyDelete(dialogRef, survey: ResearchSurvey) {
     dialogRef.close();
     this.researchConfig.surveys = this.researchConfig.surveys.filter(con => con !== survey);
-    this.researchConfigService.updateResearch(this.researchConfig);
+    this.researchConfigService.updateResearch(this.id, this.researchConfig);
   }
 
 }

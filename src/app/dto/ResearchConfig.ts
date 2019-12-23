@@ -4,8 +4,6 @@ import ResearchSurvey from './ResearchSurvey';
 import ResearchStep from './ResearchStep';
 
 export class ResearchConfig {
-  id: string;
-  userId: string;
   isLive: boolean;
   consents: ResearchConsent[];
   tutorials: ResearchTutorial[];
@@ -14,8 +12,6 @@ export class ResearchConfig {
 
   constructor() {
     this.isLive = false;
-    this.id = 'idXD';
-    this.userId = 'userIdXD';
     this.consents = [ new ResearchConsent() ];
     this.tutorials = [
       new ResearchTutorial(
@@ -31,7 +27,8 @@ export class ResearchConfig {
       new ResearchTutorial(
         'text tutorial',
         'text description',
-        'text'),
+        'text',
+         null),
     ];
     this.surveys = [
       new ResearchSurvey('radio question', 'question text', 'radio', [{val: 'yes'}, {val: 'no'}]),

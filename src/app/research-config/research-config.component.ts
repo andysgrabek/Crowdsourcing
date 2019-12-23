@@ -14,6 +14,7 @@ export class ResearchConfigComponent implements OnInit {
 
   isLive: boolean;
   researchConfig: ResearchConfig;
+  public id: string;
 
   constructor(private dialog: MatDialog,
               private snackBar: MatSnackBar,
@@ -22,8 +23,11 @@ export class ResearchConfigComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.researchConfig = this.researchConfigService.getById(this.route.snapshot.paramMap.get('id'));
-    this.isLive = this.researchConfig.isLive;
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.researchConfigService.getById(this.id).subscribe(config => {
+      this.researchConfig = config;
+      this.isLive = this.researchConfig.isLive;
+    });
   }
 
   onToggle() {
@@ -32,13 +36,13 @@ export class ResearchConfigComponent implements OnInit {
       dialogRef.componentInstance.text = 'Are you sure you want to unpublish your research?';
       dialogRef.componentInstance.onConfirm = () => {
         dialogRef.close();
-        this.researchConfigService.setResearchLive(this.researchConfig.id, false);
+        this.researchConfigService.setResearchLive(this.id, this.researchConfig, false);
       };
     } else {
       dialogRef.componentInstance.text = 'Are you sure you want to publish your research?';
       dialogRef.componentInstance.onConfirm = () => {
         dialogRef.close();
-        this.researchConfigService.setResearchLive(this.researchConfig.id, true);
+        this.researchConfigService.setResearchLive(this.id, this.researchConfig, true);
       };
     }
     dialogRef.componentInstance.onCancel = () => {

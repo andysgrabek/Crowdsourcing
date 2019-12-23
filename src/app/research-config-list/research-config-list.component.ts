@@ -14,7 +14,7 @@ import ResearchSurvey from '../dto/ResearchSurvey';
 export class ResearchConfigListComponent implements OnInit {
 
   @ViewChild(MatTable, {static: true}) researchTable: MatTable<any>;
-  public model: [ResearchConfig];
+  public model: [string, ResearchConfig][];
   public displayedColumns: string[] = ['id', 'action'];
 
   constructor(private dialog: MatDialog,
@@ -25,8 +25,9 @@ export class ResearchConfigListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.model = this.researchConfigService.getAll();
-    // Todo get by userId
+    this.researchConfigService.getAll().subscribe(res => {
+      this.model = new Array(...res.entries());
+    });
   }
 
   async onEdit(id: string) {

@@ -17,7 +17,9 @@ export class ResearchConfigConsentComponent implements OnInit {
 
   @ViewChild(MatTable, {static: true}) researchTable: MatTable<ResearchConsent>;
   public researchConfig: ResearchConfig;
+  public consents: ResearchConsent[];
   public displayedColumns: string[] = ['text', 'mandatory', 'action'];
+  private id: string;
 
   constructor(private dialog: MatDialog,
               private researchConfigService: ResearchConfigService,
@@ -25,7 +27,10 @@ export class ResearchConfigConsentComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.researchConfig = this.researchConfigService.getById(this.route.snapshot.paramMap.get('id'));
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.researchConfigService.getById(this.id).subscribe(res => {
+      this.researchConfig = res;
+    });
   }
 
   async onEdit(consent: ResearchConsent) {
@@ -34,7 +39,7 @@ export class ResearchConfigConsentComponent implements OnInit {
     dialogRef.componentInstance.onConfirm = (newConsent) => {
       dialogRef.close();
       Object.assign(this.researchConfig.consents.find(con => con === consent), newConsent);
-      this.researchConfigService.updateResearch(this.researchConfig);
+      this.researchConfigService.updateResearch(this.id, this.researchConfig);
     };
     dialogRef.componentInstance.onCancel = () => {
       dialogRef.close();
@@ -47,7 +52,7 @@ export class ResearchConfigConsentComponent implements OnInit {
     dialogRef.componentInstance.onConfirm = () => {
       dialogRef.close();
       this.researchConfig.consents = this.researchConfig.consents.filter(con => con !== consent);
-      this.researchConfigService.updateResearch(this.researchConfig);
+      this.researchConfigService.updateResearch(this.id, this.researchConfig);
     };
     dialogRef.componentInstance.onCancel = () => {
       dialogRef.close();
@@ -64,7 +69,7 @@ export class ResearchConfigConsentComponent implements OnInit {
   private onConfirmConsentAdd(dialogRef, consent: ResearchConsent) {
     dialogRef.close();
     this.researchConfig.consents.push(consent);
-    if (this.researchConfigService.updateResearch(this.researchConfig)) {
+    if (this.researchConfigService.updateResearch(this.id, this.researchConfig)) {
       this.researchTable.renderRows();
     }
   }

@@ -2,41 +2,50 @@ import { Injectable } from '@angular/core';
 import {ResearchConfig} from '../dto/ResearchConfig';
 import {MatSnackBar} from '@angular/material';
 import {ProgressService} from './progress.service';
+import {AngularFireDatabase} from '@angular/fire/database';
+import {Observable} from 'rxjs';
+import {UserService} from './user.service';
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResearchConfigService {
 
-  constructor(private snackBar: MatSnackBar, private progressService: ProgressService) { }
+  constructor(private snackBar: MatSnackBar,
+              private progressService: ProgressService,
+              private db: AngularFireDatabase,
+              private userService: UserService) { }
 
-  getAll(): [ResearchConfig] {
+  getAll(): Observable<Map<string, ResearchConfig>> {
     this.progressService.loading = true;
-
+    const accessPath = 'users/' + this.userService.getCurrentUser().uid + '/research';
+    const observable = this.db.object(accessPath).valueChanges().pipe(map(obj => new Map(Object.entries(obj))));
     this.progressService.loading = false;
-    return [ new ResearchConfig() ];
+    return observable;
   }
 
-  getByUserId(userId: string): [ResearchConfig] {
+  getById(id: string): Observable<ResearchConfig> {
     this.progressService.loading = true;
-
+    const accessPath = 'users/' + this.userService.getCurrentUser().uid + '/research/' + id;
+    const observable = this.db.object(accessPath).valueChanges() as Observable<ResearchConfig>;
     this.progressService.loading = false;
-    return [ new ResearchConfig() ];
+    return observable;
   }
 
-  getById(id: string): ResearchConfig {
+  setResearchLive(id: string, research: ResearchConfig, isLive: boolean): boolean {
     this.progressService.loading = true;
-
-    this.progressService.loading = false;
-    return new ResearchConfig();
-  }
-
-  setResearchLive(id: string, isLive: boolean): boolean {
-    this.progressService.loading = true;
-    console.log('Implement me! (publish research)');
-    this.handleUpdate();
+    research.isLive = isLive;
+    this.handleUpdate(id, research);
     this.progressService.loading = false;
     return true;
+  }
+
+  async createResearch() {
+    const research = new ResearchConfig();
+    const accessPath = 'users/' + this.userService.getCurrentUser().uid + '/research';
+    const ref = this.db.database.ref(accessPath);
+    const result = await ref.push().set(research);
   }
 
   deleteResearch(id: string): boolean {
@@ -47,20 +56,22 @@ export class ResearchConfigService {
     return true;
   }
 
-  updateResearch(researchConfig: ResearchConfig): boolean {
+  updateResearch(id: string, researchConfig: ResearchConfig): boolean {
     this.progressService.loading = true;
-    console.log('Implement me! (update research)');
-    this.handleUpdate();
+    this.handleUpdate(id, researchConfig);
     this.progressService.loading = false;
     return true;
   }
 
-  private handleUpdate() {
-    if (true) {
-      this.snackBar.open('Successfully updated research configuration');
-    } else {
-      this.snackBar.open('Failed to update research configuration');
-    }
+  private handleUpdate(id: string, researchConfig: ResearchConfig) {
+    const accessPath = 'users/' + this.userService.getCurrentUser().uid + '/research/' + id;
+    this.db.database.ref(accessPath).update(researchConfig)
+      .then(res => {
+        this.snackBar.open('Successfully updated research configuration');
+      })
+      .catch(err => {
+        this.snackBar.open('Failed to update research configuration');
+      });
   }
 
   private handleDelete() {
