@@ -25,6 +25,10 @@ export class ResearchConfigListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  loadData() {
     this.researchConfigService.getAll().subscribe(res => {
       this.model = new Array(...res.entries());
     });
@@ -49,6 +53,16 @@ export class ResearchConfigListComponent implements OnInit {
     dialogRef.componentInstance.onCancel = () => {
       dialogRef.close();
     };
+  }
+
+  async onAddNew() {
+    const newResearch = new ResearchConfig();
+    try {
+      await this.researchConfigService.createResearch(newResearch);
+      this.loadData();
+    } finally {
+
+    }
   }
 
 }
