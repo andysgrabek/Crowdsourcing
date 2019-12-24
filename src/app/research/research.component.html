@@ -1,31 +1,39 @@
 <div *ngIf="model">
-  <mat-vertical-stepper [linear]="true" #stepper>
+  <mat-horizontal-stepper [linear]="true" #stepper>
 
-    <mat-step *ngFor="let consent of model.consents">
-      <ng-template matStepLabel>Consent {{model.consents.indexOf(consent) + 1}}</ng-template>
-      <app-research-consent></app-research-consent>
+    <mat-step>
+      <ng-template matStepLabel>{{rb.get('consents-step-name')}}</ng-template>
+      <app-research-consent *ngFor="let consent of model.consents" [consent]="consent"></app-research-consent>
+      <div>
+        <p>{{rb.get('mandatory-helper-text')}}</p>
+      </div>
     </mat-step>
 
-    <mat-step *ngFor="let survey of model.surveys">
-      <ng-template matStepLabel>Survey {{model.surveys.indexOf(survey) + 1}} - {{survey.name}}</ng-template>
-      <app-research-survey></app-research-survey>
+    <mat-step>
+      <ng-template matStepLabel>{{rb.get('survey-step-name')}}</ng-template>
+      <app-research-survey *ngFor="let survey of model.surveys"></app-research-survey>
     </mat-step>
 
-    <mat-step *ngFor="let tutorial of model.tutorials">
-      <ng-template matStepLabel>Tutorial {{model.tutorials.indexOf(tutorial) + 1}} - {{tutorial.name}}</ng-template>
-      <app-research-tutorial></app-research-tutorial>
+    <mat-step>
+      <ng-template matStepLabel>{{rb.get('tutorial-step-name')}}</ng-template>
+      <app-research-tutorial *ngFor="let tutorial of model.tutorials"></app-research-tutorial>
     </mat-step>
 
-    <mat-step *ngFor="let step of model.steps">
-      <ng-template matStepLabel>Step {{model.steps.indexOf(step) + 1}} - {{step.name}}</ng-template>
-      <app-research-step></app-research-step>
+    <mat-step>
+      <ng-template matStepLabel>{{rb.get('steps-step-name')}}</ng-template>
+      <app-research-step *ngFor="let step of model.steps"></app-research-step>
     </mat-step>
 
-  </mat-vertical-stepper>
+    <mat-step>
+      <ng-template matStepLabel>{{rb.get('finished-step-name')}}</ng-template>
+      <p>{{rb.get('finished')}}</p>
+    </mat-step>
+
+  </mat-horizontal-stepper>
 
   <div>
-    <button mat-button (click)="goBack(stepper)" type="button">Back</button>
-    <button mat-button (click)="goForward(stepper)" type="button">Next</button>
+    <button mat-button (click)="goBack(stepper)" type="button">{{rb.get('step-back')}}</button>
+    <button mat-button (click)="goForward(stepper)" type="button">{{rb.get('step-next')}}</button>
   </div>
 
 </div>

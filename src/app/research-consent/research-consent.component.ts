@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import ResearchConsent from '../dto/ResearchConsent';
+import {TranslationBundle, TranslationService} from '../service/translation.service';
 
 @Component({
   selector: 'app-research-consent',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResearchConsentComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  consent: ResearchConsent;
+  rb: TranslationBundle;
+
+  constructor(private tr: TranslationService) {
+    this.rb = this.tr.getComponentBundle(this);
+  }
 
   ngOnInit() {
   }

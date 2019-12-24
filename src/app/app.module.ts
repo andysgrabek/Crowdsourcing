@@ -46,7 +46,8 @@ import { MultipleChoiceSurveyEditorComponent } from './multiple-choice-survey-ed
 import { VideoStepEditorComponent } from './video-step-editor/video-step-editor.component';
 import { ImageStepEditorComponent } from './image-step-editor/image-step-editor.component';
 import {ResearchLiveGuardService} from './guard/research-live-guard.service';
-import {MatStepperModule} from "@angular/material/stepper";
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDCS3sTMmqiPP64asRfKh4lo0hFUvjb5v4',
@@ -112,7 +113,8 @@ const firebaseConfig = {
     MatSelectModule,
     MatMenuModule,
     MatTableModule,
-    MatStepperModule
+    MatStepperModule,
+    MatCheckboxModule
   ],
   providers: [
     ResearchLiveGuardService,
