@@ -6,16 +6,21 @@ import {AngularFireDatabase} from '@angular/fire/database';
 import {Observable} from 'rxjs';
 import {UserService} from './user.service';
 import {map, tap} from 'rxjs/operators';
+import {TranslationBundle, TranslationService} from './translation.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResearchConfigService {
+  private rb: TranslationBundle;
 
   constructor(private snackBar: MatSnackBar,
               private progressService: ProgressService,
               private db: AngularFireDatabase,
-              private userService: UserService) { }
+              private userService: UserService,
+              private tr: TranslationService) {
+    this.rb = tr.getServiceBundle('ResearchConfigService');
+  }
 
   getAll(): Observable<Map<string, ResearchConfig>> {
     this.progressService.setLoadingState(true);
