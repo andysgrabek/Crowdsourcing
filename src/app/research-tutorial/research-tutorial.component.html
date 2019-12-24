@@ -1,21 +1,22 @@
 <div *ngIf="tutorial">
+
   <div>
     <h2>{{tutorial.name}}</h2>
   </div>
-  <div *ngIf="tutorial.type === 'text'">
-    <p>{{tutorial.text}}</p>
-  </div>
 
-  <div *ngIf="tutorial.type === 'video'">
+  <div *ngIf="tutorial.type === researchTutorialTypes.VIDEO">
     <div style="position: relative; height: 80vh">
       <iframe style="position: relative; height: 100%; width: 100%;" [src]="ytUrl" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
   </div>
 
-  <div *ngIf="tutorial.type === 'image'">
+  <div *ngIf="tutorial.type === researchTutorialTypes.IMAGE">
     <div style="text-align: center">
       <img style="position: relative;" src="{{tutorial.url}}" alt="tutorial-image">
     </div>
   </div>
+
+  <p>{{tutorial.text}}</p>
+
   <mat-divider></mat-divider>
 </div>
