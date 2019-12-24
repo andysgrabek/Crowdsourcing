@@ -2,7 +2,7 @@
   <div>
     <div>
       <mat-form-field>
-        <mat-label>Tutorial name</mat-label>
+        <mat-label>{{rb.get('tutorial-name')}}</mat-label>
         <input matInput
                [value]="tutorial.name"
                (keyup)="onNameChange($event.target.value)">
@@ -10,7 +10,7 @@
     </div>
     <div>
       <mat-form-field>
-        <mat-label>Tutorial text</mat-label>
+        <mat-label>{{rb.get('tutorial-text')}}</mat-label>
         <textarea matInput
                   cdkTextareaAutosize
                   #autosize="cdkTextareaAutosize"
@@ -23,7 +23,7 @@
     </div>
     <div>
       <mat-form-field>
-        <mat-label>Tutorial image url</mat-label>
+        <mat-label>{{rb.get('image-url')}}</mat-label>
         <input matInput
                [value]="tutorial.url"
                (keyup)="onUrlChange($event.target.value)">
@@ -31,7 +31,7 @@
     </div>
   </div>
   <div>
-    <span><button *ngIf="showCancel" mat-raised-button (click)="onCancel()">Cancel</button></span>
-    <span><button *ngIf="showConfirm" mat-raised-button (click)="onConfirm(tutorial)">Confirm</button></span>
+    <span><button *ngIf="showCancel" mat-raised-button (click)="onCancel()">{{rb.get('cancel')}}</button></span>
+    <span><button *ngIf="showConfirm" mat-raised-button (click)="onConfirm(tutorial)">{{rb.get('cancel')}}</button></span>
   </div>
 </div>

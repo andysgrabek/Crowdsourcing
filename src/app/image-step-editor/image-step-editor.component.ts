@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractStepEditor} from '../abstract-step-editor/abstract-step-editor';
+import {TranslationBundle, TranslationService} from '../service/translation.service';
 
 @Component({
   selector: 'app-image-step-editor',
@@ -7,9 +8,11 @@ import {AbstractStepEditor} from '../abstract-step-editor/abstract-step-editor';
   styleUrls: ['./image-step-editor.component.css']
 })
 export class ImageStepEditorComponent extends AbstractStepEditor implements OnInit {
+  rb: TranslationBundle;
 
-  constructor() {
+  constructor(private tr: TranslationService) {
     super();
+    this.rb = tr.getComponentBundle(this);
   }
 
   ngOnInit() {
