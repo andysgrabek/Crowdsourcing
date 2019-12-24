@@ -36,6 +36,10 @@ export class TranslationService {
   getComponentBundle(componentClassName: string): TranslationBundle {
     return this.getBundle('component/' + componentClassName);
   }
+
+  getServiceBundle(serviceName: string): TranslationBundle {
+    return this.getBundle('service/' + serviceName);
+  }
 }
 
 export interface TranslationBundle {
