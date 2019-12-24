@@ -14,6 +14,7 @@ export class ResearchComponent implements OnInit {
 
   public model: ResearchConfig;
   rb: TranslationBundle;
+  stepTypes = ResearchStepperSteps;
 
   constructor(private researchConfigService: ResearchConfigService,
               private route: ActivatedRoute,
@@ -34,6 +35,25 @@ export class ResearchComponent implements OnInit {
   }
 
   async goForward(stepper: MatStepper) {
+    switch (stepper.selectedIndex) {
+      case ResearchStepperSteps.CONSENTS:
+        break;
+      case ResearchStepperSteps.SURVEY:
+        break;
+      case ResearchStepperSteps.TUTORIAL:
+        break;
+      case ResearchStepperSteps.SUMMARY:
+        break;
+      case ResearchStepperSteps.STEPS:
+    }
     stepper.next();
   }
+}
+
+export enum ResearchStepperSteps {
+  CONSENTS,
+  SURVEY,
+  TUTORIAL,
+  STEPS,
+  SUMMARY
 }

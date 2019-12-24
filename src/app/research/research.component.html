@@ -32,8 +32,17 @@
   </mat-horizontal-stepper>
 
   <div>
-    <button mat-button (click)="goBack(stepper)" type="button">{{rb.get('step-back')}}</button>
-    <button mat-button (click)="goForward(stepper)" type="button">{{rb.get('step-next')}}</button>
+    <button mat-button
+            [disabled]="stepper.selectedIndex === stepTypes.CONSENTS || stepper.selectedIndex === stepTypes.SUMMARY"
+            (click)="goBack(stepper)"
+            type="button">
+      {{rb.get('step-back')}}
+    </button>
+    <button mat-button
+            [disabled]="stepper.selectedIndex === stepTypes.SUMMARY"
+            (click)="goForward(stepper)"
+            type="button">
+      {{rb.get('step-next')}}</button>
   </div>
 
 </div>
