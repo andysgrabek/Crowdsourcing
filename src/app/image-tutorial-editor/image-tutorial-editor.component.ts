@@ -12,7 +12,7 @@ export class ImageTutorialEditorComponent extends AbstractTutorialEditor impleme
 
   constructor(private tr: TranslationService) {
     super();
-    this.rb = tr.getComponentBundle(this);
+    this.rb = tr.getComponentBundle('ImageTutorialEditorComponent');
   }
 
   ngOnInit() {

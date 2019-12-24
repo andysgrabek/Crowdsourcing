@@ -12,7 +12,7 @@ export class ImageStepEditorComponent extends AbstractStepEditor implements OnIn
 
   constructor(private tr: TranslationService) {
     super();
-    this.rb = tr.getComponentBundle(this);
+    this.rb = tr.getComponentBundle('ImageStepEditorComponent');
   }
 
   ngOnInit() {

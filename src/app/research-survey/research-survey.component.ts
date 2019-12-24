@@ -15,7 +15,7 @@ export class ResearchSurveyComponent implements OnInit {
   researchSurveyTypes = ResearchSurveyType;
 
   constructor(private tr: TranslationService) {
-    this.rb = tr.getComponentBundle(this);
+    this.rb = tr.getComponentBundle('ResearchSurveyComponent');
   }
 
   ngOnInit() {

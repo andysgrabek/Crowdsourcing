@@ -15,7 +15,7 @@ export class DashboardConfigComponent implements OnInit {
   rb: TranslationBundle;
 
   constructor(public userService: UserService, private tr: TranslationService) {
-    this.rb = this.tr.getComponentBundle(this);
+    this.rb = this.tr.getComponentBundle('DashboardConfigComponent');
   }
 
   ngOnInit() {

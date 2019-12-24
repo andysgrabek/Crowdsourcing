@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
               public tr: TranslationService,
               public cookieService: CookieService,
               public snackBar: MatSnackBar) {
-    this.rb = this.tr.getComponentBundle(this);
+    this.rb = this.tr.getComponentBundle('AppComponent');
   }
 
   ngOnInit(): void {

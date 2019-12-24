@@ -14,7 +14,7 @@ export class ResearchConsentComponent implements OnInit {
   rb: TranslationBundle;
 
   constructor(private tr: TranslationService) {
-    this.rb = this.tr.getComponentBundle(this);
+    this.rb = this.tr.getComponentBundle('ResearchConsentComponent');
   }
 
   ngOnInit() {

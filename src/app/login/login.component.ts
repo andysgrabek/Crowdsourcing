@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   rb: TranslationBundle;
 
   constructor(private userService: UserService, private tr: TranslationService) {
-    this.rb = tr.getComponentBundle(this);
+    this.rb = tr.getComponentBundle('LoginComponent');
   }
 
   ngOnInit() {

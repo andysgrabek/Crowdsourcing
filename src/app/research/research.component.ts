@@ -19,7 +19,7 @@ export class ResearchComponent implements OnInit {
   constructor(private researchConfigService: ResearchConfigService,
               private route: ActivatedRoute,
               private tr: TranslationService) {
-    this.rb = tr.getComponentBundle(this);
+    this.rb = tr.getComponentBundle('ResearchComponent');
   }
 
   ngOnInit() {
