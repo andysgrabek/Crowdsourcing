@@ -4,14 +4,14 @@ import {ResearchConfig} from '../dto/ResearchConfig';
 import {MatDialog, MatTable} from '@angular/material';
 import {ResearchConfigService} from '../service/research-config.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import ResearchTutorial from '../dto/ResearchTutorial';
+import ResearchTutorial, {ResearchTutorialType} from '../dto/ResearchTutorial';
 import {ImageTutorialEditorComponent} from '../image-tutorial-editor/image-tutorial-editor.component';
 import {TextTutorialEditorComponent} from '../text-tutorial-editor/text-tutorial-editor.component';
 import {VideoTutorialEditorComponent} from '../video-tutorial-editor/video-tutorial-editor.component';
 import {ComponentType} from '@angular/cdk/overlay';
 import {AbstractTutorialEditor} from '../abstract-tutorial-editor/abstract-tutorial-editor';
 import ResearchConsent from '../dto/ResearchConsent';
-import ResearchSurvey from '../dto/ResearchSurvey';
+import ResearchSurvey, {ResearchSurveyType} from '../dto/ResearchSurvey';
 
 @Component({
   selector: 'app-research-config-tutorial',
@@ -21,10 +21,10 @@ import ResearchSurvey from '../dto/ResearchSurvey';
 export class ResearchConfigTutorialComponent implements OnInit {
 
   @ViewChild(MatTable, {static: true}) researchTable: MatTable<ResearchConsent>;
-  private readonly editors = new Map<string, ComponentType<AbstractTutorialEditor>>([
-    ['text', TextTutorialEditorComponent],
-    ['image', ImageTutorialEditorComponent],
-    ['video', VideoTutorialEditorComponent]
+  private readonly editors = new Map<ResearchTutorialType, ComponentType<AbstractTutorialEditor>>([
+    [ResearchTutorialType.TEXT, TextTutorialEditorComponent],
+    [ResearchTutorialType.IMAGE, ImageTutorialEditorComponent],
+    [ResearchTutorialType.VIDEO, VideoTutorialEditorComponent]
   ]);
   public researchConfig: ResearchConfig;
   displayedColumns = ['name', 'type', 'action'];
@@ -70,7 +70,7 @@ export class ResearchConfigTutorialComponent implements OnInit {
     this.researchConfigService.updateResearch(this.id, this.researchConfig);
   }
 
-  async onAddNew(type: string) {
+  async onAddNew(type: ResearchTutorialType) {
     const dialogRef = this.dialog.open(this.editors.get(type));
     const tutorial = new ResearchTutorial();
     tutorial.type = type;

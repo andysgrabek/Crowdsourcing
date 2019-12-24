@@ -5,7 +5,7 @@ import {ResearchConfig} from '../dto/ResearchConfig';
 import {ResearchConfigService} from '../service/research-config.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
-import ResearchStep from '../dto/ResearchStep';
+import ResearchStep, {ResearchStepType} from '../dto/ResearchStep';
 import {ComponentType} from '@angular/cdk/overlay';
 import {AbstractStepEditor} from '../abstract-step-editor/abstract-step-editor';
 import {ImageStepEditorComponent} from '../image-step-editor/image-step-editor.component';
@@ -22,9 +22,9 @@ export class ResearchConfigStepsComponent implements OnInit {
   public researchConfig: ResearchConfig;
   public displayedColumns: string[] = ['name', 'type', 'action'];
   private id: string;
-  private readonly editors = new Map<string, ComponentType<AbstractStepEditor>>([
-    ['image', ImageStepEditorComponent],
-    ['video', VideoStepEditorComponent]
+  private readonly editors = new Map<ResearchStepType, ComponentType<AbstractStepEditor>>([
+    [ResearchStepType.IMAGE, ImageStepEditorComponent],
+    [ResearchStepType.VIDEO, VideoStepEditorComponent]
   ]);
 
   constructor(private dialog: MatDialog,
@@ -65,7 +65,7 @@ export class ResearchConfigStepsComponent implements OnInit {
     };
   }
 
-  async onAddNew(type: string) {
+  async onAddNew(type: ResearchStepType) {
     const dialogRef = this.dialog.open(this.editors.get(type));
     dialogRef.componentInstance.step = new ResearchStep();
     dialogRef.componentInstance.onConfirm = (c) => this.onConfirmStepAdd(dialogRef, c);

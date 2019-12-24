@@ -1,1 +1,21 @@
-<p>research-tutorial works!</p>
+<div *ngIf="tutorial">
+  <div>
+    <h2>{{tutorial.name}}</h2>
+  </div>
+  <div *ngIf="tutorial.type === 'text'">
+    <p>{{tutorial.text}}</p>
+  </div>
+
+  <div *ngIf="tutorial.type === 'video'">
+    <div style="position: relative; height: 80vh">
+      <iframe style="position: relative; height: 100%; width: 100%;" [src]="ytUrl" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <div *ngIf="tutorial.type === 'image'">
+    <div style="text-align: center">
+      <img style="position: relative;" src="{{tutorial.url}}" alt="tutorial-image">
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+</div>

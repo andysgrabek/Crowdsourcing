@@ -11,12 +11,12 @@
 
     <mat-step>
       <ng-template matStepLabel>{{rb.get('survey-step-name')}}</ng-template>
-      <app-research-survey *ngFor="let survey of model.surveys"></app-research-survey>
+      <app-research-survey *ngFor="let survey of model.surveys" [survey]="survey"></app-research-survey>
     </mat-step>
 
     <mat-step>
       <ng-template matStepLabel>{{rb.get('tutorial-step-name')}}</ng-template>
-      <app-research-tutorial *ngFor="let tutorial of model.tutorials"></app-research-tutorial>
+      <app-research-tutorial *ngFor="let tutorial of model.tutorials" [tutorial]="tutorial"></app-research-tutorial>
     </mat-step>
 
     <mat-step>

@@ -8,7 +8,7 @@ import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component
 import {AbstractSurveyEditor} from '../abstract-survey-editor/abstract-survey-editor';
 import {TextSurveyEditorComponent} from '../text-survey-editor/text-survey-editor.component';
 import {MultipleChoiceSurveyEditorComponent} from '../multiple-choice-survey-editor/multiple-choice-survey-editor.component';
-import ResearchSurvey from '../dto/ResearchSurvey';
+import ResearchSurvey, {ResearchSurveyType} from '../dto/ResearchSurvey';
 
 @Component({
   selector: 'app-research-config-survey',
@@ -18,10 +18,10 @@ import ResearchSurvey from '../dto/ResearchSurvey';
 export class ResearchConfigSurveyComponent implements OnInit {
 
   @ViewChild(MatTable, {static: true}) researchTable: MatTable<any>;
-  private readonly editors = new Map<string, ComponentType<AbstractSurveyEditor>>([
-    ['text', TextSurveyEditorComponent],
-    ['radio', MultipleChoiceSurveyEditorComponent],
-    ['checkbox', MultipleChoiceSurveyEditorComponent]
+  private readonly editors = new Map<ResearchSurveyType, ComponentType<AbstractSurveyEditor>>([
+    [ResearchSurveyType.TEXT, TextSurveyEditorComponent],
+    [ResearchSurveyType.RADIO, MultipleChoiceSurveyEditorComponent],
+    [ResearchSurveyType.CHECKBOX, MultipleChoiceSurveyEditorComponent]
   ]);
   public researchConfig: ResearchConfig;
   displayedColumns = ['name', 'type', 'action'];
@@ -54,7 +54,7 @@ export class ResearchConfigSurveyComponent implements OnInit {
     dialogRef.componentInstance.onCancel = () => dialogRef.close();
   }
 
-  async onAddNew(type: string) {
+  async onAddNew(type: ResearchSurveyType) {
     const dialogRef = this.dialog.open(this.editors.get(type));
     const survey = new ResearchSurvey();
     survey.type = type;

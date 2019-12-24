@@ -48,6 +48,7 @@ import { ImageStepEditorComponent } from './image-step-editor/image-step-editor.
 import {ResearchLiveGuardService} from './guard/research-live-guard.service';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from "@angular/material/radio";
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDCS3sTMmqiPP64asRfKh4lo0hFUvjb5v4',
@@ -114,7 +115,8 @@ const firebaseConfig = {
     MatMenuModule,
     MatTableModule,
     MatStepperModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatRadioModule
   ],
   providers: [
     ResearchLiveGuardService,

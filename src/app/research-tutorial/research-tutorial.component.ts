@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import ResearchTutorial from '../dto/ResearchTutorial';
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-research-tutorial',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResearchTutorialComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  tutorial: ResearchTutorial;
+  ytUrl: SafeResourceUrl;
+
+  constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    this.ytUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.tutorial.url);
   }
 
 }

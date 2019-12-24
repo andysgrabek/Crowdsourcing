@@ -1,1 +1,30 @@
-<p>research-survey works!</p>
+<div *ngIf="survey">
+
+  <div>
+    <h2>{{survey.name}}</h2>
+  </div>
+
+  <div>
+    <p>{{survey.text}}</p>
+  </div>
+
+  <div *ngIf="survey.type === researchSurveyTypes.TEXT">
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="{{rb.get('type-answer')}}" value="">
+      </mat-form-field>
+    </form>
+  </div>
+
+  <div *ngIf="survey.type === researchSurveyTypes.RADIO">
+    <mat-radio-group>
+      <mat-radio-button value="{{answer.val}}" *ngFor="let answer of survey.answers">{{answer.val}}</mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <div *ngIf="survey.type === researchSurveyTypes.CHECKBOX">
+    <mat-checkbox *ngFor="let answer of survey.answers">{{answer.val}}</mat-checkbox>
+  </div>
+
+  <mat-divider></mat-divider>
+</div>

@@ -1,9 +1,10 @@
 export default class ResearchConsent {
+
   text: string;
   mandatory: boolean;
 
-  constructor() {
-    this.text = 'RODO text';
-    this.mandatory = true;
+  constructor(text?: string, mandatory?: boolean) {
+    this.text = text || '';
+    this.mandatory = mandatory;
   }
 }

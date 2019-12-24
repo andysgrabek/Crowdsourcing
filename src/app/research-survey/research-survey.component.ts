@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import ResearchSurvey, {ResearchSurveyType} from '../dto/ResearchSurvey';
+import {TranslationBundle, TranslationService} from '../service/translation.service';
 
 @Component({
   selector: 'app-research-survey',
@@ -7,7 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResearchSurveyComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  survey: ResearchSurvey;
+  private rb: TranslationBundle;
+  researchSurveyTypes = ResearchSurveyType;
+
+  constructor(private tr: TranslationService) {
+    this.rb = tr.getComponentBundle(this);
+  }
 
   ngOnInit() {
   }
