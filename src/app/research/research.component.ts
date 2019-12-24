@@ -35,18 +35,24 @@ export class ResearchComponent implements OnInit {
   }
 
   async goForward(stepper: MatStepper) {
+    let canGoForward = true;
     switch (stepper.selectedIndex) {
       case ResearchStepperSteps.CONSENTS:
+        //todo verify that each mandatory consent is checked
         break;
       case ResearchStepperSteps.SURVEY:
+        //todo verify that each mandatory question is answered
         break;
       case ResearchStepperSteps.TUTORIAL:
         break;
       case ResearchStepperSteps.SUMMARY:
         break;
       case ResearchStepperSteps.STEPS:
+        break;
     }
-    stepper.next();
+    if (canGoForward) {
+      stepper.next();
+    }
   }
 }
 

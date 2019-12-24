@@ -33,7 +33,9 @@
 
   <div>
     <button mat-button
-            [disabled]="stepper.selectedIndex === stepTypes.CONSENTS || stepper.selectedIndex === stepTypes.SUMMARY"
+            [disabled]="stepper.selectedIndex === stepTypes.CONSENTS ||
+                        stepper.selectedIndex === stepTypes.SUMMARY ||
+                        stepper.selectedIndex === stepTypes.STEPS"
             (click)="goBack(stepper)"
             type="button">
       {{rb.get('step-back')}}
