@@ -11,7 +11,8 @@ import {Observable} from 'rxjs';
   styleUrls: ['./research.component.css']
 })
 export class ResearchComponent implements OnInit {
-  private model: ResearchConfig;
+  
+  public model: ResearchConfig;
 
   constructor(private researchConfigService: ResearchConfigService, private route: ActivatedRoute) { }
 
