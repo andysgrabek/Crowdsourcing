@@ -100,9 +100,13 @@ THE SOFTWARE.
 
 @angular/material/button
 
+@angular/material/checkbox
+
 @angular/material/core
 
 @angular/material/dialog
+
+@angular/material/divider
 
 @angular/material/form-field
 
