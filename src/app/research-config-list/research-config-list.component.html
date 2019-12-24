@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="model">
   <table mat-table [dataSource]="model" class="table-aligned" #researchTable>
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID </th>

@@ -5,7 +5,7 @@ import {ProgressService} from './progress.service';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {Observable} from 'rxjs';
 import {UserService} from './user.service';
-import {map} from "rxjs/operators";
+import {map, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,34 +18,30 @@ export class ResearchConfigService {
               private userService: UserService) { }
 
   getAll(): Observable<Map<string, ResearchConfig>> {
-    this.progressService.loading = true;
+    this.progressService.setLoadingState(true);
     const accessPath = 'users/' + this.userService.getCurrentUser().uid + '/research';
     const observable = this.db.object(accessPath).valueChanges().pipe(map(obj => new Map(Object.entries(obj))));
-    this.progressService.loading = false;
-    return observable;
+    return observable.pipe(tap(() => this.progressService.setLoadingState(false)));
   }
 
   getById(id: string): Observable<ResearchConfig> {
-    this.progressService.loading = true;
+    this.progressService.setLoadingState(true);
     const accessPath = 'users/' + this.userService.getCurrentUser().uid + '/research/' + id;
     const observable = this.db.object(accessPath).valueChanges() as Observable<ResearchConfig>;
-    this.progressService.loading = false;
-    return observable;
+    return observable.pipe(tap(() => this.progressService.setLoadingState(false)));
   }
 
   getByIdUnauthenticated(userId: string, researchId: string) {
-    this.progressService.loading = true;
+    this.progressService.setLoadingState(true);
     const accessPath = 'users/' + userId + '/research/' + researchId;
     const observable = this.db.object(accessPath).valueChanges() as Observable<ResearchConfig>;
-    this.progressService.loading = false;
-    return observable;
+    return observable.pipe(tap(() => this.progressService.setLoadingState(false)));
   }
 
   setResearchLive(id: string, research: ResearchConfig, isLive: boolean): boolean {
-    this.progressService.loading = true;
+    this.progressService.setLoadingState(true);
     research.isLive = isLive;
     this.handleUpdate(id, research);
-    this.progressService.loading = false;
     return true;
   }
 
@@ -57,17 +53,16 @@ export class ResearchConfigService {
   }
 
   deleteResearch(id: string): boolean {
-    this.progressService.loading = true;
+    this.progressService.setLoadingState(true);
     console.log('Implement me! (delete research)');
     this.handleDelete();
-    this.progressService.loading = false;
+    this.progressService.setLoadingState(false);
     return true;
   }
 
   updateResearch(id: string, researchConfig: ResearchConfig): boolean {
-    this.progressService.loading = true;
+    this.progressService.setLoadingState(true);
     this.handleUpdate(id, researchConfig);
-    this.progressService.loading = false;
     return true;
   }
 
@@ -79,7 +74,9 @@ export class ResearchConfigService {
       })
       .catch(err => {
         this.snackBar.open('Failed to update research configuration');
-      });
+      }).finally(() => {
+        this.progressService.setLoadingState(false);
+    });
   }
 
   private handleDelete() {

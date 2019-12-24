@@ -13,22 +13,22 @@ export class UserService {
               private progressService: ProgressService) { }
 
   async login(credentials: { email: string, password: string}) {
-    this.progressService.loading = true;
+    this.progressService.setLoadingState(true);
     try {
       await this.afAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password);
       await this.router.navigateByUrl('dashboard');
     } catch (e) {
       console.log('Error logging in user with email: ' + credentials.email);
     }
-    this.progressService.loading = false;
+    this.progressService.setLoadingState(false);
     return this.afAuth.user;
   }
 
   async logout() {
-    this.progressService.loading = true;
+    this.progressService.setLoadingState(true);
     await this.afAuth.auth.signOut();
     await this.router.navigateByUrl('');
-    this.progressService.loading = false;
+    this.progressService.setLoadingState(false);
   }
 
   getCurrentUser() {
@@ -36,17 +36,17 @@ export class UserService {
   }
 
   async beginChangePassword() {
-    this.progressService.loading = true;
+    this.progressService.setLoadingState(true);
     const actionCodeSettings = {
       url: 'http://' + window.location.host + '/',
       handleCodeInApp: false
     };
     await this.afAuth.auth.sendPasswordResetEmail(this.afAuth.auth.currentUser.email, actionCodeSettings);
-    this.progressService.loading = false;
+    this.progressService.setLoadingState(false);
   }
 
   async beginRegisterUser(credentials: { email: string, password: string}) {
-    this.progressService.loading = true;
+    this.progressService.setLoadingState(true);
     try {
       const res = await this.afAuth.auth.createUserWithEmailAndPassword(credentials.email, credentials.password);
       if (!res.user.emailVerified) {
@@ -59,7 +59,7 @@ export class UserService {
     } catch (err) {
       console.log(err);
     }
-    this.progressService.loading = false;
+    this.progressService.setLoadingState(false);
   }
 
 }

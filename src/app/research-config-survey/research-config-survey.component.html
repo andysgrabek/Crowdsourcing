@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="researchConfig">
     <table mat-table [dataSource]="researchConfig.surveys" class="table-aligned" #researchTable>
 
     <ng-container matColumnDef="name">

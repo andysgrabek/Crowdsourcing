@@ -10,6 +10,6 @@
       </mat-select>
     </mat-form-field>
   </mat-toolbar>
-  <div *ngIf="!this.progressService.loading"><router-outlet></router-outlet></div>
-  <div *ngIf="this.progressService.loading"><mat-spinner></mat-spinner></div>
+  <div [style.display]="(this.progressService.getLoadingState() | async) ? 'none' : ''"><router-outlet></router-outlet></div>
+  <div [style.display]="!(this.progressService.getLoadingState() | async) ? 'none' : ''"><mat-spinner></mat-spinner></div>
 </div>
