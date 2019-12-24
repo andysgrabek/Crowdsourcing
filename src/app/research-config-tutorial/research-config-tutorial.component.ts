@@ -29,12 +29,12 @@ export class ResearchConfigTutorialComponent implements OnInit {
   public researchConfig: ResearchConfig;
   displayedColumns = ['name', 'type', 'action'];
   private id: string;
+  researchTutorialTypes = ResearchTutorialType;
 
   constructor(private dialog: MatDialog,
               private researchConfigService: ResearchConfigService,
               private router: Router,
               private route: ActivatedRoute) {
-
   }
 
   ngOnInit() {

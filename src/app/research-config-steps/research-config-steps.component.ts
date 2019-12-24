@@ -22,6 +22,7 @@ export class ResearchConfigStepsComponent implements OnInit {
   public researchConfig: ResearchConfig;
   public displayedColumns: string[] = ['name', 'type', 'action'];
   private id: string;
+  researchStepTypes = ResearchStepType;
   private readonly editors = new Map<ResearchStepType, ComponentType<AbstractStepEditor>>([
     [ResearchStepType.IMAGE, ImageStepEditorComponent],
     [ResearchStepType.VIDEO, VideoStepEditorComponent]

@@ -11,7 +11,7 @@ export class ResearchSurveyComponent implements OnInit {
 
   @Input()
   survey: ResearchSurvey;
-  private rb: TranslationBundle;
+  rb: TranslationBundle;
   researchSurveyTypes = ResearchSurveyType;
 
   constructor(private tr: TranslationService) {

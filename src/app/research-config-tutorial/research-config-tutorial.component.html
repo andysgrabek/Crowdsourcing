@@ -25,9 +25,9 @@
 
   <button mat-raised-button [matMenuTriggerFor]="menu">Add tutorial</button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="onAddNew('video')">Video</button>
-    <button mat-menu-item (click)="onAddNew('image')">Image</button>
-    <button mat-menu-item (click)="onAddNew('text')">Text</button>
+    <button mat-menu-item (click)="onAddNew(researchTutorialTypes.VIDEO)">Video</button>
+    <button mat-menu-item (click)="onAddNew(researchTutorialTypes.IMAGE)">Image</button>
+    <button mat-menu-item (click)="onAddNew(researchTutorialTypes.TEXT)">Text</button>
   </mat-menu>
 
 </div>

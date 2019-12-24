@@ -24,6 +24,7 @@ export class ResearchConfigSurveyComponent implements OnInit {
     [ResearchSurveyType.CHECKBOX, MultipleChoiceSurveyEditorComponent]
   ]);
   public researchConfig: ResearchConfig;
+  researchSurveyTypes = ResearchSurveyType;
   displayedColumns = ['name', 'type', 'action'];
   private id: string;
 

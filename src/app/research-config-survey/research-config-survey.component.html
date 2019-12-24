@@ -25,9 +25,9 @@
 
   <button mat-raised-button [matMenuTriggerFor]="menu">Add survey</button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="onAddNew('radio')">Radio</button>
-    <button mat-menu-item (click)="onAddNew('checkbox')">Checkbox</button>
-    <button mat-menu-item (click)="onAddNew('text')">Text</button>
+    <button mat-menu-item (click)="onAddNew(researchSurveyTypes.RADIO)">Radio</button>
+    <button mat-menu-item (click)="onAddNew(researchSurveyTypes.CHECKBOX)">Checkbox</button>
+    <button mat-menu-item (click)="onAddNew(researchSurveyTypes.TEXT)">Text</button>
   </mat-menu>
 
 </div>

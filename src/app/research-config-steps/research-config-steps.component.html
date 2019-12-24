@@ -25,8 +25,8 @@
 
   <button mat-raised-button [matMenuTriggerFor]="menu">Add step</button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="onAddNew('video')">Video</button>
-    <button mat-menu-item (click)="onAddNew('image')">Image</button>
+    <button mat-menu-item (click)="onAddNew(researchStepTypes.VIDEO)">Video</button>
+    <button mat-menu-item (click)="onAddNew(researchStepTypes.IMAGE)">Image</button>
   </mat-menu>
 
 </div>
