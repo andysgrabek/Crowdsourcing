@@ -106,6 +106,8 @@ THE SOFTWARE.
 
 @angular/material/form-field
 
+@angular/material/icon
+
 @angular/material/list
 
 @angular/material/menu
@@ -117,6 +119,8 @@ THE SOFTWARE.
 @angular/material/slide-toggle
 
 @angular/material/snack-bar
+
+@angular/material/stepper
 
 @angular/material/table
 
