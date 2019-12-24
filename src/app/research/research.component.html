@@ -1,5 +1,5 @@
 <div *ngIf="model">
-  <mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-vertical-stepper [linear]="true" #stepper>
 
     <mat-step *ngFor="let consent of model.consents">
       <ng-template matStepLabel>Consent {{model.consents.indexOf(consent) + 1}}</ng-template>
@@ -21,7 +21,7 @@
       <app-research-step></app-research-step>
     </mat-step>
 
-  </mat-horizontal-stepper>
+  </mat-vertical-stepper>
 
   <div>
     <button mat-button (click)="goBack(stepper)" type="button">Back</button>

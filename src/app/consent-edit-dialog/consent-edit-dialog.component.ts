@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import ResearchConsent from '../dto/ResearchConsent';
+import {TranslationBundle, TranslationService} from '../service/translation.service';
 
 @Component({
   selector: 'app-consent-edit-dialog',
@@ -10,14 +11,19 @@ export class ConsentEditDialogComponent implements OnInit {
   consent: ResearchConsent;
   showCancel = true;
   showConfirm = true;
-  onConfirm: (newConsent: ResearchConsent) => void = () => {};
-  onCancel: () => void = () => {};
+  rb: TranslationBundle;
 
-  constructor() { }
+  constructor(private tr: TranslationService) {
+    this.rb = this.tr.getComponentBundle(this);
+  }
 
   ngOnInit() {
 
   }
+
+  onConfirm: (newConsent: ResearchConsent) => void = () => {};
+
+  onCancel: () => void = () => {};
 
   onToggleMandatoryStatus() {
     this.consent.mandatory = !this.consent.mandatory;

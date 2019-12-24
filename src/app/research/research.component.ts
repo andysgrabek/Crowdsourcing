@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ResearchConfigService} from '../service/research-config.service';
 import {ActivatedRoute} from '@angular/router';
 import {ResearchConfig} from '../dto/ResearchConfig';
-import {MatHorizontalStepper} from '@angular/material/stepper';
+import {MatHorizontalStepper, MatStepper} from '@angular/material/stepper';
 import {Observable} from 'rxjs';
 
 @Component({
@@ -11,7 +11,7 @@ import {Observable} from 'rxjs';
   styleUrls: ['./research.component.css']
 })
 export class ResearchComponent implements OnInit {
-  
+
   public model: ResearchConfig;
 
   constructor(private researchConfigService: ResearchConfigService, private route: ActivatedRoute) { }
@@ -24,11 +24,11 @@ export class ResearchComponent implements OnInit {
     });
   }
 
-  async goBack(stepper: MatHorizontalStepper) {
+  async goBack(stepper: MatStepper) {
     stepper.previous();
   }
 
-  async goForward(stepper: MatHorizontalStepper) {
+  async goForward(stepper: MatStepper) {
     stepper.next();
   }
 }

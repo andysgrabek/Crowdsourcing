@@ -33,6 +33,9 @@ export class TranslationService {
     return new ObservableTranslationBundle(observable, translationPath);
   }
 
+  getComponentBundle(componentClass: any): TranslationBundle {
+    return this.getBundle('component/' + componentClass.constructor.name);
+  }
 }
 
 export interface TranslationBundle {

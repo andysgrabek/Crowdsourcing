@@ -1,3 +1,3 @@
-<div>Email address: {{model.email}}</div>
-<div>Email verified: {{model.emailVerified}}</div>
-<button mat-raised-button (click)="userService.beginChangePassword()">Reset password</button>
+<div>{{rb.get('address')}}: {{model.email}}</div>
+<div>{{rb.get('verified')}}: {{model.emailVerified}}</div>
+<button mat-raised-button (click)="userService.beginChangePassword()">{{rb.get('reset')}}</button>
