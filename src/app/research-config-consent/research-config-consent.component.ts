@@ -65,11 +65,13 @@ export class ResearchConfigConsentComponent implements OnInit {
     dialogRef.componentInstance.onCancel = () => dialogRef.close();
   }
 
-  private onConfirmConsentAdd(dialogRef, consent: ResearchConsent) {
+  private async onConfirmConsentAdd(dialogRef, consent: ResearchConsent) {
     dialogRef.close();
     this.researchConfig.consents.push(consent);
-    if (this.researchConfigService.updateResearch(this.id, this.researchConfig)) {
-      this.researchTable.renderRows();
+    try {
+      await this.researchConfigService.updateResearch(this.id, this.researchConfig);
+    } finally {
+
     }
   }
 

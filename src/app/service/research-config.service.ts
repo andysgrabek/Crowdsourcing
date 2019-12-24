@@ -36,59 +36,67 @@ export class ResearchConfigService {
     return observable.pipe(tap(() => this.progressService.setLoadingState(false)));
   }
 
-  getByIdUnauthenticated(userId: string, researchId: string) {
+  getByIdUnauthenticated(userId: string, researchId: string): Observable<ResearchConfig> {
     this.progressService.setLoadingState(true);
     const accessPath = 'users/' + userId + '/research/' + researchId;
     const observable = this.db.object(accessPath).valueChanges() as Observable<ResearchConfig>;
     return observable.pipe(tap(() => this.progressService.setLoadingState(false)));
   }
 
-  setResearchLive(id: string, research: ResearchConfig, isLive: boolean): boolean {
+  async setResearchLive(id: string, research: ResearchConfig, isLive: boolean) {
     this.progressService.setLoadingState(true);
     research.isLive = isLive;
-    this.handleUpdate(id, research);
-    return true;
+    await this.handleUpdate(id, research);
   }
 
-  async createResearch() {
-    const research = new ResearchConfig();
-    const accessPath = 'users/' + this.userService.getCurrentUser().uid + '/research';
-    const ref = this.db.database.ref(accessPath);
-    const result = await ref.push().set(research);
-  }
-
-  deleteResearch(id: string): boolean {
+  async createResearch(researchConfig: ResearchConfig) {
     this.progressService.setLoadingState(true);
-    console.log('Implement me! (delete research)');
-    this.handleDelete();
-    this.progressService.setLoadingState(false);
-    return true;
+    await this.handleCreate(researchConfig);
   }
 
-  updateResearch(id: string, researchConfig: ResearchConfig): boolean {
+  async deleteResearch(id: string) {
     this.progressService.setLoadingState(true);
-    this.handleUpdate(id, researchConfig);
-    return true;
+    await this.handleDelete(id);
   }
 
-  private handleUpdate(id: string, researchConfig: ResearchConfig) {
+  async updateResearch(id: string, researchConfig: ResearchConfig) {
+    this.progressService.setLoadingState(true);
+    await this.handleUpdate(id, researchConfig);
+  }
+
+  private async handleCreate(researchConfig: ResearchConfig) {
+    const accessPath = 'users/' + this.userService.getCurrentUser().uid + '/research/';
+    try {
+      await this.db.database.ref(accessPath).push().set(researchConfig);
+      this.snackBar.open(this.rb.get('create-success'));
+    } catch (e) {
+      this.snackBar.open(this.rb.get('create-fail'));
+    } finally {
+      this.progressService.setLoadingState(false);
+    }
+  }
+
+  private async handleUpdate(id: string, researchConfig: ResearchConfig) {
     const accessPath = 'users/' + this.userService.getCurrentUser().uid + '/research/' + id;
-    this.db.database.ref(accessPath).update(researchConfig)
-      .then(res => {
-        this.snackBar.open('Successfully updated research configuration');
-      })
-      .catch(err => {
-        this.snackBar.open('Failed to update research configuration');
-      }).finally(() => {
-        this.progressService.setLoadingState(false);
-    });
+    try {
+      await this.db.database.ref(accessPath).update(researchConfig);
+      this.snackBar.open(this.rb.get('update-success'));
+    } catch (e) {
+      this.snackBar.open(this.rb.get('update-fail'));
+    } finally {
+      this.progressService.setLoadingState(false);
+    }
   }
 
-  private handleDelete() {
-    if (true) {
-      this.snackBar.open('Successfully deleted research configuration');
-    } else {
-      this.snackBar.open('Failed to delete research configuration');
+  private async handleDelete(id: string) {
+    const accessPath = 'users/' + this.userService.getCurrentUser().uid + '/research/' + id;
+    try {
+      await this.db.database.ref(accessPath).remove();
+      this.snackBar.open(this.rb.get('delete-success'));
+    } catch (e) {
+      this.snackBar.open(this.rb.get('delete-fail'));
+    } finally {
+      this.progressService.setLoadingState(false);
     }
   }
 

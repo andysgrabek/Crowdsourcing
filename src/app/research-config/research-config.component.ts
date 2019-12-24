@@ -30,7 +30,7 @@ export class ResearchConfigComponent implements OnInit {
     });
   }
 
-  onToggle() {
+  async onToggle() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent);
     if (this.isLive) {
       dialogRef.componentInstance.text = 'Are you sure you want to unpublish your research?';

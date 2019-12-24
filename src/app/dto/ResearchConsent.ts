@@ -5,6 +5,6 @@ export default class ResearchConsent {
 
   constructor(text?: string, mandatory?: boolean) {
     this.text = text || '';
-    this.mandatory = mandatory;
+    this.mandatory = mandatory || false;
   }
 }

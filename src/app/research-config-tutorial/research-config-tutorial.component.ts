@@ -58,16 +58,16 @@ export class ResearchConfigTutorialComponent implements OnInit {
     dialogRef.componentInstance.onCancel = () => dialogRef.close();
   }
 
-  private onConfirmTutorialEdit(dialogRef, tutorial: ResearchTutorial, newTutorial) {
+  private async onConfirmTutorialEdit(dialogRef, tutorial: ResearchTutorial, newTutorial) {
     dialogRef.close();
     Object.assign(this.researchConfig.tutorials.find(con => con === tutorial), newTutorial);
-    this.researchConfigService.updateResearch(this.id, this.researchConfig);
+    await this.researchConfigService.updateResearch(this.id, this.researchConfig);
   }
 
-  private onConfirmTutorialDelete(dialogRef, consent: ResearchTutorial) {
+  private async onConfirmTutorialDelete(dialogRef, consent: ResearchTutorial) {
     dialogRef.close();
     this.researchConfig.tutorials = this.researchConfig.tutorials.filter(con => con !== consent);
-    this.researchConfigService.updateResearch(this.id, this.researchConfig);
+    await this.researchConfigService.updateResearch(this.id, this.researchConfig);
   }
 
   async onAddNew(type: ResearchTutorialType) {
@@ -79,11 +79,14 @@ export class ResearchConfigTutorialComponent implements OnInit {
     dialogRef.componentInstance.onCancel = () => dialogRef.close();
   }
 
-  private onConfirmTutorialAdd(dialogRef, tutorial: ResearchTutorial) {
+  private async onConfirmTutorialAdd(dialogRef, tutorial: ResearchTutorial) {
     dialogRef.close();
     this.researchConfig.tutorials.push(tutorial);
-    if (this.researchConfigService.updateResearch(this.id, this.researchConfig)) {
+    try {
+      await this.researchConfigService.updateResearch(this.id, this.researchConfig);
       this.researchTable.renderRows();
+    } finally {
+
     }
   }
 

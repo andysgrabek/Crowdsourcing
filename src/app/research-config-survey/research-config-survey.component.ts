@@ -64,24 +64,35 @@ export class ResearchConfigSurveyComponent implements OnInit {
     dialogRef.componentInstance.onCancel = () => dialogRef.close();
   }
 
-  private onConfirmSurveyAdd(dialogRef, survey: ResearchSurvey) {
+  private async onConfirmSurveyAdd(dialogRef, survey: ResearchSurvey) {
     dialogRef.close();
     this.researchConfig.surveys.push(survey);
-    if (this.researchConfigService.updateResearch(this.id, this.researchConfig)) {
+    try {
+      await this.researchConfigService.updateResearch(this.id, this.researchConfig);
       this.researchTable.renderRows();
+    } finally {
+
     }
   }
 
-  private onConfirmSurveyEdit(dialogRef, survey: ResearchSurvey, newSurvey) {
+  private async onConfirmSurveyEdit(dialogRef, survey: ResearchSurvey, newSurvey) {
     dialogRef.close();
     Object.assign(this.researchConfig.surveys.find(con => con === survey), newSurvey);
-    this.researchConfigService.updateResearch(this.id, this.researchConfig);
+    try {
+      await this.researchConfigService.updateResearch(this.id, this.researchConfig);
+    } finally {
+
+    }
   }
 
-  private onConfirmSurveyDelete(dialogRef, survey: ResearchSurvey) {
+  private async onConfirmSurveyDelete(dialogRef, survey: ResearchSurvey) {
     dialogRef.close();
     this.researchConfig.surveys = this.researchConfig.surveys.filter(con => con !== survey);
-    this.researchConfigService.updateResearch(this.id, this.researchConfig);
+    try {
+      await this.researchConfigService.updateResearch(this.id, this.researchConfig);
+    } finally {
+
+    }
   }
 
 }

@@ -73,11 +73,14 @@ export class ResearchConfigStepsComponent implements OnInit {
     dialogRef.componentInstance.onCancel = () => dialogRef.close();
   }
 
-  private onConfirmStepAdd(dialogRef, step: ResearchStep) {
+  private async onConfirmStepAdd(dialogRef, step: ResearchStep) {
     dialogRef.close();
     this.researchConfig.steps.push(step);
-    if (this.researchConfigService.updateResearch(this.id, this.researchConfig)) {
+    try {
+      await this.researchConfigService.updateResearch(this.id, this.researchConfig);
       this.researchTable.renderRows();
+    } finally {
+
     }
   }
 
