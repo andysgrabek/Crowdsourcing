@@ -3,7 +3,6 @@ import {AngularFireDatabase} from '@angular/fire/database';
 import {Observable} from 'rxjs';
 import {CookieService} from 'ngx-cookie-service';
 import {ProgressService} from './progress.service';
-import {tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

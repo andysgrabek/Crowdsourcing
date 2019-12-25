@@ -43,7 +43,8 @@ export class AppComponent implements OnInit {
     if (this.cookieService.get(this.cookiesAcceptedCookieName) === 'false') {
       const config = new MatSnackBarConfig<any>();
       config.duration = 0;
-      const instance = this.snackBar.open(this.rb.get('cookie-text'), this.rb.get('cookie-acknowledgement'), config);
+      // todo: init from component and retrieve the resource bundle inside
+      const instance = this.snackBar.open('cookie-text', 'cookie-acknowledgement', config);
       instance.onAction().subscribe(next => this.acceptCookies());
     }
   }

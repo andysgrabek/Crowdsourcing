@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
 import {ProgressService} from './progress.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatSnackBar, MatSnackBarConfig} from '@angular/material/snack-bar';
 import {TranslationBundle, TranslationService} from './translation.service';
 
 @Injectable({
@@ -21,12 +21,14 @@ export class UserService {
 
   async login(credentials: { email: string, password: string}) {
     this.progressService.setLoadingState(true);
+    const config = new MatSnackBarConfig();
+    config.duration = 3000;
     try {
       await this.afAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password);
       await this.router.navigateByUrl('dashboard');
-      this.snackBar.open(this.rb.get('login-success'));
+      this.snackBar.open(this.rb.get('login-success'), undefined, config);
     } catch {
-      this.snackBar.open(this.rb.get('login-fail'));
+      this.snackBar.open(this.rb.get('login-fail'), undefined, config);
     }
     this.progressService.setLoadingState(false);
     return this.afAuth.user;

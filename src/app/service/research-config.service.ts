@@ -7,6 +7,7 @@ import {Observable} from 'rxjs';
 import {UserService} from './user.service';
 import {map, tap} from 'rxjs/operators';
 import {TranslationBundle, TranslationService} from './translation.service';
+import {MatSnackBarConfig} from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: 'root'
@@ -66,11 +67,13 @@ export class ResearchConfigService {
 
   private async handleCreate(researchConfig: ResearchConfig) {
     const accessPath = 'users/' + this.userService.getCurrentUser().uid + '/research/';
+    const config = new MatSnackBarConfig();
+    config.duration = 3000;
     try {
       await this.db.database.ref(accessPath).push().set(researchConfig);
-      this.snackBar.open(this.rb.get('create-success'));
+      this.snackBar.open(this.rb.get('create-success'), undefined, config);
     } catch (e) {
-      this.snackBar.open(this.rb.get('create-fail'));
+      this.snackBar.open(this.rb.get('create-fail'), undefined, config);
     } finally {
       this.progressService.setLoadingState(false);
     }
@@ -78,11 +81,13 @@ export class ResearchConfigService {
 
   private async handleUpdate(id: string, researchConfig: ResearchConfig) {
     const accessPath = 'users/' + this.userService.getCurrentUser().uid + '/research/' + id;
+    const config = new MatSnackBarConfig();
+    config.duration = 3000;
     try {
       await this.db.database.ref(accessPath).update(researchConfig);
-      this.snackBar.open(this.rb.get('update-success'));
+      this.snackBar.open(this.rb.get('update-success'), undefined, config);
     } catch (e) {
-      this.snackBar.open(this.rb.get('update-fail'));
+      this.snackBar.open(this.rb.get('update-fail'), undefined, config);
     } finally {
       this.progressService.setLoadingState(false);
     }
@@ -90,11 +95,13 @@ export class ResearchConfigService {
 
   private async handleDelete(id: string) {
     const accessPath = 'users/' + this.userService.getCurrentUser().uid + '/research/' + id;
+    const config = new MatSnackBarConfig();
+    config.duration = 3000;
     try {
       await this.db.database.ref(accessPath).remove();
-      this.snackBar.open(this.rb.get('delete-success'));
+      this.snackBar.open(this.rb.get('delete-success'), undefined, config);
     } catch (e) {
-      this.snackBar.open(this.rb.get('delete-fail'));
+      this.snackBar.open(this.rb.get('delete-fail'), undefined, config);
     } finally {
       this.progressService.setLoadingState(false);
     }
