@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 import {UserService} from './user.service';
 import {map, tap} from 'rxjs/operators';
 import {TranslationBundle, TranslationService} from './translation.service';
-import {MatSnackBarConfig} from "@angular/material/snack-bar";
+import {MatSnackBarConfig} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'

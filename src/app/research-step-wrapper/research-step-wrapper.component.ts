@@ -34,5 +34,9 @@ export class ResearchStepWrapperComponent implements OnInit {
     }
   }
 
+  getResearchData(): object[] {
+    // todo implement me
+    return [{ works: true }];
+  }
 
 }

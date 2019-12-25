@@ -50,6 +50,8 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from "@angular/material/radio";
 import { ResearchStepWrapperComponent } from './research-step-wrapper/research-step-wrapper.component';
+import { ResearchConsentWrapperComponent } from './research-consent-wrapper/research-consent-wrapper.component';
+import { ResearchSurveyWrapperComponent } from './research-survey-wrapper/research-survey-wrapper.component';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDCS3sTMmqiPP64asRfKh4lo0hFUvjb5v4',
@@ -92,6 +94,8 @@ const firebaseConfig = {
     VideoStepEditorComponent,
     ImageStepEditorComponent,
     ResearchStepWrapperComponent,
+    ResearchConsentWrapperComponent,
+    ResearchSurveyWrapperComponent,
   ],
   imports: [
     BrowserModule,

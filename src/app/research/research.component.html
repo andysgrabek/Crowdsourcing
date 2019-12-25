@@ -3,15 +3,16 @@
 
     <mat-step [editable]="false" [completed]="false">
       <ng-template matStepLabel>{{rb.get('consents-step-name')}}</ng-template>
-      <app-research-consent *ngFor="let consent of model.consents" [consent]="consent"></app-research-consent>
+      <app-research-consent-wrapper #researchConsentWrapperComponent [model]="model.consents"></app-research-consent-wrapper>
       <div>
         <p>{{rb.get('mandatory-helper-text')}}</p>
       </div>
+
     </mat-step>
 
     <mat-step [editable]="false" [completed]="false">
       <ng-template matStepLabel>{{rb.get('survey-step-name')}}</ng-template>
-      <app-research-survey *ngFor="let survey of model.surveys" [survey]="survey"></app-research-survey>
+      <app-research-survey-wrapper #researchSurveyWrapperComponent [model]="model.surveys"></app-research-survey-wrapper>
     </mat-step>
 
     <mat-step [editable]="false" [completed]="false">
@@ -21,25 +22,27 @@
 
     <mat-step [editable]="false" [completed]="false">
       <ng-template matStepLabel>{{rb.get('steps-step-name')}}</ng-template>
-      <app-research-step-wrapper [model]="model.steps" (lastStepFinished)="lastStepFinished = true"></app-research-step-wrapper>
+      <app-research-step-wrapper #researchStepWrapperComponent [model]="model.steps" (lastStepFinished)="lastStepFinished = true"></app-research-step-wrapper>
     </mat-step>
 
     <mat-step [editable]="false" [completed]="false">
       <ng-template matStepLabel>{{rb.get('finished-step-name')}}</ng-template>
-      <p>{{rb.get('finished')}}</p>
+      <div *ngIf="currentUploadState === uploadStates.NOT_ATTEMPTED">
+        <p>{{rb.get('finished')}}</p>
+        <button mat-button (click)="onSubmitResult()">{{rb.get('submit')}}</button>
+      </div>
+      <div *ngIf="currentUploadState === uploadStates.SUCCESSFUL">
+        <p>{{rb.get('upload-successful')}}</p>
+      </div>
+      <div *ngIf="currentUploadState === uploadStates.FAILED">
+        <p>{{rb.get('try-resubmit')}}</p>
+        <button mat-button (click)="onSubmitResult()">{{rb.get('submit')}}</button>
+      </div>
     </mat-step>
 
   </mat-horizontal-stepper>
 
   <div>
-<!--    <button mat-button-->
-<!--            [disabled]="stepper.selectedIndex === stepTypes.CONSENTS ||-->
-<!--                        stepper.selectedIndex === stepTypes.SUMMARY ||-->
-<!--                        stepper.selectedIndex === stepTypes.STEPS"-->
-<!--            (click)="goBack(stepper)"-->
-<!--            type="button">-->
-<!--      {{rb.get('step-back')}}-->
-<!--    </button>-->
     <button mat-button
             *ngIf="!(stepper.selectedIndex === stepTypes.SUMMARY || (!lastStepFinished && stepper.selectedIndex === stepTypes.STEPS))"
             (click)="goForward(stepper)"
