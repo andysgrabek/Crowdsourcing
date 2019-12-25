@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable, isDevMode} from '@angular/core';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {Observable} from 'rxjs';
 import {CookieService} from 'ngx-cookie-service';
+import {ProgressService} from './progress.service';
+import {tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,9 @@ export class TranslationService {
   availableLocales = ['en-US', 'pl-PL'];
   currentLocale; // default and only one available locale for now
 
-  constructor(private db: AngularFireDatabase, private cookieService: CookieService) {
+  constructor(private db: AngularFireDatabase,
+              private cookieService: CookieService,
+              private progressService: ProgressService) {
     if (cookieService.check(this.currentLocaleCookieName)) {
       this.currentLocale = cookieService.get(this.currentLocaleCookieName);
     } else {
@@ -59,7 +63,7 @@ abstract class AbstractTranslationBundle implements TranslationBundle {
   get(key: string): string {
     return (this.obj && this.obj.hasOwnProperty(key) && (typeof this.obj[key] === 'string' || this.obj[key] instanceof String))
       ? this.obj[key]
-      : this.translationPath + '/' + key;
+      : (isDevMode() ? 'tr:' + key : '');
   }
 
   getBundle(key: string): TranslationBundle {
