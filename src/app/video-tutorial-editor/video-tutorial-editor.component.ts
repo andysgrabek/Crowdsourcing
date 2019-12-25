@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractTutorialEditor} from '../abstract-tutorial-editor/abstract-tutorial-editor';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {TranslationBundle, TranslationService} from '../service/translation.service';
 
 @Component({
   selector: 'app-video-tutorial-editor',
@@ -10,9 +11,11 @@ import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 export class VideoTutorialEditorComponent extends AbstractTutorialEditor implements OnInit {
 
   ytUrl: SafeResourceUrl;
+  rb: TranslationBundle;
 
-  constructor(private sanitizer: DomSanitizer) {
+  constructor(private sanitizer: DomSanitizer, private tr: TranslationService) {
     super();
+    this.rb = tr.getComponentBundle('VideoTutorialEditorComponent');
   }
 
   ngOnInit() {

@@ -2,20 +2,20 @@
     <table mat-table [dataSource]="researchConfig.surveys" class="table-aligned" #researchTable>
 
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <th mat-header-cell *matHeaderCellDef> {{rb.get('name-header')}} </th>
       <td mat-cell *matCellDef="let survey"> {{survey.name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="type">
-      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <th mat-header-cell *matHeaderCellDef> {{rb.get('type-header')}} </th>
       <td mat-cell *matCellDef="let survey"> {{survey.type}} </td>
     </ng-container>
 
     <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <th mat-header-cell *matHeaderCellDef> {{rb.get('action-header')}} </th>
       <td mat-cell *matCellDef="let survey" class="action-link">
-        <button mat-raised-button (click)="onEdit(survey)">Edit</button>
-        <button mat-raised-button (click)="onDelete(survey)">Delete</button>
+        <button mat-raised-button (click)="onEdit(survey)">{{rb.get('edit')}}</button>
+        <button mat-raised-button (click)="onDelete(survey)">{{rb.get('delete')}}</button>
       </td>
     </ng-container>
 
@@ -23,11 +23,11 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <button mat-raised-button [matMenuTriggerFor]="menu">Add survey</button>
+  <button mat-raised-button [matMenuTriggerFor]="menu">{{rb.get('add-survey')}}</button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="onAddNew(researchSurveyTypes.RADIO)">Radio</button>
-    <button mat-menu-item (click)="onAddNew(researchSurveyTypes.CHECKBOX)">Checkbox</button>
-    <button mat-menu-item (click)="onAddNew(researchSurveyTypes.TEXT)">Text</button>
+    <button mat-menu-item (click)="onAddNew(researchSurveyTypes.RADIO)">{{rb.get('radio')}}</button>
+    <button mat-menu-item (click)="onAddNew(researchSurveyTypes.CHECKBOX)">{{rb.get('checkbox')}}</button>
+    <button mat-menu-item (click)="onAddNew(researchSurveyTypes.TEXT)">{{rb.get('text')}}</button>
   </mat-menu>
 
 </div>

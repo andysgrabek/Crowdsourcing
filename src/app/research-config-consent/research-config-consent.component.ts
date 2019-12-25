@@ -6,7 +6,7 @@ import {ResearchConfig} from '../dto/ResearchConfig';
 import ResearchConsent from '../dto/ResearchConsent';
 import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
 import {ConsentEditDialogComponent} from '../consent-edit-dialog/consent-edit-dialog.component';
-import ResearchSurvey from '../dto/ResearchSurvey';
+import {TranslationBundle, TranslationService} from '../service/translation.service';
 
 @Component({
   selector: 'app-research-config-consent',
@@ -19,11 +19,15 @@ export class ResearchConfigConsentComponent implements OnInit {
   public researchConfig: ResearchConfig;
   public displayedColumns: string[] = ['text', 'mandatory', 'action'];
   private id: string;
+  rb: TranslationBundle;
 
   constructor(private dialog: MatDialog,
               private researchConfigService: ResearchConfigService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private tr: TranslationService) {
+    this.rb = tr.getComponentBundle('ResearchConfigConsentComponent');
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -47,7 +51,7 @@ export class ResearchConfigConsentComponent implements OnInit {
 
   async onDelete(consent: ResearchConsent) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent);
-    dialogRef.componentInstance.text = 'Are you sure?';
+    dialogRef.componentInstance.text = this.rb.get('delete-confirmation');
     dialogRef.componentInstance.onConfirm = () => {
       dialogRef.close();
       this.researchConfig.consents = this.researchConfig.consents.filter(con => con !== consent);

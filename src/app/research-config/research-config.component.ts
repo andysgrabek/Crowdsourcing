@@ -4,6 +4,7 @@ import {ResearchConfig} from '../dto/ResearchConfig';
 import {ResearchConfigService} from '../service/research-config.service';
 import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
 import {MatDialog, MatSnackBar} from '@angular/material';
+import {TranslationBundle, TranslationService} from '../service/translation.service';
 
 @Component({
   selector: 'app-research-config',
@@ -15,12 +16,16 @@ export class ResearchConfigComponent implements OnInit {
   isLive: boolean;
   researchConfig: ResearchConfig;
   public id: string;
+  rb: TranslationBundle;
 
   constructor(private dialog: MatDialog,
               private snackBar: MatSnackBar,
               private researchConfigService: ResearchConfigService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private tr: TranslationService) {
+    this.rb = tr.getComponentBundle('ResearchConfigComponent');
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');

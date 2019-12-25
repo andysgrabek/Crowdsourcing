@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../service/user.service';
-import {Router} from '@angular/router';
+import {TranslationBundle, TranslationService} from '../service/translation.service';
 
 @Component({
   selector: 'app-register',
@@ -10,8 +10,11 @@ import {Router} from '@angular/router';
 export class RegisterComponent implements OnInit {
 
   model: {email: string, password: string} = {email: '', password: ''};
+  rb: TranslationBundle;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private tr: TranslationService) {
+    this.rb = tr.getComponentBundle('RegisterComponent');
+  }
 
   ngOnInit() {
   }

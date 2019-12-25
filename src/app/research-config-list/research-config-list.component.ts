@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
 import {MatDialog, MatSnackBar, MatTable} from '@angular/material';
 import {ResearchConfigService} from '../service/research-config.service';
-import ResearchSurvey from '../dto/ResearchSurvey';
+import {TranslationBundle, TranslationService} from '../service/translation.service';
 
 @Component({
   selector: 'app-research-config-list',
@@ -16,12 +16,14 @@ export class ResearchConfigListComponent implements OnInit {
   @ViewChild(MatTable, {static: true}) researchTable: MatTable<any>;
   public model: [string, ResearchConfig][];
   public displayedColumns: string[] = ['id', 'action'];
+  rb: TranslationBundle;
 
   constructor(private dialog: MatDialog,
               private snackBack: MatSnackBar,
               private router: Router,
-              public researchConfigService: ResearchConfigService) {
-
+              public researchConfigService: ResearchConfigService,
+              private tr: TranslationService) {
+    this.rb = tr.getComponentBundle('ResearchConfigListComponent');
   }
 
   ngOnInit() {
@@ -40,15 +42,11 @@ export class ResearchConfigListComponent implements OnInit {
 
   async onDelete(id: string) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent);
-    dialogRef.componentInstance.text = 'Are you sure?';
+    dialogRef.componentInstance.text = this.rb.get('delete-confirmation');
     dialogRef.componentInstance.onConfirm = () => {
       dialogRef.close();
-      if (this.researchConfigService.deleteResearch(id)) {
-        this.snackBack.open('Successfully removed research');
-        this.researchTable.renderRows();
-      } else {
-        this.snackBack.open('Failed to remove research');
-      }
+      this.researchConfigService.deleteResearch(id).then(
+        () => { this.researchTable.renderRows(); });
     };
     dialogRef.componentInstance.onCancel = () => {
       dialogRef.close();

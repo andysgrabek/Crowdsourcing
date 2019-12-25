@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
 import {ResearchConfig} from '../dto/ResearchConfig';
 import {MatDialog, MatTable} from '@angular/material';
@@ -11,7 +11,7 @@ import {VideoTutorialEditorComponent} from '../video-tutorial-editor/video-tutor
 import {ComponentType} from '@angular/cdk/overlay';
 import {AbstractTutorialEditor} from '../abstract-tutorial-editor/abstract-tutorial-editor';
 import ResearchConsent from '../dto/ResearchConsent';
-import ResearchSurvey, {ResearchSurveyType} from '../dto/ResearchSurvey';
+import {TranslationBundle, TranslationService} from '../service/translation.service';
 
 @Component({
   selector: 'app-research-config-tutorial',
@@ -30,11 +30,14 @@ export class ResearchConfigTutorialComponent implements OnInit {
   displayedColumns = ['name', 'type', 'action'];
   private id: string;
   researchTutorialTypes = ResearchTutorialType;
+  rb: TranslationBundle;
 
   constructor(private dialog: MatDialog,
               private researchConfigService: ResearchConfigService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private tr: TranslationService) {
+    this.rb = tr.getComponentBundle('ResearchConfigTutorialComponent');
   }
 
   ngOnInit() {
@@ -53,7 +56,7 @@ export class ResearchConfigTutorialComponent implements OnInit {
 
   async onDelete(consent: ResearchTutorial) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent);
-    dialogRef.componentInstance.text = 'Are you sure?';
+    dialogRef.componentInstance.text = this.rb.get('delete-confirmation');
     dialogRef.componentInstance.onConfirm = () => this.onConfirmTutorialDelete(dialogRef, consent);
     dialogRef.componentInstance.onCancel = () => dialogRef.close();
   }

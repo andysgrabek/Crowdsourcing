@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractStepEditor} from '../abstract-step-editor/abstract-step-editor';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {TranslationBundle, TranslationService} from '../service/translation.service';
 
 @Component({
   selector: 'app-video-step-editor',
@@ -10,9 +11,11 @@ import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 export class VideoStepEditorComponent extends AbstractStepEditor implements OnInit {
 
   ytUrl: SafeResourceUrl;
+  rb: TranslationBundle;
 
-  constructor(private sanitizer: DomSanitizer) {
+  constructor(private sanitizer: DomSanitizer, private tr: TranslationService) {
     super();
+    this.rb = tr.getComponentBundle('VideoStepEditorComponent');
   }
 
   ngOnInit() {

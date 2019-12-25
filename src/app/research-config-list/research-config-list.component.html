@@ -1,15 +1,15 @@
 <div *ngIf="model">
   <table mat-table [dataSource]="model" class="table-aligned" #researchTable>
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <th mat-header-cell *matHeaderCellDef> {{rb.get('id-header')}} </th>
       <td mat-cell *matCellDef="let element"> {{element[0]}} </td>
     </ng-container>
 
     <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <th mat-header-cell *matHeaderCellDef> {{rb.get('action-header')}} </th>
       <td mat-cell *matCellDef="let element" class="action-link">
-        <button mat-raised-button (click)="onEdit(element[0])">Edit</button>
-        <button mat-raised-button (click)="onDelete(element[0])">Delete</button>
+        <button mat-raised-button (click)="onEdit(element[0])">{{rb.get('edit')}}</button>
+        <button mat-raised-button (click)="onDelete(element[0])">{{rb.get('delete')}}</button>
       </td>
     </ng-container>
 
@@ -17,6 +17,6 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <button mat-raised-button (click)="onAddNew()">Add</button>
+  <button mat-raised-button (click)="onAddNew()">{{rb.get('add')}}</button>
 
 </div>

@@ -9,6 +9,7 @@ import {AbstractSurveyEditor} from '../abstract-survey-editor/abstract-survey-ed
 import {TextSurveyEditorComponent} from '../text-survey-editor/text-survey-editor.component';
 import {MultipleChoiceSurveyEditorComponent} from '../multiple-choice-survey-editor/multiple-choice-survey-editor.component';
 import ResearchSurvey, {ResearchSurveyType} from '../dto/ResearchSurvey';
+import {TranslationBundle, TranslationService} from '../service/translation.service';
 
 @Component({
   selector: 'app-research-config-survey',
@@ -27,11 +28,14 @@ export class ResearchConfigSurveyComponent implements OnInit {
   researchSurveyTypes = ResearchSurveyType;
   displayedColumns = ['name', 'type', 'action'];
   private id: string;
+  rb: TranslationBundle;
 
   constructor(private dialog: MatDialog,
               private researchConfigService: ResearchConfigService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private tr: TranslationService) {
+    this.rb = tr.getComponentBundle('ResearchConfigSurveyComponent');
   }
 
   ngOnInit() {
@@ -50,7 +54,7 @@ export class ResearchConfigSurveyComponent implements OnInit {
 
   async onDelete(survey: ResearchSurvey) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent);
-    dialogRef.componentInstance.text = 'Are you sure?';
+    dialogRef.componentInstance.text = this.rb.get('delete-confirmation');
     dialogRef.componentInstance.onConfirm = () => this.onConfirmSurveyDelete(dialogRef, survey);
     dialogRef.componentInstance.onCancel = () => dialogRef.close();
   }

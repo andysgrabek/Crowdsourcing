@@ -1,10 +1,10 @@
 <div>
-  <mat-slide-toggle [checked]="isLive" (toggleChange)="onToggle()">Live</mat-slide-toggle>
+  <mat-slide-toggle [checked]="isLive" (toggleChange)="onToggle()">{{rb.get('live')}}</mat-slide-toggle>
 </div>
 <div>
-  <span><button mat-raised-button routerLink="/research-config-consent/{{id}}">Consent configuration</button></span>
-  <span><button mat-raised-button routerLink="/research-config-survey/{{id}}">Survey configuration</button></span>
-  <span><button mat-raised-button routerLink="/research-config-tutorial/{{id}}">Tutorial configuration</button></span>
-  <span><button mat-raised-button routerLink="/research-config-steps/{{id}}">Steps configuration</button></span>
-  <span><button mat-raised-button routerLink="/research-data/{{id}}">Data</button></span>
+  <span><button mat-raised-button routerLink="/research-config-consent/{{id}}">{{rb.get('consent-configuration')}}</button></span>
+  <span><button mat-raised-button routerLink="/research-config-survey/{{id}}">{{rb.get('survey-configuration')}}</button></span>
+  <span><button mat-raised-button routerLink="/research-config-tutorial/{{id}}">{{rb.get('tutorial-configuration')}}</button></span>
+  <span><button mat-raised-button routerLink="/research-config-steps/{{id}}">{{rb.get('steps-configuration')}}</button></span>
+  <span><button mat-raised-button routerLink="/research-data/{{id}}">{{rb.get('data-configuration')}}</button></span>
 </div>

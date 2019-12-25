@@ -2,20 +2,20 @@
   <table mat-table [dataSource]="researchConfig.steps" class="table-aligned" #researchTable>
 
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <th mat-header-cell *matHeaderCellDef> {{rb.get('name-header')}} </th>
       <td mat-cell *matCellDef="let survey"> {{survey.name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="type">
-      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <th mat-header-cell *matHeaderCellDef> {{rb.get('type-header')}} </th>
       <td mat-cell *matCellDef="let survey"> {{survey.type}} </td>
     </ng-container>
 
     <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <th mat-header-cell *matHeaderCellDef> {{rb.get('action-header')}} </th>
       <td mat-cell *matCellDef="let survey" class="action-link">
-        <button mat-raised-button (click)="onEdit(survey)">Edit</button>
-        <button mat-raised-button (click)="onDelete(survey)">Delete</button>
+        <button mat-raised-button (click)="onEdit(survey)">{{rb.get('edit')}}</button>
+        <button mat-raised-button (click)="onDelete(survey)">{{rb.get('delete')}}</button>
       </td>
     </ng-container>
 
@@ -23,10 +23,10 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <button mat-raised-button [matMenuTriggerFor]="menu">Add step</button>
+  <button mat-raised-button [matMenuTriggerFor]="menu">{{rb.get('add-step')}}</button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="onAddNew(researchStepTypes.VIDEO)">Video</button>
-    <button mat-menu-item (click)="onAddNew(researchStepTypes.IMAGE)">Image</button>
+    <button mat-menu-item [disabled]="true" (click)="onAddNew(researchStepTypes.VIDEO)">{{rb.get('add-video-step')}}</button>
+    <button mat-menu-item (click)="onAddNew(researchStepTypes.IMAGE)">{{rb.get('add-image-step')}}</button>
   </mat-menu>
 
 </div>

@@ -2,20 +2,20 @@
 
   <table mat-table [dataSource]="researchConfig.tutorials" class="table-aligned" #researchTable>
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <th mat-header-cell *matHeaderCellDef> {{rb.get('name-header')}} </th>
       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="type">
-      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <th mat-header-cell *matHeaderCellDef> {{rb.get('type-header')}} </th>
       <td mat-cell *matCellDef="let element"> {{element.type}} </td>
     </ng-container>
 
     <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <th mat-header-cell *matHeaderCellDef> {{rb.get('action-header')}} </th>
       <td mat-cell *matCellDef="let tutorial" class="action-link">
-        <button mat-raised-button (click)="onEdit(tutorial)">Edit</button>
-        <button mat-raised-button (click)="onDelete(tutorial)">Delete</button>
+        <button mat-raised-button (click)="onEdit(tutorial)">{{rb.get('edit')}}</button>
+        <button mat-raised-button (click)="onDelete(tutorial)">{{rb.get('delete')}}</button>
       </td>
     </ng-container>
 
@@ -23,11 +23,11 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <button mat-raised-button [matMenuTriggerFor]="menu">Add tutorial</button>
+  <button mat-raised-button [matMenuTriggerFor]="menu">{{rb.get('add-tutorial')}}</button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="onAddNew(researchTutorialTypes.VIDEO)">Video</button>
-    <button mat-menu-item (click)="onAddNew(researchTutorialTypes.IMAGE)">Image</button>
-    <button mat-menu-item (click)="onAddNew(researchTutorialTypes.TEXT)">Text</button>
+    <button mat-menu-item (click)="onAddNew(researchTutorialTypes.VIDEO)">{{rb.get('add-video-tutorial')}}</button>
+    <button mat-menu-item (click)="onAddNew(researchTutorialTypes.IMAGE)">{{rb.get('add-image-tutorial')}}</button>
+    <button mat-menu-item (click)="onAddNew(researchTutorialTypes.TEXT)">{{rb.get('add-text-tutorial')}}</button>
   </mat-menu>
 
 </div>

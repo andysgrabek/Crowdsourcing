@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from './service/user.service';
 import {ProgressService} from './service/progress.service';
 import {TranslationBundle, TranslationService} from './service/translation.service';
-import {MatSelectChange} from '@angular/material';
-import {Router} from '@angular/router';
 import {CookieService} from 'ngx-cookie-service';
 import {MatSnackBar, MatSnackBarConfig} from '@angular/material/snack-bar';
 
@@ -45,7 +43,7 @@ export class AppComponent implements OnInit {
     if (this.cookieService.get(this.cookiesAcceptedCookieName) === 'false') {
       const config = new MatSnackBarConfig<any>();
       config.duration = 0;
-      const instance = this.snackBar.open('Site uses cookies for proper operation', 'Acknowledge', config);
+      const instance = this.snackBar.open(this.rb.get('cookie-text'), this.rb.get('cookie-acknowledgement'), config);
       instance.onAction().subscribe(next => this.acceptCookies());
     }
   }

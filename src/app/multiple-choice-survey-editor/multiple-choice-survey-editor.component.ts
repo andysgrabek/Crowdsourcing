@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractSurveyEditor} from '../abstract-survey-editor/abstract-survey-editor';
+import {TranslationBundle, TranslationService} from '../service/translation.service';
 
 @Component({
   selector: 'app-multiple-choice-survey-editor',
@@ -7,9 +8,11 @@ import {AbstractSurveyEditor} from '../abstract-survey-editor/abstract-survey-ed
   styleUrls: ['./multiple-choice-survey-editor.component.css']
 })
 export class MultipleChoiceSurveyEditorComponent extends AbstractSurveyEditor implements OnInit {
+  rb: TranslationBundle;
 
-  constructor() {
+  constructor(private tr: TranslationService) {
     super();
+    this.rb = tr.getComponentBundle('MultipleChoiceSurveyEditorComponent');
   }
 
   ngOnInit() {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractSurveyEditor} from '../abstract-survey-editor/abstract-survey-editor';
+import {TranslationBundle, TranslationService} from '../service/translation.service';
 
 @Component({
   selector: 'app-text-survey-editor',
@@ -8,8 +9,10 @@ import {AbstractSurveyEditor} from '../abstract-survey-editor/abstract-survey-ed
 })
 export class TextSurveyEditorComponent extends AbstractSurveyEditor implements OnInit {
 
-  constructor() {
+  rb: TranslationBundle;
+  constructor(private tr: TranslationService) {
     super();
+    this.rb = tr.getComponentBundle('TextSurveyEditorComponent');
   }
 
   ngOnInit() {

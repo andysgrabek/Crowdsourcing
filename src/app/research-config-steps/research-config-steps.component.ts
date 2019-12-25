@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatTable} from '@angular/material';
-import ResearchConsent from '../dto/ResearchConsent';
 import {ResearchConfig} from '../dto/ResearchConfig';
 import {ResearchConfigService} from '../service/research-config.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -10,6 +9,7 @@ import {ComponentType} from '@angular/cdk/overlay';
 import {AbstractStepEditor} from '../abstract-step-editor/abstract-step-editor';
 import {ImageStepEditorComponent} from '../image-step-editor/image-step-editor.component';
 import {VideoStepEditorComponent} from '../video-step-editor/video-step-editor.component';
+import {TranslationBundle, TranslationService} from '../service/translation.service';
 
 @Component({
   selector: 'app-research-config-steps',
@@ -23,6 +23,7 @@ export class ResearchConfigStepsComponent implements OnInit {
   public displayedColumns: string[] = ['name', 'type', 'action'];
   private id: string;
   researchStepTypes = ResearchStepType;
+  rb: TranslationBundle;
   private readonly editors = new Map<ResearchStepType, ComponentType<AbstractStepEditor>>([
     [ResearchStepType.IMAGE, ImageStepEditorComponent],
     [ResearchStepType.VIDEO, VideoStepEditorComponent]
@@ -31,7 +32,10 @@ export class ResearchConfigStepsComponent implements OnInit {
   constructor(private dialog: MatDialog,
               private researchConfigService: ResearchConfigService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private tr: TranslationService) {
+    this.rb = tr.getComponentBundle('ResearchConfigStepsComponent');
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -55,7 +59,7 @@ export class ResearchConfigStepsComponent implements OnInit {
 
   async onDelete(step: ResearchStep) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent);
-    dialogRef.componentInstance.text = 'Are you sure?';
+    dialogRef.componentInstance.text = this.rb.get('delete-confirmation');
     dialogRef.componentInstance.onConfirm = () => {
       dialogRef.close();
       this.researchConfig.steps = this.researchConfig.steps.filter(con => con !== step);

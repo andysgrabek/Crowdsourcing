@@ -1,19 +1,19 @@
 <div >
-  <h3>Register</h3>
+  <h3>{{rb.get('register')}}</h3>
 
   <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
 
     <div>
-      <label for="email">Email</label>
+      <label for="email">{{rb.get('email-address')}}</label>
       <input type="email" [(ngModel)]="model.email" id="email" name="email" required>
     </div>
 
     <div>
-      <label for="password">Password</label>
+      <label for="password">{{rb.get('password')}}</label>
       <input type="password" [(ngModel)]="model.password" id="password" name="email" required>
     </div>
 
-    <button mat-raised-button type="submit">Submit</button>
+    <button mat-raised-button type="submit">{{rb.get('submit')}}</button>
 
   </form>
 </div>

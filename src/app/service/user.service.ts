@@ -2,23 +2,31 @@ import { Injectable } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
 import {ProgressService} from './progress.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {TranslationBundle, TranslationService} from './translation.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  private rb: TranslationBundle;
 
   constructor(private afAuth: AngularFireAuth,
               private router: Router,
-              private progressService: ProgressService) { }
+              private progressService: ProgressService,
+              private snackBar: MatSnackBar,
+              private tr: TranslationService) {
+    this.rb = tr.getServiceBundle('UserService');
+  }
 
   async login(credentials: { email: string, password: string}) {
     this.progressService.setLoadingState(true);
     try {
       await this.afAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password);
       await this.router.navigateByUrl('dashboard');
-    } catch (e) {
-      console.log('Error logging in user with email: ' + credentials.email);
+      this.snackBar.open(this.rb.get('login-success'));
+    } catch {
+      this.snackBar.open(this.rb.get('login-fail'));
     }
     this.progressService.setLoadingState(false);
     return this.afAuth.user;
