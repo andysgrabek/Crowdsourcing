@@ -49,6 +49,7 @@ import {ResearchLiveGuardService} from './guard/research-live-guard.service';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from "@angular/material/radio";
+import { ResearchStepWrapperComponent } from './research-step-wrapper/research-step-wrapper.component';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDCS3sTMmqiPP64asRfKh4lo0hFUvjb5v4',
@@ -90,6 +91,7 @@ const firebaseConfig = {
     MultipleChoiceSurveyEditorComponent,
     VideoStepEditorComponent,
     ImageStepEditorComponent,
+    ResearchStepWrapperComponent,
   ],
   imports: [
     BrowserModule,

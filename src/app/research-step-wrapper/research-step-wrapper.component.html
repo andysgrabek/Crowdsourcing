@@ -1,0 +1,18 @@
+<div *ngIf="!finished">
+  <div *ngFor="let step of model">
+    <app-research-step *ngIf="step === currentStep" [model]="step"></app-research-step>
+  </div>
+
+  <div>
+    <button
+      mat-button
+      (click)="finishCurrentStep()"
+      type="button">
+      {{rb.get('finish-step')}}
+    </button>
+  </div>
+</div>
+
+<div *ngIf="finished">
+  <p>{{rb.get('all-steps-finished')}}</p>
+</div>

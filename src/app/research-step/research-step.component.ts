@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import ResearchStep from '../dto/ResearchStep';
 
 @Component({
   selector: 'app-research-step',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./research-step.component.css']
 })
 export class ResearchStepComponent implements OnInit {
+
+  @Input()
+  model: ResearchStep;
 
   constructor() { }
 

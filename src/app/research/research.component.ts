@@ -12,7 +12,8 @@ import {TranslationBundle, TranslationService} from '../service/translation.serv
 })
 export class ResearchComponent implements OnInit {
 
-  public model: ResearchConfig;
+  model: ResearchConfig;
+  lastStepFinished = false;
   rb: TranslationBundle;
   stepTypes = ResearchStepperSteps;
 
@@ -35,24 +36,29 @@ export class ResearchComponent implements OnInit {
   }
 
   async goForward(stepper: MatStepper) {
-    let canGoForward = true;
     switch (stepper.selectedIndex) {
       case ResearchStepperSteps.CONSENTS:
         //todo verify that each mandatory consent is checked
+        if (true) {
+          stepper.selected.completed = true;
+        }
         break;
       case ResearchStepperSteps.SURVEY:
-        //todo verify that each mandatory question is answered
+        if (true) {
+          stepper.selected.completed = true;
+        }
+        //todo verify that each question is valid
         break;
       case ResearchStepperSteps.TUTORIAL:
+        stepper.selected.completed = true;
+        break;
+      case ResearchStepperSteps.STEPS:
+        stepper.selected.completed = this.lastStepFinished;
         break;
       case ResearchStepperSteps.SUMMARY:
         break;
-      case ResearchStepperSteps.STEPS:
-        break;
     }
-    if (canGoForward) {
-      stepper.next();
-    }
+    stepper.next();
   }
 }
 
