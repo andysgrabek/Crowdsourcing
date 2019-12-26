@@ -1,22 +1,23 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ResearchConfig} from '../dto/ResearchConfig';
 import {ResearchConfigService} from '../service/research-config.service';
 import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {TranslationBundle, TranslationService} from '../service/translation.service';
-import {Observable} from 'rxjs';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-research-config',
   templateUrl: './research-config.component.html',
   styleUrls: ['./research-config.component.css']
 })
-export class ResearchConfigComponent implements OnInit {
+export class ResearchConfigComponent implements OnInit, OnDestroy {
 
   id: string;
   rb: TranslationBundle;
-  researchObservable: Observable<ResearchConfig>;
+  researchConfig: ResearchConfig;
+  private researchSubscription: Subscription;
 
   constructor(private dialog: MatDialog,
               private snackBar: MatSnackBar,
@@ -29,7 +30,13 @@ export class ResearchConfigComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.researchObservable = this.researchConfigService.getById(this.id);
+    this.researchSubscription = this.researchConfigService.getById(this.id).subscribe(res => {
+      this.researchConfig = res;
+    });
+  }
+
+  ngOnDestroy() {
+    this.researchSubscription.unsubscribe();
   }
 
   async onToggle(researchConfig: ResearchConfig) {
