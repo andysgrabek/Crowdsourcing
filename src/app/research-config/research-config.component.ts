@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ResearchConfig} from '../dto/ResearchConfig';
 import {ResearchConfigService} from '../service/research-config.service';
 import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {TranslationBundle, TranslationService} from '../service/translation.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-research-config',
@@ -13,10 +14,9 @@ import {TranslationBundle, TranslationService} from '../service/translation.serv
 })
 export class ResearchConfigComponent implements OnInit {
 
-  isLive: boolean;
-  researchConfig: ResearchConfig;
   public id: string;
   rb: TranslationBundle;
+  private researchObservable: Observable<ResearchConfig>;
 
   constructor(private dialog: MatDialog,
               private snackBar: MatSnackBar,
@@ -29,31 +29,32 @@ export class ResearchConfigComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.researchConfigService.getById(this.id).subscribe(config => {
-      this.researchConfig = config;
-      this.isLive = this.researchConfig.isLive;
-    });
+    this.researchObservable = this.researchConfigService.getById(this.id);
+    // this.researchObservable.subscribe(config => {
+    //   this.researchConfig = config;
+    //   this.isLive = this.researchConfig.isLive;
+    // });
   }
 
-  async onToggle() {
+  async onToggle(researchConfig: ResearchConfig) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent);
-    if (this.isLive) {
+    if (researchConfig.isLive) {
       dialogRef.componentInstance.text = 'Are you sure you want to unpublish your research?';
       dialogRef.componentInstance.onConfirm = () => {
         dialogRef.close();
-        this.researchConfigService.setResearchLive(this.id, this.researchConfig, false);
+        this.researchConfigService.setResearchLive(this.id, researchConfig, false);
       };
     } else {
       dialogRef.componentInstance.text = 'Are you sure you want to publish your research?';
       dialogRef.componentInstance.onConfirm = () => {
         dialogRef.close();
-        this.researchConfigService.setResearchLive(this.id, this.researchConfig, true);
+        this.researchConfigService.setResearchLive(this.id, researchConfig, true);
       };
     }
     dialogRef.componentInstance.onCancel = () => {
       dialogRef.close();
     };
-    this.isLive = !this.isLive;
+    // this.isLive = !this.isLive;
   }
 
 }

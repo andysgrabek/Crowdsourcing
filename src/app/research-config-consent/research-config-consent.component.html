@@ -1,5 +1,5 @@
 <div *ngIf="researchConfig">
-  <table mat-table [dataSource]="researchConfig.consents" class="table-aligned" #researchTable>
+  <table *ngIf="researchConfig.consents" mat-table [dataSource]="researchConfig.consents" class="table-aligned" #researchTable>
     <ng-container matColumnDef="text">
       <th mat-header-cell *matHeaderCellDef> {{rb.get('text-header')}} </th>
       <td mat-cell *matCellDef="let element"> {{element.text}} </td>

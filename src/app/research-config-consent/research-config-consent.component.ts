@@ -71,7 +71,11 @@ export class ResearchConfigConsentComponent implements OnInit {
 
   private async onConfirmConsentAdd(dialogRef, consent: ResearchConsent) {
     dialogRef.close();
-    this.researchConfig.consents.push(consent);
+    if (this.researchConfig.consents) {
+      this.researchConfig.consents.push(consent);
+    } else {
+      this.researchConfig.consents = [consent];
+    }
     try {
       await this.researchConfigService.updateResearch(this.id, this.researchConfig);
     } finally {

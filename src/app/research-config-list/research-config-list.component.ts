@@ -13,7 +13,7 @@ import {TranslationBundle, TranslationService} from '../service/translation.serv
 })
 export class ResearchConfigListComponent implements OnInit {
 
-  @ViewChild(MatTable, {static: true}) researchTable: MatTable<any>;
+  @ViewChild('researchTable', undefined) researchTable: MatTable<any>;
   public model: [string, ResearchConfig][];
   public displayedColumns: string[] = ['id', 'action'];
   rb: TranslationBundle;
@@ -45,8 +45,7 @@ export class ResearchConfigListComponent implements OnInit {
     dialogRef.componentInstance.text = this.rb.get('delete-confirmation');
     dialogRef.componentInstance.onConfirm = () => {
       dialogRef.close();
-      this.researchConfigService.deleteResearch(id).then(
-        () => { this.researchTable.renderRows(); });
+      this.researchConfigService.deleteResearch(id);
     };
     dialogRef.componentInstance.onCancel = () => {
       dialogRef.close();

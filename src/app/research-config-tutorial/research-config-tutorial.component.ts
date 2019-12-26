@@ -84,10 +84,13 @@ export class ResearchConfigTutorialComponent implements OnInit {
 
   private async onConfirmTutorialAdd(dialogRef, tutorial: ResearchTutorial) {
     dialogRef.close();
-    this.researchConfig.tutorials.push(tutorial);
+    if (this.researchConfig.tutorials) {
+      this.researchConfig.tutorials.push(tutorial);
+    } else {
+      this.researchConfig.tutorials = [tutorial];
+    }
     try {
       await this.researchConfigService.updateResearch(this.id, this.researchConfig);
-      this.researchTable.renderRows();
     } finally {
 
     }

@@ -26,7 +26,7 @@ export class ResearchConfigService {
   getAll(): Observable<Map<string, ResearchConfig>> {
     this.progressService.setLoadingState(true);
     const accessPath = 'users/' + this.userService.getCurrentUser().uid + '/research';
-    const observable = this.db.object(accessPath).valueChanges().pipe(map(obj => new Map(Object.entries(obj))));
+    const observable = this.db.object(accessPath).valueChanges().pipe(map(obj => obj ? new Map(Object.entries(obj)) : new Map()));
     return observable.pipe(tap(() => this.progressService.setLoadingState(false)));
   }
 

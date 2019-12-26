@@ -79,10 +79,13 @@ export class ResearchConfigStepsComponent implements OnInit {
 
   private async onConfirmStepAdd(dialogRef, step: ResearchStep) {
     dialogRef.close();
-    this.researchConfig.steps.push(step);
+    if (this.researchConfig.steps) {
+      this.researchConfig.steps.push(step);
+    } else {
+      this.researchConfig.steps = [step];
+    }
     try {
       await this.researchConfigService.updateResearch(this.id, this.researchConfig);
-      this.researchTable.renderRows();
     } finally {
 
     }

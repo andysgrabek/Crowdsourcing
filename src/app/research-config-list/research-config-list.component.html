@@ -1,5 +1,5 @@
-<div *ngIf="model">
-  <table mat-table [dataSource]="model" class="table-aligned" #researchTable>
+<div>
+  <table *ngIf="model && model.length > 0" mat-table [dataSource]="model" class="table-aligned" #researchTable>
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> {{rb.get('id-header')}} </th>
       <td mat-cell *matCellDef="let element"> {{element[0]}} </td>

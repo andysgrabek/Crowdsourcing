@@ -70,10 +70,13 @@ export class ResearchConfigSurveyComponent implements OnInit {
 
   private async onConfirmSurveyAdd(dialogRef, survey: ResearchSurvey) {
     dialogRef.close();
-    this.researchConfig.surveys.push(survey);
+    if (this.researchConfig.surveys) {
+      this.researchConfig.surveys.push(survey);
+    } else {
+      this.researchConfig.surveys = [survey];
+    }
     try {
       await this.researchConfigService.updateResearch(this.id, this.researchConfig);
-      this.researchTable.renderRows();
     } finally {
 
     }
