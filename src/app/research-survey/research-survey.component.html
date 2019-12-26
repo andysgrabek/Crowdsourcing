@@ -9,21 +9,21 @@
   </div>
 
   <div *ngIf="survey.type === researchSurveyTypes.TEXT">
-    <form class="example-form">
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="{{rb.get('type-answer')}}" value="">
+    <form>
+      <mat-form-field>
+        <input name="textAnswerInput" [(ngModel)]="textAnswer" matInput placeholder="{{rb.get('type-answer')}}">
       </mat-form-field>
     </form>
   </div>
 
   <div *ngIf="survey.type === researchSurveyTypes.RADIO">
-    <mat-radio-group>
+    <mat-radio-group name="radioAnswerGroup" [(ngModel)]="radioAnswer">
       <mat-radio-button value="{{answer.val}}" *ngFor="let answer of survey.answers">{{answer.val}}</mat-radio-button>
     </mat-radio-group>
   </div>
 
   <div *ngIf="survey.type === researchSurveyTypes.CHECKBOX">
-    <mat-checkbox *ngFor="let answer of survey.answers">{{answer.val}}</mat-checkbox>
+    <mat-checkbox name="checkboxAnswerCheckbox" [(ngModel)]="checkboxAnswers[survey.answers.indexOf(answer)]" *ngFor="let answer of survey.answers">{{answer.val}}</mat-checkbox>
   </div>
 
   <mat-divider></mat-divider>

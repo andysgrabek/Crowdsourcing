@@ -20,11 +20,10 @@ export class ResearchSurveyWrapperComponent implements OnInit {
   }
 
   getResearchSurveyAnswers(): string[][] {
-    // todo implement me
-    return [ ['works1'], ['works2']];
+    return this.viewChildren.map(surveyComponent => surveyComponent.getAnswer());
   }
 
   didProvideValidAnswers() {
-    return this.viewChildren.map(consentComponent => consentComponent.isValid()).reduce((a, b) => a && b, true);
+    return this.viewChildren.map(surveyComponent => surveyComponent.isValid()).reduce((a, b) => a && b, true);
   }
 }

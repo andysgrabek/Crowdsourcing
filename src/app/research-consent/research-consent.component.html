@@ -3,7 +3,7 @@
     <p>{{consent.text}}</p>
   </div>
   <div>
-    <mat-checkbox [(ngModel)]="marked" [required]="consent.mandatory">{{rb.get('agree')}}</mat-checkbox><span *ngIf="consent.mandatory"> * </span>
+    <mat-checkbox name="consentCheckbox" [(ngModel)]="marked" [required]="consent.mandatory">{{rb.get('agree')}}</mat-checkbox><span *ngIf="consent.mandatory"> * </span>
   </div>
   <mat-divider></mat-divider>
 </div>

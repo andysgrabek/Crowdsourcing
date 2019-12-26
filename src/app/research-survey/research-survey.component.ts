@@ -13,6 +13,9 @@ export class ResearchSurveyComponent implements OnInit {
   survey: ResearchSurvey;
   rb: TranslationBundle;
   researchSurveyTypes = ResearchSurveyType;
+  textAnswer = '';
+  radioAnswer = '';
+  checkboxAnswers: string[] = [];
 
   constructor(private tr: TranslationService) {
     this.rb = tr.getComponentBundle('ResearchSurveyComponent');
@@ -22,7 +25,25 @@ export class ResearchSurveyComponent implements OnInit {
 
   }
 
+  getAnswer(): string[] {
+    switch (this.survey.type) {
+      case ResearchSurveyType.TEXT:
+        return [this.textAnswer];
+      case ResearchSurveyType.RADIO:
+        return [this.radioAnswer];
+      case ResearchSurveyType.CHECKBOX:
+        return this.checkboxAnswers;
+    }
+  }
+
   isValid(): boolean {
-    return true;
+    switch (this.survey.type) {
+      case ResearchSurveyType.TEXT:
+        return !!this.textAnswer;
+      case ResearchSurveyType.RADIO:
+        return !!this.radioAnswer;
+      case ResearchSurveyType.CHECKBOX:
+        return this.checkboxAnswers && this.checkboxAnswers.length > 0;
+    }
   }
 }
