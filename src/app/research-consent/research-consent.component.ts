@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import ResearchConsent from '../dto/ResearchConsent';
 import {TranslationBundle, TranslationService} from '../service/translation.service';
 
@@ -12,12 +12,23 @@ export class ResearchConsentComponent implements OnInit {
   @Input()
   consent: ResearchConsent;
   rb: TranslationBundle;
+  marked = false;
 
   constructor(private tr: TranslationService) {
     this.rb = this.tr.getComponentBundle('ResearchConsentComponent');
   }
 
   ngOnInit() {
+
   }
+
+  isValid(): boolean {
+    return !this.consent.mandatory || this.isMarked();
+  }
+
+  isMarked(): boolean {
+    return this.marked;
+  }
+
 
 }

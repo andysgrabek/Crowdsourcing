@@ -19,6 +19,10 @@ export class ResearchSurveyComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
+  isValid(): boolean {
+    return true;
+  }
 }

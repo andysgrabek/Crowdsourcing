@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
 import ResearchSurvey from '../dto/ResearchSurvey';
+import {ResearchSurveyComponent} from '../research-survey/research-survey.component';
 
 @Component({
   selector: 'app-research-survey-wrapper',
@@ -8,6 +9,8 @@ import ResearchSurvey from '../dto/ResearchSurvey';
 })
 export class ResearchSurveyWrapperComponent implements OnInit {
 
+  @ViewChildren(ResearchSurveyComponent)
+  viewChildren !: QueryList<ResearchSurveyComponent>;
   @Input()
   model: ResearchSurvey[];
 
@@ -22,7 +25,6 @@ export class ResearchSurveyWrapperComponent implements OnInit {
   }
 
   didProvideValidAnswers() {
-    // todo implement me
-    return true;
+    return this.viewChildren.map(consentComponent => consentComponent.isValid()).reduce((a, b) => a && b, true);
   }
 }

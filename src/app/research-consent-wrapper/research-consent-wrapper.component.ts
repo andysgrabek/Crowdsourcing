@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
 import ResearchConsent from '../dto/ResearchConsent';
+import {ResearchConsentComponent} from '../research-consent/research-consent.component';
 
 @Component({
   selector: 'app-research-consent-wrapper',
@@ -8,6 +9,8 @@ import ResearchConsent from '../dto/ResearchConsent';
 })
 export class ResearchConsentWrapperComponent implements OnInit {
 
+  @ViewChildren(ResearchConsentComponent)
+  viewChildren !: QueryList<ResearchConsentComponent>;
   @Input()
   model: ResearchConsent[];
 
@@ -19,14 +22,12 @@ export class ResearchConsentWrapperComponent implements OnInit {
 
   }
 
-  getResearchConsents(): number[] {
-    // todo implement me
-    return [0];
+  getResearchConsents(): boolean[] {
+    return this.viewChildren.map(consentComponent => consentComponent.isMarked());
   }
 
   didMarkAllRequiredConsents(): boolean {
-    // todo implement me
-    return true;
+    return this.viewChildren.map(consentComponent => consentComponent.isValid()).reduce((a, b) => a && b, true);
   }
 
 }
