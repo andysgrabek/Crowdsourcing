@@ -1,7 +1,4 @@
 <div *ngIf="!finished">
-  <div *ngFor="let step of model">
-    <app-research-step *ngIf="step === currentStep" [model]="step"></app-research-step>
-  </div>
 
   <div>
     <button
@@ -10,6 +7,10 @@
       type="button">
       {{rb.get('finish-step')}}
     </button>
+  </div>
+
+  <div *ngFor="let step of model">
+    <app-research-step *ngIf="step === currentStep" [model]="step"></app-research-step>
   </div>
 </div>
 

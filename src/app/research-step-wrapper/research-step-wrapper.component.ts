@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
 import ResearchStep from '../dto/ResearchStep';
 import {TranslationBundle, TranslationService} from '../service/translation.service';
+import {ResearchStepComponent} from '../research-step/research-step.component';
 
 @Component({
   selector: 'app-research-step-wrapper',
@@ -9,6 +10,8 @@ import {TranslationBundle, TranslationService} from '../service/translation.serv
 })
 export class ResearchStepWrapperComponent implements OnInit {
 
+  @ViewChildren(ResearchStepComponent)
+  researchStepComponentList !: QueryList<ResearchStepComponent>;
   @Output()
   lastStepFinished = new EventEmitter();
   @Input()
@@ -34,9 +37,8 @@ export class ResearchStepWrapperComponent implements OnInit {
     }
   }
 
-  getResearchData(): object[] {
-    // todo implement me
-    return [{ works: true }];
+  getResearchData(): Map<string, object | number>[] {
+    return this.researchStepComponentList.map(component => component.getStepData());
   }
 
 }

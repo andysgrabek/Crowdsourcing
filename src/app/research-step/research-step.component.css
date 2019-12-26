@@ -1,0 +1,21 @@
+/*.inner {*/
+/*  !*position: absolute;*!*/
+/*}*/
+
+/*.image-container {*/
+/*  flex: 1;*/
+/*  z-index: auto;*/
+/*}*/
+
+/*.canvas-container {*/
+/*  background-color: aqua;*/
+/*  flex: 1;*/
+/*  z-index: 1;*/
+/*}*/
+
+/*.outer {*/
+/*  !*position: relative;*!*/
+/*  min-height: 300px;*/
+/*  margin: 0 auto;*/
+/*  display: flex;*/
+/*}*/

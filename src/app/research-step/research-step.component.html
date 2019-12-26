@@ -1,1 +1,18 @@
-<p>{{model.name}}</p>
+<div *ngIf="model.type !== stepTypes.IMAGE">
+  <p>{{rb.get('unsupported-step-type')}}</p>
+</div>
+<div *ngIf="model.type === stepTypes.IMAGE">
+  <div>
+    List of annotations
+  </div>
+  <div>
+    Available annotation types
+  </div>
+  <div>
+    <textarea matInput>Free comment area</textarea>
+  </div>
+  <div>
+    <canvas id="annotationCanvas"></canvas>
+  </div>
+
+</div>
