@@ -14,9 +14,9 @@ import {Observable} from 'rxjs';
 })
 export class ResearchConfigComponent implements OnInit {
 
-  public id: string;
+  id: string;
   rb: TranslationBundle;
-  private researchObservable: Observable<ResearchConfig>;
+  researchObservable: Observable<ResearchConfig>;
 
   constructor(private dialog: MatDialog,
               private snackBar: MatSnackBar,
@@ -30,10 +30,6 @@ export class ResearchConfigComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.researchObservable = this.researchConfigService.getById(this.id);
-    // this.researchObservable.subscribe(config => {
-    //   this.researchConfig = config;
-    //   this.isLive = this.researchConfig.isLive;
-    // });
   }
 
   async onToggle(researchConfig: ResearchConfig) {
@@ -54,7 +50,5 @@ export class ResearchConfigComponent implements OnInit {
     dialogRef.componentInstance.onCancel = () => {
       dialogRef.close();
     };
-    // this.isLive = !this.isLive;
   }
-
 }
