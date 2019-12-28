@@ -1,0 +1,19 @@
+<div>
+  <div>
+    <mat-form-field>
+      <mat-label>{{rb.get('comment')}}</mat-label>
+      <textarea matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5"
+                [value]="annotation.comment"
+                (keyup)="onTextChange($event.target.value)">
+      </textarea>
+    </mat-form-field>
+  </div>
+  <div>
+    <span><button *ngIf="showCancel" mat-raised-button (click)="onCancel()">{{rb.get('cancel')}}</button></span>
+    <span><button *ngIf="showConfirm" mat-raised-button (click)="onConfirm(annotation)">{{rb.get('confirm')}}</button></span>
+  </div>
+</div>
