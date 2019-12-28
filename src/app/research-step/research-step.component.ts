@@ -9,6 +9,7 @@ import ResearchAnnotationDelegateFactory from '../research-annotation-delegate/R
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
 import {MatTable} from '@angular/material/table';
+import {AnnotationVisualizerService} from '../service/annotation-visualizer.service';
 
 @Component({
   selector: 'app-research-step',
@@ -28,8 +29,6 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
   canvas: HTMLCanvasElement;
   availableAnnotationTypes = ResearchAnnotationType;
   annotations: ResearchAnnotation[] = [];
-  private readonly defaultLineWidth = 3;
-  private readonly defaultStrokeStyle = '#ffff00';
   private readonly annotationCanvasName = 'annotationCanvas';
   private newAnnotation: ResearchAnnotation;
   private annotationDelegate: ResearchAnnotationDelegate;
@@ -38,7 +37,8 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
 
   constructor(private tr: TranslationService,
               private dialog: MatDialog,
-              private sanitizer: DomSanitizer) {
+              private sanitizer: DomSanitizer,
+              private visualizer: AnnotationVisualizerService) {
     this.rb = tr.getComponentBundle('ResearchStepComponent');
   }
 
@@ -100,18 +100,8 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
   }
 
   visualizeAnnotation(annotation: ResearchAnnotation) {
-    const points = annotation.points;
     const context = this.canvas.getContext('2d');
-    context.beginPath();
-    context.strokeStyle = this.defaultStrokeStyle;
-    context.lineWidth = this.defaultLineWidth;
-    context.moveTo(points[0].x, points[0].y);
-    for (let i = 1; i < points.length - 1; i++) {
-      context.lineTo(points[i].x, points[i].y);
-      context.stroke();
-    }
-    context.lineTo(points[0].x, points[0].y);
-    context.stroke();
+    this.visualizer.visualize(annotation, context);
   }
 
   async clearVisualizeAnnotation() {

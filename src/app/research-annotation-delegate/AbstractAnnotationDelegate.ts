@@ -2,6 +2,7 @@ import {ResearchAnnotationDelegate} from './ResearchAnnotationDelegate';
 
 export default abstract class AbstractAnnotationDelegate implements ResearchAnnotationDelegate {
 
+  protected points: {x: number; y: number}[] = [];
   protected defaultLineWidth = 3;
   protected defaultStrokeStyle = '#ffff00';
   protected canvas: HTMLCanvasElement;

@@ -2,8 +2,6 @@ import AbstractAnnotationDelegate from './AbstractAnnotationDelegate';
 
 export default class FreeCurveAnnotationDelegate extends AbstractAnnotationDelegate {
 
-  private points: {x: number; y: number}[] = [];
-
   constructor(canvas: HTMLCanvasElement) {
     super(canvas);
   }
@@ -24,6 +22,7 @@ export default class FreeCurveAnnotationDelegate extends AbstractAnnotationDeleg
   }
 
   protected drawCurrentInput(): void {
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.context.beginPath();
     this.context.strokeStyle = this.defaultStrokeStyle;
     this.context.lineWidth = this.defaultLineWidth;
