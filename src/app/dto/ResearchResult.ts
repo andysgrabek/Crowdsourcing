@@ -1,14 +1,14 @@
 export default class ResearchResult {
 
-  submitDate: Date;
+  submitDate: number;
   consents: boolean[]; // array of booleans to represent if a given consent was given
   answers: string[][]; // even a yes/no question returns an array, but with 1 element
-  data: Map<string, object | number>[]; // 'any' represents the object containing the data collected for the given question.
+  data: {k: string, v: object | number | string}[][];
 
-  constructor(consents: boolean[], answers: string[][], data: Map<string, object | number>[]) {
+  constructor(consents: boolean[], answers: string[][], data: {k: string, v: object | number | string}[][]) {
     this.consents = consents;
     this.answers = answers;
-    this.submitDate = new Date();
+    this.submitDate = Date.now();
     this.data = data;
   }
 

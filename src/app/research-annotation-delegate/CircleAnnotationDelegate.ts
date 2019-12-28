@@ -13,7 +13,9 @@ export default class CircleAnnotationDelegate extends AbstractAnnotationDelegate
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.hook = point;
     this.points = [this.center, this.hook];
-    return this.points;
+    return this.points.map(ptr => {
+      return {x: ptr.x / this.canvas.width, y: ptr.y / this.canvas.height};
+    });
   }
 
   move(point: { x: number; y: number }): void {

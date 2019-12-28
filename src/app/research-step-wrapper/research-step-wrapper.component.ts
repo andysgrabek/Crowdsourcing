@@ -10,8 +10,7 @@ import {ResearchStepComponent} from '../research-step/research-step.component';
 })
 export class ResearchStepWrapperComponent implements OnInit {
 
-  @ViewChildren(ResearchStepComponent)
-  researchStepComponentList !: QueryList<ResearchStepComponent>;
+  @ViewChildren(ResearchStepComponent, undefined) researchStepComponentList: QueryList<ResearchStepComponent>;
   @Output()
   lastStepFinished = new EventEmitter();
   @Input()
@@ -37,7 +36,7 @@ export class ResearchStepWrapperComponent implements OnInit {
     }
   }
 
-  getResearchData(): Map<string, object | number>[] {
+  getResearchData(): {k: string, v: object | number | string}[][] {
     return this.researchStepComponentList.map(component => component.getStepData());
   }
 

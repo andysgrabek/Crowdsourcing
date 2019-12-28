@@ -1,4 +1,4 @@
-<div *ngIf="!finished">
+<div [hidden]="finished">
 
   <div>
     <button
@@ -10,7 +10,7 @@
   </div>
 
   <div *ngFor="let step of model">
-    <app-research-step *ngIf="step === currentStep" [model]="step"></app-research-step>
+    <app-research-step [hidden]="step !== currentStep" [model]="step"></app-research-step>
   </div>
 </div>
 

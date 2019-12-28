@@ -24,7 +24,7 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
   model: ResearchStep;
   stepTypes = ResearchStepType;
   rb: TranslationBundle;
-  researchStepData = new Map<string, object | number>();
+  researchStepData: {k: string, v: object | number | string}[] = [];
   currentDrawingState: AnnotationDrawingStates = AnnotationDrawingStates.NOT_LISTENING;
   canvas: HTMLCanvasElement;
   availableAnnotationTypes = ResearchAnnotationType;
@@ -34,6 +34,7 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
   private annotationDelegate: ResearchAnnotationDelegate;
   displayedColumns: string[] = ['index', 'action'];
   sanitizedUrl: SafeHtml;
+  freeComment = '';
 
   constructor(private tr: TranslationService,
               private dialog: MatDialog,
@@ -43,38 +44,62 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.researchStepData.set('start', new Date());
-    this.researchStepData.set('type', this.model.type);
     this.sanitizedUrl = this.sanitizer.bypassSecurityTrustStyle(`url(${this.model.url})`);
   }
 
   ngAfterViewInit() {
+    this.researchStepData.push({k: 'start', v: Date.now()});
+    this.researchStepData.push({k: 'type', v: this.model.type});
     this.canvas = document.getElementById(this.annotationCanvasName) as HTMLCanvasElement;
   }
 
-  getStepData(): Map<string, object | number> {
+  getStepData(): {k: string, v: object | number | string}[] {
+    this.researchStepData.push({k: 'end', v: Date.now()});
+    this.researchStepData.push({k: 'annotations', v: this.annotations});
+    this.researchStepData.push({k: 'comment', v: this.freeComment || ''});
     return this.researchStepData;
   }
 
-  onEdit(annotation: ResearchAnnotation) {
+  onFinalizeAddAnnotation() {
     const dialogRef = this.dialog.open(EditResearchAnnotationComponent);
-    dialogRef.componentInstance.annotation = annotation;
-    dialogRef.componentInstance.onConfirm = (ann: ResearchAnnotation) => this.onConfirmEditAnnotation(ann);
+    dialogRef.componentInstance.annotation = this.newAnnotation;
+    dialogRef.componentInstance.onConfirm = (ann: ResearchAnnotation) => {
+      this.onConfirmFinalizeAddAnnotation(ann);
+      dialogRef.close();
+    };
     dialogRef.componentInstance.onCancel = () => dialogRef.close();
   }
 
-  onConfirmEditAnnotation(annotation: ResearchAnnotation) {
+  async onEdit(annotation: ResearchAnnotation) {
+    const dialogRef = this.dialog.open(EditResearchAnnotationComponent);
+    const annotationCopy = new ResearchAnnotation();
+    Object.assign(annotationCopy, annotation);
+    dialogRef.componentInstance.annotation = annotationCopy;
+    dialogRef.componentInstance.onConfirm = (ann: ResearchAnnotation) => {
+      this.onConfirmEditAnnotation(ann, annotation);
+      dialogRef.close();
+    };
+    dialogRef.componentInstance.onCancel = () => dialogRef.close();
+  }
+
+  onConfirmEditAnnotation(annotation: ResearchAnnotation, originalAnnotation: ResearchAnnotation) {
+    Object.assign(this.annotations.find(a => a === originalAnnotation), annotation);
+    this.tableList.first.renderRows();
+  }
+
+  onConfirmFinalizeAddAnnotation(annotation: ResearchAnnotation) {
     this.annotations.push(annotation);
+    this.tableList.first.renderRows();
     this.newAnnotation = undefined;
     this.currentDrawingState = AnnotationDrawingStates.NOT_LISTENING;
+
   }
 
   onMouseUpOrLeave(event: MouseEvent) {
     if (this.currentDrawingState === AnnotationDrawingStates.DRAWING) {
       this.currentDrawingState = AnnotationDrawingStates.NOT_LISTENING;
       this.newAnnotation.points = this.annotationDelegate.end({x: event.layerX, y: event.layerY});
-      this.annotations.push(this.newAnnotation);
-      this.tableList.first.renderRows();
+      this.onFinalizeAddAnnotation();
       this.newAnnotation = undefined;
       this.annotationDelegate = undefined;
     }
@@ -101,7 +126,7 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
 
   visualizeAnnotation(annotation: ResearchAnnotation) {
     const context = this.canvas.getContext('2d');
-    this.visualizer.visualize(annotation, context);
+    this.visualizer.visualize(annotation, context, this.canvas);
   }
 
   async clearVisualizeAnnotation() {

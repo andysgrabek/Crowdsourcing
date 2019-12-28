@@ -19,7 +19,9 @@ export default class RectangleAnnotationDelegate extends AbstractAnnotationDeleg
     this.bottomRightCorner = point;
     this.recalculateCorners();
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    return this.points;
+    return this.points.map(ptr => {
+      return {x: ptr.x / this.canvas.width, y: ptr.y / this.canvas.height};
+    });
   }
 
   move(point: { x: number; y: number }): void {

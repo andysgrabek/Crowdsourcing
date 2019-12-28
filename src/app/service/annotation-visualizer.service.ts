@@ -13,33 +13,35 @@ export class AnnotationVisualizerService {
 
   }
 
-  visualize(annotation: ResearchAnnotation, context: CanvasRenderingContext2D) {
+  visualize(annotation: ResearchAnnotation, context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
     switch (annotation.type) {
       case ResearchAnnotationType.RECTANGLE:
-        this.visualizeRectangle(annotation, context);
+        this.visualizeRectangle(annotation, context, canvas);
         break;
       case ResearchAnnotationType.CIRCLE:
-        this.visualizeCircle(annotation, context);
+        this.visualizeCircle(annotation, context, canvas);
         break;
       case ResearchAnnotationType.FREE_CURVE:
-        this.visualizeFreeCurve(annotation, context);
+        this.visualizeFreeCurve(annotation, context, canvas);
         break;
     }
   }
 
-  visualizeCircle(annotation: ResearchAnnotation, context: CanvasRenderingContext2D) {
+  visualizeCircle(annotation: ResearchAnnotation, context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
     context.beginPath();
     context.strokeStyle = this.defaultStrokeStyle;
     context.lineWidth = this.defaultLineWidth;
-    const xDif = annotation.points[1].x - annotation.points[0].x;
-    const yDif = annotation.points[1].y - annotation.points[0].y;
+    const xDif = (annotation.points[1].x - annotation.points[0].x) * canvas.width;
+    const yDif = (annotation.points[1].y - annotation.points[0].y) * canvas.height;
     const radius = Math.sqrt(xDif * xDif + yDif + yDif);
-    context.arc(annotation.points[0].x, annotation.points[0].y, radius, 0, 2 * Math.PI);
+    context.arc(annotation.points[0].x * canvas.width, annotation.points[0].y * canvas.height, radius, 0, 2 * Math.PI);
     context.stroke();
   }
 
-  visualizeRectangle(annotation: ResearchAnnotation, context: CanvasRenderingContext2D) {
-    const points = annotation.points;
+  visualizeRectangle(annotation: ResearchAnnotation, context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
+    const points = annotation.points.map(point => {
+      return { x: point.x * canvas.width, y: point.y * canvas.height };
+    });
     context.beginPath();
     context.strokeStyle = this.defaultStrokeStyle;
     context.lineWidth = this.defaultLineWidth;
@@ -54,8 +56,10 @@ export class AnnotationVisualizerService {
     context.stroke();
   }
 
-  visualizeFreeCurve(annotation: ResearchAnnotation, context: CanvasRenderingContext2D) {
-    const points = annotation.points;
+  visualizeFreeCurve(annotation: ResearchAnnotation, context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
+    const points = annotation.points.map(point => {
+      return { x: point.x * canvas.width, y: point.y * canvas.height };
+    });
     context.beginPath();
     context.strokeStyle = this.defaultStrokeStyle;
     context.lineWidth = this.defaultLineWidth;

@@ -48,7 +48,7 @@ import { ImageStepEditorComponent } from './image-step-editor/image-step-editor.
 import {ResearchLiveGuardService} from './guard/research-live-guard.service';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatRadioModule} from "@angular/material/radio";
+import {MatRadioModule} from '@angular/material/radio';
 import { ResearchStepWrapperComponent } from './research-step-wrapper/research-step-wrapper.component';
 import { ResearchConsentWrapperComponent } from './research-consent-wrapper/research-consent-wrapper.component';
 import { ResearchSurveyWrapperComponent } from './research-survey-wrapper/research-survey-wrapper.component';
@@ -136,6 +136,7 @@ const firebaseConfig = {
     AppComponent
   ],
   entryComponents: [
+    EditResearchAnnotationComponent,
     ConfirmDialogComponent,
     ConsentEditDialogComponent,
     TextTutorialEditorComponent,
