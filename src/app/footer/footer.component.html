@@ -1,0 +1,8 @@
+<div>
+  <mat-form-field>
+    <mat-select [(value)]="tr.currentLocale" (selectionChange)="setLocale($event.source.value)">
+      <mat-option *ngFor="let locale of tr.availableLocales" [value]="locale">{{locale}}</mat-option>
+    </mat-select>
+    <mat-label>{{rb.get('change-locale')}}</mat-label>
+  </mat-form-field>
+</div>

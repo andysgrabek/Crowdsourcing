@@ -53,6 +53,9 @@ import { ResearchStepWrapperComponent } from './research-step-wrapper/research-s
 import { ResearchConsentWrapperComponent } from './research-consent-wrapper/research-consent-wrapper.component';
 import { ResearchSurveyWrapperComponent } from './research-survey-wrapper/research-survey-wrapper.component';
 import { EditResearchAnnotationComponent } from './edit-research-annotation/edit-research-annotation.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import {MatIconModule} from "@angular/material/icon";
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDCS3sTMmqiPP64asRfKh4lo0hFUvjb5v4',
@@ -98,6 +101,8 @@ const firebaseConfig = {
     ResearchConsentWrapperComponent,
     ResearchSurveyWrapperComponent,
     EditResearchAnnotationComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -124,7 +129,8 @@ const firebaseConfig = {
     MatTableModule,
     MatStepperModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    MatIconModule
   ],
   providers: [
     ResearchLiveGuardService,

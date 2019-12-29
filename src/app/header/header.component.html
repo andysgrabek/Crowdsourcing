@@ -1,0 +1,6 @@
+<mat-toolbar>
+  <span>{{rb.get('title')}}</span>
+  <button *ngIf="!userService.getCurrentUser()" mat-button routerLink="/login" routerLinkActive="active">{{rb.get('login')}}</button>
+  <button *ngIf="!userService.getCurrentUser()" mat-button routerLink="/register" routerLinkActive="active">{{rb.get('register')}}</button>
+  <button *ngIf="userService.getCurrentUser()" mat-button (click)="logout()">{{rb.get('logout')}}</button>
+</mat-toolbar>

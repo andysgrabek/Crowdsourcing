@@ -27,15 +27,6 @@ export class AppComponent implements OnInit {
     this.handleCookieAcceptanceStatus();
   }
 
-  async logout() {
-    await this.userService.logout();
-  }
-
-  async setLocale(locale: string) {
-    this.tr.setLocale(locale);
-    window.location.reload();
-  }
-
   handleCookieAcceptanceStatus() {
     if (!this.cookieService.check(this.cookiesAcceptedCookieName)) {
       this.cookieService.set(this.cookiesAcceptedCookieName, 'false');

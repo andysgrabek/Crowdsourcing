@@ -1,15 +1,10 @@
-<div>
-  <mat-toolbar>
-    <span>{{rb.get('title')}}</span>
-    <button *ngIf="!userService.getCurrentUser()" mat-button routerLink="/login" routerLinkActive="active">{{rb.get('login')}}</button>
-    <button *ngIf="!userService.getCurrentUser()" mat-button routerLink="/register" routerLinkActive="active">{{rb.get('register')}}</button>
-    <button *ngIf="userService.getCurrentUser()" mat-button (click)="logout()">{{rb.get('logout')}}</button>
-    <mat-form-field>
-      <mat-select [(value)]="tr.currentLocale" (selectionChange)="setLocale($event.source.value)">
-        <mat-option *ngFor="let locale of tr.availableLocales" [value]="locale">{{locale}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </mat-toolbar>
-  <div [style.display]="(this.progressService.getLoadingState() | async) ? 'none' : ''"><router-outlet></router-outlet></div>
-  <div [style.display]="!(this.progressService.getLoadingState() | async) ? 'none' : ''"><mat-spinner></mat-spinner></div>
+<div style="display: flex; flex-direction: column; height: 100%; width: 100%">
+  <app-header></app-header>
+  <div style="flex: 1 0 auto;
+  align-items: center;
+  justify-content: center;">
+    <div [style.display]="(this.progressService.getLoadingState() | async) ? 'none' : ''"><router-outlet></router-outlet></div>
+    <div [style.display]="!(this.progressService.getLoadingState() | async) ? 'none' : ''"><mat-spinner></mat-spinner></div>
+  </div>
+  <app-footer style="width: 100%; flex-shrink: 0; background-color: antiquewhite"></app-footer>
 </div>
