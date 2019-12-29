@@ -1,13 +1,59 @@
+<div class="route-title">
+  <h2>{{rb.get('research-configuration')}}</h2>
+</div>
 <div *ngIf="researchConfig">
-  <div>
-    <mat-slide-toggle [checked]="researchConfig.isLive" (toggleChange)="onToggle(researchConfig)">{{rb.get('live')}}</mat-slide-toggle>
-  </div>
-  <div>
-    <span><button mat-raised-button routerLink="/research-config-consent/{{id}}">{{rb.get('consent-configuration')}}</button></span>
-    <span><button mat-raised-button routerLink="/research-config-survey/{{id}}">{{rb.get('survey-configuration')}}</button></span>
-    <span><button mat-raised-button routerLink="/research-config-tutorial/{{id}}">{{rb.get('tutorial-configuration')}}</button></span>
-    <span><button mat-raised-button routerLink="/research-config-steps/{{id}}">{{rb.get('steps-configuration')}}</button></span>
-    <span><button mat-raised-button routerLink="/research-data/{{id}}">{{rb.get('data-configuration')}}</button></span>
+  <div class="research-config-actions-container">
+    <div class="research-config-actions-wrapper">
+      <div *ngIf="(consentUrl | async) as url" class="research-config-actions-item mat-elevation-z4">
+        <h4>{{rb.get('consent-configuration')}}</h4>
+        <p>{{rb.get('consent-configuration-description')}}</p>
+        <img class="research-config-actions-icon" [src]="url" alt="consent-configuration-logo">
+        <button class="research-config-actions-button" mat-raised-button routerLink="/research-config-consent/{{id}}">{{rb.get('configure')}}</button>
+      </div>
+
+      <div *ngIf="(confusedUrl | async) as url" class="research-config-actions-item mat-elevation-z4">
+        <h4>{{rb.get('survey-configuration')}}</h4>
+        <p>{{rb.get('survey-configuration-description')}}</p>
+        <img class="research-config-actions-icon" [src]="url" alt="consent-configuration-logo">
+        <button class="research-config-actions-button" mat-raised-button routerLink="/research-config-survey/{{id}}">{{rb.get('configure')}}</button>
+      </div>
+
+      <div *ngIf="(tutorialUrl | async) as url" class="research-config-actions-item mat-elevation-z4">
+        <h4>{{rb.get('tutorial-configuration')}}</h4>
+        <p>{{rb.get('tutorial-configuration-description')}}</p>
+        <img class="research-config-actions-icon" [src]="url" alt="consent-configuration-logo">
+        <button class="research-config-actions-button" mat-raised-button routerLink="/research-config-tutorial/{{id}}">{{rb.get('configure')}}</button>
+      </div>
+
+      <div *ngIf="(ctScanUrl | async) as url" class="research-config-actions-item mat-elevation-z4">
+        <h4>{{rb.get('steps-configuration')}}</h4>
+        <p>{{rb.get('steps-configuration-description')}}</p>
+        <img class="research-config-actions-icon" [src]="url" alt="consent-configuration-logo">
+        <button class="research-config-actions-button" mat-raised-button routerLink="/research-config-steps/{{id}}">{{rb.get('configure')}}</button>
+      </div>
+
+      <div *ngIf="(serverUrl | async) as url" class="research-config-actions-item mat-elevation-z4">
+        <h4>{{rb.get('data-configuration')}}</h4>
+        <p>{{rb.get('data-configuration-description')}}</p>
+        <img class="research-config-actions-icon" [src]="url" alt="consent-configuration-logo">
+        <button class="research-config-actions-button" mat-raised-button routerLink="/research-data/{{id}}">{{rb.get('configure')}}</button>
+      </div>
+
+      <div [hidden]="researchConfig.isLive" *ngIf="(publishUrl | async) as url" class="research-config-actions-item mat-elevation-z4">
+        <h4>{{rb.get('research-publish')}}</h4>
+        <p>{{rb.get('research-publish-description')}}</p>
+        <img class="research-config-actions-icon" [src]="url" alt="consent-configuration-logo">
+        <button class="research-config-actions-button" mat-raised-button (click)="onPublish(researchConfig)">{{rb.get('research-publish-button')}}</button>
+      </div>
+
+      <div [hidden]="!researchConfig.isLive" *ngIf="(publishUrl | async) as url" class="research-config-actions-item mat-elevation-z4">
+        <h4>{{rb.get('research-unpublish')}}</h4>
+        <p>{{rb.get('research-unpublish-description')}}</p>
+        <img class="research-config-actions-icon" [src]="url" alt="consent-configuration-logo">
+        <button class="research-config-actions-button" mat-raised-button (click)="onUnPublish(researchConfig)">{{rb.get('research-unpublish-button')}}</button>
+      </div>
+
+    </div>
   </div>
 
 </div>

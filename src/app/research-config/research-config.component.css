@@ -1,0 +1,37 @@
+.research-config-actions-container {
+  padding: 1rem;
+}
+
+.research-config-actions-wrapper {
+  margin: 0 auto;
+  width: 80%;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.research-config-actions-item {
+  max-height: 25%;
+  max-width: 25%;
+  background-color: white;
+  align-self: stretch;
+  flex: 33%;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.research-config-actions-button {
+  background-color: var(--color-primary-3);
+  color: white;
+}
+
+.research-config-actions-icon {
+  max-height: 35%;
+  max-width: 35%;
+  display: block;
+  margin: 1rem auto;
+}
+
+

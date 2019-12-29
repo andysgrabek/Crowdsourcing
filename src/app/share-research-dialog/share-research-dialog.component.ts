@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TranslationBundle, TranslationService} from '../service/translation.service';
+import {PlatformLocation} from '@angular/common';
 
 @Component({
   selector: 'app-share-research-dialog',
@@ -11,7 +12,7 @@ export class ShareResearchDialogComponent implements OnInit {
   userId = '';
   rb: TranslationBundle;
 
-  constructor(private tr: TranslationService) {
+  constructor(private tr: TranslationService, private platformLocation: PlatformLocation) {
     this.rb = tr.getComponentBundle('ShareResearchDialogComponent');
   }
 
@@ -19,7 +20,7 @@ export class ShareResearchDialogComponent implements OnInit {
   }
 
   researchLink(): string {
-    return `${window.location.origin}/research/${this.userId}/${this.researchId}`;
-
+    const baseUrl = `${window.location.origin}${this.platformLocation.getBaseHrefFromDOM()}`;
+    return `${baseUrl}research/${this.userId}/${this.researchId}`;
   }
 }

@@ -5,7 +5,8 @@ import {ResearchConfigService} from '../service/research-config.service';
 import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {TranslationBundle, TranslationService} from '../service/translation.service';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
+import {AngularFireStorage} from '@angular/fire/storage';
 
 @Component({
   selector: 'app-research-config',
@@ -18,13 +19,20 @@ export class ResearchConfigComponent implements OnInit, OnDestroy {
   rb: TranslationBundle;
   researchConfig: ResearchConfig;
   private researchSubscription: Subscription;
+  consentUrl: Observable<any>;
+  tutorialUrl: Observable<any>;
+  ctScanUrl: Observable<any>;
+  serverUrl: Observable<any>;
+  confusedUrl: Observable<any>;
+  publishUrl: Observable<any>;
 
   constructor(private dialog: MatDialog,
               private snackBar: MatSnackBar,
               private researchConfigService: ResearchConfigService,
               private router: Router,
               private route: ActivatedRoute,
-              private tr: TranslationService) {
+              private tr: TranslationService,
+              private storage: AngularFireStorage) {
     this.rb = tr.getComponentBundle('ResearchConfigComponent');
   }
 
@@ -33,27 +41,37 @@ export class ResearchConfigComponent implements OnInit, OnDestroy {
     this.researchSubscription = this.researchConfigService.getById(this.id).subscribe(res => {
       this.researchConfig = res;
     });
+    this.consentUrl = this.storage.ref('assets/images/research-config/consent.png').getDownloadURL();
+    this.tutorialUrl = this.storage.ref('assets/images/research-config/education.png').getDownloadURL();
+    this.ctScanUrl = this.storage.ref('assets/images/research-config/ct-scan.png').getDownloadURL();
+    this.serverUrl = this.storage.ref('assets/images/research-config/server.png').getDownloadURL();
+    this.confusedUrl = this.storage.ref('assets/images/research-config/confused.png').getDownloadURL();
+    this.publishUrl = this.storage.ref('assets/images/research-config/publish.png').getDownloadURL();
   }
 
   ngOnDestroy() {
     this.researchSubscription.unsubscribe();
   }
 
-  async onToggle(researchConfig: ResearchConfig) {
+  async onPublish(researchConfig: ResearchConfig) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent);
-    if (researchConfig.isLive) {
-      dialogRef.componentInstance.text = 'Are you sure you want to unpublish your research?';
-      dialogRef.componentInstance.onConfirm = () => {
-        dialogRef.close();
-        this.researchConfigService.setResearchLive(this.id, researchConfig, false);
-      };
-    } else {
-      dialogRef.componentInstance.text = 'Are you sure you want to publish your research?';
-      dialogRef.componentInstance.onConfirm = () => {
-        dialogRef.close();
-        this.researchConfigService.setResearchLive(this.id, researchConfig, true);
-      };
-    }
+    dialogRef.componentInstance.text = this.rb.get('publish-confirmation');
+    dialogRef.componentInstance.onConfirm = () => {
+      dialogRef.close();
+      this.researchConfigService.setResearchLive(this.id, researchConfig, true);
+    };
+    dialogRef.componentInstance.onCancel = () => {
+      dialogRef.close();
+    };
+  }
+
+  async onUnPublish(researchConfig: ResearchConfig) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+    dialogRef.componentInstance.text = this.rb.get('unpublish-confirmation');
+    dialogRef.componentInstance.onConfirm = () => {
+      dialogRef.close();
+      this.researchConfigService.setResearchLive(this.id, researchConfig, false);
+    };
     dialogRef.componentInstance.onCancel = () => {
       dialogRef.close();
     };
