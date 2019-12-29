@@ -14,7 +14,7 @@ export class AnnotationVisualizerService {
   }
 
   visualize(annotation: ResearchAnnotation, context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
-    switch (annotation.type) {
+    switch (annotation.annotationType) {
       case ResearchAnnotationType.RECTANGLE:
         this.visualizeRectangle(annotation, context, canvas);
         break;

@@ -1,11 +1,11 @@
 export default class ResearchAnnotation {
 
-  type: ResearchAnnotationType;
+  annotationType: ResearchAnnotationType;
   comment: string;
   points: {x: number, y: number}[];
 
-  constructor(type?: ResearchAnnotationType, comment?: string, points?: {x: number, y: number}[]) {
-    this.type = type;
+  constructor(annotationType?: ResearchAnnotationType, comment?: string, points?: {x: number, y: number}[]) {
+    this.annotationType = annotationType;
     this.comment = comment;
     this.points = points;
   }

@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren}
 import ResearchStep from '../dto/ResearchStep';
 import {TranslationBundle, TranslationService} from '../service/translation.service';
 import {ResearchStepComponent} from '../research-step/research-step.component';
+import ResearchStepData from "../dto/ResearchStepData";
 
 @Component({
   selector: 'app-research-step-wrapper',
@@ -36,7 +37,7 @@ export class ResearchStepWrapperComponent implements OnInit {
     }
   }
 
-  getResearchData(): {k: string, v: object | number | string}[][] {
+  getResearchData(): ResearchStepData[] {
     return this.researchStepComponentList.map(component => component.getStepData());
   }
 

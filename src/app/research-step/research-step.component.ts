@@ -10,6 +10,7 @@ import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
 import {MatTable} from '@angular/material/table';
 import {AnnotationVisualizerService} from '../service/annotation-visualizer.service';
+import ResearchStepData from '../dto/ResearchStepData';
 
 @Component({
   selector: 'app-research-step',
@@ -24,7 +25,7 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
   model: ResearchStep;
   stepTypes = ResearchStepType;
   rb: TranslationBundle;
-  researchStepData: {k: string, v: object | number | string}[] = [];
+  researchStepData = new ResearchStepData();
   currentDrawingState: AnnotationDrawingStates = AnnotationDrawingStates.NOT_LISTENING;
   canvas: HTMLCanvasElement;
   availableAnnotationTypes = ResearchAnnotationType;
@@ -48,15 +49,15 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.researchStepData.push({k: 'start', v: Date.now()});
-    this.researchStepData.push({k: 'type', v: this.model.type});
+    this.researchStepData.startTimeStamp = Date.now();
+    this.researchStepData.stepType = this.model.type;
     this.canvas = document.getElementById(this.annotationCanvasName) as HTMLCanvasElement;
   }
 
-  getStepData(): {k: string, v: object | number | string}[] {
-    this.researchStepData.push({k: 'end', v: Date.now()});
-    this.researchStepData.push({k: 'annotations', v: this.annotations});
-    this.researchStepData.push({k: 'comment', v: this.freeComment || ''});
+  getStepData(): ResearchStepData {
+    this.researchStepData.endTimeStamp = Date.now();
+    this.researchStepData.annotations = this.annotations;
+    this.researchStepData.freeComment = this.freeComment || '';
     return this.researchStepData;
   }
 
@@ -114,7 +115,7 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
   onMouseDown(event: MouseEvent) {
     if (this.currentDrawingState === AnnotationDrawingStates.IDLE) {
       this.currentDrawingState = AnnotationDrawingStates.DRAWING;
-      this.annotationDelegate = ResearchAnnotationDelegateFactory.createDelegate(this.newAnnotation.type, this.canvas);
+      this.annotationDelegate = ResearchAnnotationDelegateFactory.createDelegate(this.newAnnotation.annotationType, this.canvas);
       this.annotationDelegate.start({x: event.layerX, y: event.layerY});
     }
   }
