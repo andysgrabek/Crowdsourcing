@@ -1,0 +1,13 @@
+.dialog-button {
+  flex: 1;
+}
+
+.dialog-buttons-wrapper {
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  width: 80%;
+  justify-items: center;
+  align-content: center;
+}

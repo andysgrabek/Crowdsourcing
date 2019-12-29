@@ -1,3 +1,9 @@
-<div>{{text}}</div>
-<span><button *ngIf="showCancel" mat-raised-button (click)="onCancel()">Cancel</button></span>
-<span><button *ngIf="showConfirm" mat-raised-button (click)="onConfirm()">Confirm</button></span>
+<div>
+  <h4>{{rb.get('confirmation-heading')}}</h4>
+  <div>{{text}}</div>
+  <div class="dialog-buttons-wrapper">
+    <button class="dialog-button" *ngIf="showCancel" mat-button (click)="onCancel()">{{rb.get('cancel')}}</button>
+    <div class="dialog-button"></div>
+    <button class="dialog-button" *ngIf="showConfirm" mat-button (click)="onConfirm()">{{rb.get('confirm')}}</button>
+  </div>
+</div>
