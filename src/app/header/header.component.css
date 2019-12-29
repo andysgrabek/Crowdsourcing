@@ -1,0 +1,11 @@
+.header-container {
+  background-color: var(--color-primary-2);
+}
+
+.header-item {
+  padding: 1rem;
+}
+
+.header-title:focus {
+  outline: 0;
+}

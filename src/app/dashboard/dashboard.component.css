@@ -1,0 +1,14 @@
+.dashboard-wrapper {
+  display: flex;
+}
+
+.dashboard-item-main {
+  width: 100%;
+  padding: 1rem;
+  flex: 3;
+}
+
+.dashboard-item-sidebar {
+  padding: 1rem;
+  flex: 1;
+}

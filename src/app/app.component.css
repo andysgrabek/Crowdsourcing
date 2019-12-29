@@ -1,5 +1,7 @@
 .table-aligned {
   table-layout: auto;
+  width: 100%;
+  margin-bottom: 1rem;
 }
 
 .mat-header-cell { text-align: center; }

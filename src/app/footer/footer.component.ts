@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TranslationBundle, TranslationService} from '../service/translation.service';
+import {AngularFireStorage} from '@angular/fire/storage';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-footer',
@@ -9,12 +11,16 @@ import {TranslationBundle, TranslationService} from '../service/translation.serv
 export class FooterComponent implements OnInit {
 
   rb: TranslationBundle;
+  logoUniversityUrl: Observable<string>;
+  logoInstituteUrl: Observable<string>;
 
-  constructor(private tr: TranslationService) {
+  constructor(public tr: TranslationService, private storage: AngularFireStorage) {
     this.rb = tr.getComponentBundle('FooterComponent');
   }
 
   ngOnInit() {
+    this.logoUniversityUrl = this.storage.ref('assets/images/footer/logo-pl.png').getDownloadURL();
+    this.logoInstituteUrl = this.storage.ref('assets/images/footer/logo-iis.png').getDownloadURL();
   }
 
   async setLocale(locale: string) {

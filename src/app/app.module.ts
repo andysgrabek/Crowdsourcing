@@ -16,8 +16,8 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import {appRoutingModule} from './app.router';
-import {FormsModule} from '@angular/forms';
+import { appRoutingModule} from './app.router';
+import { FormsModule} from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ResearchConfigComponent } from './research-config/research-config.component';
 import { ResearchConfigConsentComponent } from './research-config-consent/research-config-consent.component';
@@ -31,13 +31,13 @@ import { ResearchComponent } from './research/research.component';
 import { ResearchSurveyComponent } from './research-survey/research-survey.component';
 import { DashboardConfigComponent } from './dashboard-config/dashboard-config.component';
 import { ResearchConfigListComponent } from './research-config-list/research-config-list.component';
-import {AngularFireAuthGuard} from '@angular/fire/auth-guard';
+import { AngularFireAuthGuard} from '@angular/fire/auth-guard';
 import { RegisterComponent } from './register/register.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { ResearchConfigSurveyComponent } from './research-config-survey/research-config-survey.component';
 import { ConsentEditDialogComponent } from './consent-edit-dialog/consent-edit-dialog.component';
-import {AngularFireDatabase, AngularFireDatabaseModule} from '@angular/fire/database';
-import {CookieService} from 'ngx-cookie-service';
+import { AngularFireDatabase, AngularFireDatabaseModule } from '@angular/fire/database';
+import { CookieService} from 'ngx-cookie-service';
 import { TextTutorialEditorComponent } from './text-tutorial-editor/text-tutorial-editor.component';
 import { ImageTutorialEditorComponent } from './image-tutorial-editor/image-tutorial-editor.component';
 import { VideoTutorialEditorComponent } from './video-tutorial-editor/video-tutorial-editor.component';
@@ -45,17 +45,18 @@ import { TextSurveyEditorComponent } from './text-survey-editor/text-survey-edit
 import { MultipleChoiceSurveyEditorComponent } from './multiple-choice-survey-editor/multiple-choice-survey-editor.component';
 import { VideoStepEditorComponent } from './video-step-editor/video-step-editor.component';
 import { ImageStepEditorComponent } from './image-step-editor/image-step-editor.component';
-import {ResearchLiveGuardService} from './guard/research-live-guard.service';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatRadioModule} from '@angular/material/radio';
+import { ResearchLiveGuardService} from './guard/research-live-guard.service';
+import { MatStepperModule} from '@angular/material/stepper';
+import { MatCheckboxModule} from '@angular/material/checkbox';
+import { MatRadioModule} from '@angular/material/radio';
 import { ResearchStepWrapperComponent } from './research-step-wrapper/research-step-wrapper.component';
 import { ResearchConsentWrapperComponent } from './research-consent-wrapper/research-consent-wrapper.component';
 import { ResearchSurveyWrapperComponent } from './research-survey-wrapper/research-survey-wrapper.component';
 import { EditResearchAnnotationComponent } from './edit-research-annotation/edit-research-annotation.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import {MatIconModule} from "@angular/material/icon";
+import { MatIconModule } from '@angular/material/icon';
+import { LicensesComponent } from './licenses/licenses.component';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDCS3sTMmqiPP64asRfKh4lo0hFUvjb5v4',
@@ -103,6 +104,7 @@ const firebaseConfig = {
     EditResearchAnnotationComponent,
     HeaderComponent,
     FooterComponent,
+    LicensesComponent,
   ],
   imports: [
     BrowserModule,

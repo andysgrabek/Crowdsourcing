@@ -1,0 +1,22 @@
+.footer-outer-container {
+  width: 100%;
+  flex-shrink: 0;
+  background-color: var(--color-primary-2);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-inner-container {
+  display: flex;
+}
+
+.footer-item {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  flex: auto;
+}
+
+.footer-logo {
+  max-height: 10vh;
+}

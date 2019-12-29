@@ -1,7 +1,6 @@
-<app-research-config-list>
-
-</app-research-config-list>
-
-<app-dashboard-config [model]="userService.getCurrentUser()">
-
-</app-dashboard-config>
+<h2 class="route-title">{{rb.get('dashboard')}}</h2>
+<div class="dashboard-wrapper">
+  <div class="dashboard-item-sidebar"></div>
+  <app-research-config-list class="dashboard-item-main"></app-research-config-list>
+  <app-dashboard-config class="dashboard-item-sidebar"[model]="userService.getCurrentUser()"></app-dashboard-config>
+</div>

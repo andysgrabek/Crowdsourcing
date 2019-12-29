@@ -1,8 +1,20 @@
-<div>
-  <mat-form-field>
-    <mat-select [(value)]="tr.currentLocale" (selectionChange)="setLocale($event.source.value)">
-      <mat-option *ngFor="let locale of tr.availableLocales" [value]="locale">{{locale}}</mat-option>
-    </mat-select>
-    <mat-label>{{rb.get('change-locale')}}</mat-label>
-  </mat-form-field>
+<div class="footer-outer-container">
+  <div class="footer-inner-container">
+    <div class="footer-item">
+      <mat-form-field>
+        <mat-select [(value)]="tr.currentLocale" (selectionChange)="setLocale($event.source.value)">
+          <mat-option *ngFor="let locale of tr.availableLocales" [value]="locale">{{locale}}</mat-option>
+        </mat-select>
+        <mat-label>{{rb.get('change-locale')}}</mat-label>
+      </mat-form-field>
+      <p>{{rb.get('copyright-notice-text')}}</p>
+      <a routerLink="/licenses">{{rb.get('licenses-button-text')}}</a>
+    </div>
+    <div *ngIf="(logoUniversityUrl | async) as url" class="footer-item">
+      <img class="footer-logo" [src]="url" alt="logo-lodz-university-of-technology">
+    </div>
+    <div *ngIf="(logoInstituteUrl | async) as url" class="footer-item">
+      <img class="footer-logo" [src]="url" alt="logo-institute-of-applied-computer-science">
+    </div>
+  </div>
 </div>

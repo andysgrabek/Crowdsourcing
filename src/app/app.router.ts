@@ -12,10 +12,12 @@ import {ResearchComponent} from './research/research.component';
 import {RegisterComponent} from './register/register.component';
 import {ResearchConfigSurveyComponent} from './research-config-survey/research-config-survey.component';
 import {ResearchLiveGuardService} from './guard/research-live-guard.service';
+import {LicensesComponent} from './licenses/licenses.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'licenses', component: LicensesComponent },
   { path: 'register', component: RegisterComponent },
 
   { path: 'dashboard', component: DashboardComponent, canActivate: [AngularFireAuthGuard] },

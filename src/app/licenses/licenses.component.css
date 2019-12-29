@@ -1,0 +1,14 @@
+.licenses-outer-container {
+  width: 100vw;
+  text-align: center;
+}
+
+.licenses-inner-container {
+  width: 80%;
+  display: inline-block;
+}
+
+.licenses-content {
+  text-align: left;
+}
+

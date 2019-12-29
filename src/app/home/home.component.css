@@ -39,7 +39,7 @@
 }
 
 .home-features-wrapper {
-
+  padding: 1rem;
 }
 
 .home-row {
@@ -53,5 +53,6 @@
 }
 
 .home-column {
-  flex: 50%;
+  flex: 45%;
+  padding: 1rem;
 }

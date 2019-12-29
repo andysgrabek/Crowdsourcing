@@ -1,4 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: var(--color-primary-1)}
+
+:root {
+  --color-primary-0: #37377A;
+  --color-primary-1: #D1D1DD;
+  --color-primary-2: #7575A7;
+  --color-primary-3: #0F0F4D;
+  --color-primary-4: #01011F;
+}
+
+.route-title {
+  text-align: center;
+}
