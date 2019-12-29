@@ -5,6 +5,8 @@ import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component
 import {MatDialog, MatSnackBar, MatTable} from '@angular/material';
 import {ResearchConfigService} from '../service/research-config.service';
 import {TranslationBundle, TranslationService} from '../service/translation.service';
+import {ShareResearchDialogComponent} from '../share-research-dialog/share-research-dialog.component';
+import {UserService} from '../service/user.service';
 
 @Component({
   selector: 'app-research-config-list',
@@ -15,14 +17,15 @@ export class ResearchConfigListComponent implements OnInit {
 
   @ViewChild('researchTable', undefined) researchTable: MatTable<any>;
   public model: [string, ResearchConfig][];
-  public displayedColumns: string[] = ['id', 'action'];
+  public displayedColumns: string[] = ['count', 'id', 'isLive', 'action'];
   rb: TranslationBundle;
 
   constructor(private dialog: MatDialog,
               private snackBack: MatSnackBar,
               private router: Router,
               public researchConfigService: ResearchConfigService,
-              private tr: TranslationService) {
+              private tr: TranslationService,
+              private userService: UserService) {
     this.rb = tr.getComponentBundle('ResearchConfigListComponent');
   }
 
@@ -62,4 +65,9 @@ export class ResearchConfigListComponent implements OnInit {
     }
   }
 
+  async onShare(id: string) {
+    const dialogRef = this.dialog.open(ShareResearchDialogComponent);
+    dialogRef.componentInstance.researchId = id;
+    dialogRef.componentInstance.userId = this.userService.getCurrentUser().uid;
+  }
 }

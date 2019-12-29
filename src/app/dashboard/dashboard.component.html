@@ -1,6 +1,8 @@
-<h2 class="route-title">{{rb.get('dashboard')}}</h2>
+<div class="route-title">
+  <h2>{{rb.get('dashboard')}}</h2>
+</div>
 <div class="dashboard-wrapper">
   <div class="dashboard-item-sidebar"></div>
   <app-research-config-list class="dashboard-item-main"></app-research-config-list>
-  <app-dashboard-config class="dashboard-item-sidebar"[model]="userService.getCurrentUser()"></app-dashboard-config>
+  <app-dashboard-config class="dashboard-item-sidebar" [model]="userService.getCurrentUser()"></app-dashboard-config>
 </div>
