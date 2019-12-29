@@ -6,3 +6,28 @@
 
 .mat-header-cell { text-align: center; }
 .mat-cell { text-align: center; }
+
+.app-component-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%
+}
+
+.app-body-wrapper {
+  flex: 1 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-indicator {
+  position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
