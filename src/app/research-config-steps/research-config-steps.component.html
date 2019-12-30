@@ -9,7 +9,7 @@
   <div class="research-config-step-item-sidebar"></div>
   <div class="research-config-step-wrapper research-config-step-item-main">
     <div [hidden]="!researchConfig || !researchConfig.steps || researchConfig.steps.length === 0">
-      <table mat-table [dataSource]="researchConfig.steps" class="table-aligned" #researchTable>
+      <table mat-table [dataSource]="researchConfig.steps" class="table-aligned mat-elevation-z4" #researchTable>
 
         <ng-container matColumnDef="number">
           <th mat-header-cell *matHeaderCellDef> {{rb.get('number-header')}} </th>
