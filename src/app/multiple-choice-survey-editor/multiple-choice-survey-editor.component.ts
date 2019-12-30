@@ -18,4 +18,7 @@ export class MultipleChoiceSurveyEditorComponent extends AbstractSurveyEditor im
   ngOnInit() {
   }
 
+  onRemoveAnswer(ans: { val: string }) {
+    this.survey.answers = this.survey.answers.filter(a => a !== ans);
+  }
 }

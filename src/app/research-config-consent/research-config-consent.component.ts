@@ -17,7 +17,7 @@ export class ResearchConfigConsentComponent implements OnInit {
 
   @ViewChild(MatTable, {static: true}) researchTable: MatTable<ResearchConsent>;
   public researchConfig: ResearchConfig;
-  public displayedColumns: string[] = ['text', 'mandatory', 'action'];
+  public displayedColumns: string[] = ['number', 'text', 'mandatory', 'action'];
   private id: string;
   rb: TranslationBundle;
 

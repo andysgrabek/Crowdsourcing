@@ -1,0 +1,24 @@
+.no-survey-wrapper {
+  text-align: center;
+  background-color: white;
+  padding: 1rem;
+}
+
+.research-config-survey-wrapper {
+  min-height: 50vh;
+}
+
+.research-config-survey-container {
+  display: flex;
+}
+
+.research-config-survey-item-main {
+  width: 100%;
+  padding: 1rem;
+  flex: 3;
+}
+
+.research-config-survey-item-sidebar {
+  padding: 1rem;
+  flex: 1;
+}

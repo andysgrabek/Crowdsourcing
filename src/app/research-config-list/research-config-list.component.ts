@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ResearchConfig} from '../dto/ResearchConfig';
 import {Router} from '@angular/router';
 import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';

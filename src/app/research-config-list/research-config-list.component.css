@@ -3,3 +3,7 @@
   background-color: white;
   padding: 1rem;
 }
+
+.research-config-list-wrapper {
+  min-height: 50vh;
+}

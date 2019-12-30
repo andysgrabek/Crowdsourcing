@@ -1,22 +1,22 @@
-<div>
+<div class="dialog-wrapper">
   <div>
-    <mat-form-field>
+    <mat-form-field class="full-width-element">
       <mat-label>{{rb.get('text')}}</mat-label>
       <textarea matInput
+                class="full-width-element"
                 cdkTextareaAutosize
                 #autosize="cdkTextareaAutosize"
-                cdkAutosizeMinRows="1"
-                cdkAutosizeMaxRows="5"
+                cdkAutosizeMinRows="3"
+                cdkAutosizeMaxRows="10"
                 [value]="consent.text"
                 (keyup)="onTextChange($event.target.value)">
       </textarea>
     </mat-form-field>
-  </div>
-  <div>
     <mat-slide-toggle [checked]="consent.mandatory" (toggleChange)="onToggleMandatoryStatus()">{{rb.get('mandatory')}}</mat-slide-toggle>
   </div>
-  <div>
-    <span><button *ngIf="showCancel" mat-raised-button (click)="onCancel()">{{rb.get('cancel')}}</button></span>
-    <span><button *ngIf="showConfirm" mat-raised-button (click)="onConfirm(consent)">{{rb.get('confirm')}}</button></span>
+  <div class="dialog-buttons-wrapper">
+    <button class="dialog-button" *ngIf="showCancel" mat-raised-button (click)="onCancel()">{{rb.get('cancel')}}</button>
+    <div class="dialog-button"></div>
+    <button class="dialog-button" *ngIf="showConfirm" mat-raised-button (click)="onConfirm(consent)">{{rb.get('confirm')}}</button>
   </div>
 </div>

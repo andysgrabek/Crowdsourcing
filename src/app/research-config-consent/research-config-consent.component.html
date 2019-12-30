@@ -1,27 +1,44 @@
-<div *ngIf="researchConfig">
-  <table *ngIf="researchConfig.consents" mat-table [dataSource]="researchConfig.consents" class="table-aligned" #researchTable>
-    <ng-container matColumnDef="text">
-      <th mat-header-cell *matHeaderCellDef> {{rb.get('text-header')}} </th>
-      <td mat-cell *matCellDef="let element"> {{element.text}} </td>
-    </ng-container>
+<div class="route-title">
+  <h2>{{rb.get('research-consent-configuration')}}</h2>
+</div>
+<div class="research-config-consent-container">
+  <div class="research-config-consent-item-sidebar"></div>
+  <div class="research-config-consent-wrapper research-config-consent-item-main">
+    <div [hidden]="!researchConfig || !researchConfig.consents || researchConfig.consents.length === 0">
+      <table class="mat-elevation-z4 table-aligned"  *ngIf="researchConfig.consents && researchConfig.consents.length > 0" mat-table [dataSource]="researchConfig.consents" #researchTable>
+        <ng-container matColumnDef="number">
+          <th mat-header-cell *matHeaderCellDef> {{rb.get('number-header')}} </th>
+          <td mat-cell *matCellDef="let element"> {{researchConfig.consents.indexOf(element) + 1}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="mandatory">
-      <th mat-header-cell *matHeaderCellDef> {{rb.get('mandatory-header')}} </th>
-      <td mat-cell *matCellDef="let element"> {{element.mandatory}} </td>
-    </ng-container>
+        <ng-container matColumnDef="text">
+          <th mat-header-cell *matHeaderCellDef> {{rb.get('text-header')}} </th>
+          <td mat-cell *matCellDef="let element"> {{element.text}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef> {{rb.get('action-header')}} </th>
-      <td mat-cell *matCellDef="let element" class="action-link">
-        <button mat-raised-button (click)="onEdit(element)">{{rb.get('edit')}}</button>
-        <button mat-raised-button (click)="onDelete(element)">{{rb.get('delete')}}</button>
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="mandatory">
+          <th mat-header-cell *matHeaderCellDef> {{rb.get('mandatory-header')}} </th>
+          <td mat-cell *matCellDef="let element"> {{element.mandatory}} </td>
+        </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef> {{rb.get('action-header')}} </th>
+          <td mat-cell *matCellDef="let element" class="action-link">
+            <button mat-button (click)="onEdit(element)">{{rb.get('edit')}}</button>
+            <button mat-button (click)="onDelete(element)">{{rb.get('delete')}}</button>
+          </td>
+        </ng-container>
 
-  <button mat-raised-button (click)="onAddNew()">{{rb.get('add-consent')}}</button>
-
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <button mat-raised-button (click)="onAddNew()">{{rb.get('add-consent')}}</button>
+    </div>
+    <div class="mat-elevation-z4 no-consent-wrapper research-config-consent-item-main" [hidden]="researchConfig.consents && researchConfig.consents.length > 0">
+      <h3>{{rb.get('no-consent')}}</h3>
+      <p>{{rb.get('no-consent-hint')}}</p>
+      <button mat-raised-button (click)="onAddNew()">{{rb.get('add-consent')}}</button>
+    </div>
+  </div>
+  <div class="research-config-consent-item-sidebar"></div>
 </div>

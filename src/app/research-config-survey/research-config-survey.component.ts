@@ -26,7 +26,7 @@ export class ResearchConfigSurveyComponent implements OnInit {
   ]);
   public researchConfig: ResearchConfig;
   researchSurveyTypes = ResearchSurveyType;
-  displayedColumns = ['name', 'type', 'action'];
+  displayedColumns = ['number', 'name', 'type', 'action'];
   private id: string;
   rb: TranslationBundle;
 

@@ -1,0 +1,24 @@
+.no-consent-wrapper {
+  text-align: center;
+  background-color: white;
+  padding: 1rem;
+}
+
+.research-config-consent-wrapper {
+  min-height: 50vh;
+}
+
+.research-config-consent-container {
+  display: flex;
+}
+
+.research-config-consent-item-main {
+  width: 100%;
+  padding: 1rem;
+  flex: 3;
+}
+
+.research-config-consent-item-sidebar {
+  padding: 1rem;
+  flex: 1;
+}
