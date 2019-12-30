@@ -76,4 +76,12 @@ export class ResearchConfigComponent implements OnInit, OnDestroy {
       dialogRef.close();
     };
   }
+
+  async onToggle(researchConfig: ResearchConfig) {
+    if (researchConfig.isLive) {
+      await this.onUnPublish(researchConfig);
+    } else {
+      await this.onPublish(researchConfig);
+    }
+  }
 }
