@@ -11,6 +11,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
   --color-primary-4: #01011F;
 }
 
+.full-height-element {
+  height: 100%;
+}
+
 .full-width-element {
   width: 100%;
 }

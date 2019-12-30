@@ -27,7 +27,7 @@ export class ResearchConfigTutorialComponent implements OnInit {
     [ResearchTutorialType.VIDEO, VideoTutorialEditorComponent]
   ]);
   public researchConfig: ResearchConfig;
-  displayedColumns = ['name', 'type', 'action'];
+  displayedColumns = ['number', 'name', 'type', 'action'];
   private id: string;
   researchTutorialTypes = ResearchTutorialType;
   rb: TranslationBundle;
