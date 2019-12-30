@@ -18,15 +18,16 @@ export class ResearchDataComponent implements OnInit {
 
   constructor(private resultService: ResearchResultService,
               private route: ActivatedRoute,
-              private tr: TranslationService) {
+              private tr: TranslationService,
+              private fireFunctions: AngularFireFunctions) {
     this.rb = tr.getComponentBundle('ResearchDataComponent');
   }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.researchData = this.resultService.getAllResultsById(this.id);
-    // const list = this.fireFunctions.functions;
-    // console.log(list);
+    const list = this.fireFunctions.functions;
+    console.log(list);
   }
 
 }

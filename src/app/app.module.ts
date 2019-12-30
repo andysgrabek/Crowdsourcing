@@ -12,7 +12,7 @@ import {
 } from '@angular/material';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
+import {AngularFireStorage, AngularFireStorageModule} from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -59,6 +59,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { LicensesComponent } from './licenses/licenses.component';
 import { ShareResearchDialogComponent } from './share-research-dialog/share-research-dialog.component';
 import {NgxJsonViewerModule} from 'ngx-json-viewer';
+import {AngularFireFunctions, AngularFireFunctionsModule} from '@angular/fire/functions';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDCS3sTMmqiPP64asRfKh4lo0hFUvjb5v4',
@@ -120,6 +121,7 @@ const firebaseConfig = {
     MatToolbarModule,
     MatButtonToggleModule,
     AngularFirestoreModule,
+    AngularFireFunctionsModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,
@@ -142,6 +144,8 @@ const firebaseConfig = {
     ResearchLiveGuardService,
     AngularFireAuthGuard,
     AngularFireDatabase,
+    AngularFireFunctions,
+    AngularFireStorage,
     CookieService
   ],
   bootstrap: [
