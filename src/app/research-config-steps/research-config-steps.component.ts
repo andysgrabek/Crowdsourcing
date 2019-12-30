@@ -20,7 +20,7 @@ export class ResearchConfigStepsComponent implements OnInit {
 
   @ViewChild(MatTable, {static: true}) researchTable: MatTable<ResearchStep>;
   public researchConfig: ResearchConfig;
-  public displayedColumns: string[] = ['name', 'type', 'action'];
+  public displayedColumns: string[] = ['number', 'name', 'type', 'action'];
   private id: string;
   researchStepTypes = ResearchStepType;
   rb: TranslationBundle;

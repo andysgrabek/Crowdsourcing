@@ -1,0 +1,24 @@
+.no-step-wrapper {
+  text-align: center;
+  background-color: white;
+  padding: 1rem;
+}
+
+.research-config-step-wrapper {
+  min-height: 50vh;
+}
+
+.research-config-step-container {
+  display: flex;
+}
+
+.research-config-step-item-main {
+  width: 100%;
+  padding: 1rem;
+  flex: 3;
+}
+
+.research-config-step-item-sidebar {
+  padding: 1rem;
+  flex: 1;
+}

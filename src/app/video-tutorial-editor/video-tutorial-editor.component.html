@@ -25,8 +25,8 @@
            [value]="tutorial.url"
            (keyup)="onUrlChange($event.target.value)">
   </mat-form-field>
-  <div class="videoContainerWrapper">
-    <iframe class="videoContainer" [src]="ytUrl" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="video-container-wrapper">
+    <iframe class="video-container" [src]="ytUrl" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
   <div class="dialog-buttons-wrapper">
     <button class="dialog-button" *ngIf="showCancel" mat-raised-button (click)="onCancel()">{{rb.get('cancel')}}</button>
