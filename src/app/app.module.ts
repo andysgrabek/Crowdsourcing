@@ -58,6 +58,7 @@ import { FooterComponent } from './footer/footer.component';
 import { MatIconModule } from '@angular/material/icon';
 import { LicensesComponent } from './licenses/licenses.component';
 import { ShareResearchDialogComponent } from './share-research-dialog/share-research-dialog.component';
+import {NgxJsonViewerModule} from 'ngx-json-viewer';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDCS3sTMmqiPP64asRfKh4lo0hFUvjb5v4',
@@ -109,6 +110,7 @@ const firebaseConfig = {
     ShareResearchDialogComponent,
   ],
   imports: [
+    NgxJsonViewerModule,
     BrowserModule,
     appRoutingModule,
     MatDialogModule,

@@ -36,7 +36,7 @@
         <h4>{{rb.get('data-configuration')}}</h4>
         <p>{{rb.get('data-configuration-description')}}</p>
         <img class="research-config-actions-icon" [src]="url" alt="consent-configuration-logo">
-        <button class="research-config-actions-button" mat-raised-button routerLink="/research-data/{{id}}">{{rb.get('configure')}}</button>
+        <button class="research-config-actions-button" mat-raised-button routerLink="/research-data/{{id}}">{{rb.get('view')}}</button>
       </div>
 
       <div *ngIf="(publishUrl | async) as url" class="research-config-actions-item mat-elevation-z4">

@@ -1,0 +1,17 @@
+.research-data-wrapper {
+  display: flex;
+}
+
+.research-data-sidebar {
+  flex: 1;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.research-data-main {
+  flex: 2;
+  background-color: white;
+  padding: 1rem;
+  margin: 1rem;
+  width: 25%;
+}
