@@ -22,8 +22,8 @@ export class ResearchDataComponent implements OnInit {
   rb: TranslationBundle;
   availableTransformations: Observable<TransformationDescriptor[]>;
   selectedTransform: TransformationDescriptor;
-  private dataString: string;
-  private fb: TranslationBundle;
+  dataString: string;
+  fb: TranslationBundle;
 
   constructor(private resultService: ResearchResultService,
               private route: ActivatedRoute,
