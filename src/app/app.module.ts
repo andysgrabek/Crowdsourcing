@@ -60,6 +60,7 @@ import { LicensesComponent } from './licenses/licenses.component';
 import { ShareResearchDialogComponent } from './share-research-dialog/share-research-dialog.component';
 import {NgxJsonViewerModule} from 'ngx-json-viewer';
 import {AngularFireFunctions, AngularFireFunctionsModule} from '@angular/fire/functions';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDCS3sTMmqiPP64asRfKh4lo0hFUvjb5v4',
@@ -138,9 +139,12 @@ const firebaseConfig = {
     MatStepperModule,
     MatCheckboxModule,
     MatRadioModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule
   ],
   providers: [
+    // { provide: FUNCTIONS_ORIGIN, useValue: 'us-central1' },
+    HttpClient,
     ResearchLiveGuardService,
     AngularFireAuthGuard,
     AngularFireDatabase,

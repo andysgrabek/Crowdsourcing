@@ -9,6 +9,7 @@
 }
 
 .research-config-survey-container {
+  flex-wrap: wrap;
   display: flex;
 }
 

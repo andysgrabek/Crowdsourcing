@@ -9,6 +9,7 @@
 }
 
 .research-config-consent-container {
+  flex-wrap: wrap;
   display: flex;
 }
 

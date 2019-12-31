@@ -43,6 +43,10 @@ export class TranslationService {
   getServiceBundle(serviceName: string): TranslationBundle {
     return this.getBundle('service/' + serviceName);
   }
+
+  getFunctionsBundle() {
+    return this.getBundle('function/');
+  }
 }
 
 export interface TranslationBundle {
@@ -66,7 +70,7 @@ abstract class AbstractTranslationBundle implements TranslationBundle {
   }
 
   getBundle(key: string): TranslationBundle {
-    return new ObjectTranslationBundle(this.obj, this.translationPath);
+    return new ObjectTranslationBundle(this.obj[key], this.translationPath + '/' + key);
   }
 
   getTranslationPath(): string {

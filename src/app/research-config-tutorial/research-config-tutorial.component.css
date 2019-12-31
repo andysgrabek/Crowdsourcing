@@ -9,6 +9,7 @@
 }
 
 .research-config-tutorial-container {
+  flex-wrap: wrap;
   display: flex;
 }
 

@@ -9,6 +9,7 @@
 
 .footer-inner-container {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .footer-item {

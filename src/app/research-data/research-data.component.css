@@ -1,4 +1,5 @@
 .research-data-wrapper {
+  flex-wrap: wrap;
   display: flex;
 }
 
@@ -14,4 +15,8 @@
   padding: 1rem;
   margin: 1rem;
   width: 25%;
+}
+
+.download-button {
+  margin: 1rem;
 }

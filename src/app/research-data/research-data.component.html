@@ -5,12 +5,14 @@
   <div class="research-data-sidebar"></div>
   <div class="research-data-main mat-elevation-z4">
     <h3>{{rb.get('transformations')}}</h3>
-    <mat-form-field>
-      <mat-select>
-        <mat-option></mat-option>
+    <mat-form-field class="full-width-element" *ngIf="(availableTransformations | async) as transforms">
+      <mat-label>{{rb.get('selected-transform')}}</mat-label>
+      <mat-select class="full-width-element" [(value)]="selectedTransform">
+        <mat-option *ngFor="let transform of transforms" [value]="transform">{{fb.getBundle(transform.name).get('displayName')}}</mat-option>
       </mat-select>
     </mat-form-field>
-    <button mat-raised-button>{{rb.get('download-transformed')}}</button>
+    <p *ngIf="selectedTransform">{{fb.getBundle(selectedTransform.name).get('description')}}</p>
+    <button class="download-button" [disabled]="!selectedTransform" mat-raised-button (click)="onDownloadTransformed(selectedTransform)">{{rb.get('download-transformed')}}</button>
   </div>
   <div class="research-data-main mat-elevation-z4" *ngIf="(researchData | async) as data">
     <h3>{{rb.get('raw-data')}}</h3>
