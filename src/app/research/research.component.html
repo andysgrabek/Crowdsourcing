@@ -1,53 +1,57 @@
+<div class="route-title">
+  <h2>{{rb.get('research')}}</h2>
+</div>
 <div *ngIf="model">
-  <mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-horizontal-stepper class="research-stepper mat-elevation-z4" [linear]="true" #stepper>
 
     <mat-step [editable]="false" [completed]="false">
       <ng-template matStepLabel>{{rb.get('consents-step-name')}}</ng-template>
-      <app-research-consent-wrapper #researchConsentWrapperComponent [model]="model.consents"></app-research-consent-wrapper>
+      <app-research-consent-wrapper class="step-container" #researchConsentWrapperComponent [model]="model.consents"></app-research-consent-wrapper>
       <div>
         <p>{{rb.get('mandatory-helper-text')}}</p>
       </div>
-
     </mat-step>
 
     <mat-step [editable]="false" [completed]="false">
       <ng-template matStepLabel>{{rb.get('survey-step-name')}}</ng-template>
-      <app-research-survey-wrapper #researchSurveyWrapperComponent [model]="model.surveys"></app-research-survey-wrapper>
+      <app-research-survey-wrapper class="step-container" #researchSurveyWrapperComponent [model]="model.surveys"></app-research-survey-wrapper>
     </mat-step>
 
     <mat-step [editable]="false" [completed]="false">
       <ng-template matStepLabel>{{rb.get('tutorial-step-name')}}</ng-template>
-      <app-research-tutorial *ngFor="let tutorial of model.tutorials" [tutorial]="tutorial"></app-research-tutorial>
+      <app-research-tutorial class="step-container" *ngFor="let tutorial of model.tutorials" [tutorial]="tutorial"></app-research-tutorial>
     </mat-step>
 
     <mat-step [editable]="false" [completed]="false">
       <ng-template matStepLabel>{{rb.get('steps-step-name')}}</ng-template>
-      <app-research-step-wrapper #researchStepWrapperComponent [model]="model.steps" (lastStepFinished)="lastStepFinished = true"></app-research-step-wrapper>
+      <app-research-step-wrapper class="step-container" #researchStepWrapperComponent [model]="model.steps" (lastStepFinished)="lastStepFinished = true"></app-research-step-wrapper>
     </mat-step>
 
     <mat-step [editable]="false" [completed]="false">
       <ng-template matStepLabel>{{rb.get('finished-step-name')}}</ng-template>
-      <div *ngIf="currentUploadState === uploadStates.NOT_ATTEMPTED">
-        <p>{{rb.get('finished')}}</p>
-        <button mat-button (click)="onSubmitResult()">{{rb.get('submit')}}</button>
-      </div>
-      <div *ngIf="currentUploadState === uploadStates.SUCCESSFUL">
-        <p>{{rb.get('upload-successful')}}</p>
-      </div>
-      <div *ngIf="currentUploadState === uploadStates.FAILED">
-        <p>{{rb.get('try-resubmit')}}</p>
-        <button mat-button (click)="onSubmitResult()">{{rb.get('submit')}}</button>
+      <div class="step-container">
+        <div *ngIf="currentUploadState === uploadStates.NOT_ATTEMPTED">
+          <p>{{rb.get('finished')}}</p>
+          <button mat-button (click)="onSubmitResult()">{{rb.get('submit')}}</button>
+        </div>
+        <div *ngIf="currentUploadState === uploadStates.SUCCESSFUL">
+          <p>{{rb.get('upload-successful')}}</p>
+        </div>
+        <div *ngIf="currentUploadState === uploadStates.FAILED">
+          <p>{{rb.get('try-resubmit')}}</p>
+          <button mat-button (click)="onSubmitResult()">{{rb.get('submit')}}</button>
+        </div>
       </div>
     </mat-step>
 
   </mat-horizontal-stepper>
 
-  <div>
-    <button mat-button
-            *ngIf="!(stepper.selectedIndex === stepTypes.SUMMARY || (!lastStepFinished && stepper.selectedIndex === stepTypes.STEPS))"
-            (click)="goForward(stepper)"
-            type="button">
-      {{rb.get('step-next')}}</button>
-  </div>
+  <button mat-raised-button
+          class="research-stepper-next-step-button"
+          *ngIf="!(stepper.selectedIndex === stepTypes.SUMMARY || (!lastStepFinished && stepper.selectedIndex === stepTypes.STEPS))"
+          (click)="goForward(stepper)"
+          type="button">
+    {{rb.get('step-next')}}
+  </button>
 
 </div>

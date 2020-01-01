@@ -1,19 +1,18 @@
 <div [hidden]="finished">
-
-  <div>
+  <div *ngFor="let step of model">
+    <app-research-step [hidden]="step !== currentStep" [model]="step"></app-research-step>
+  </div>
+  <div class="full-width-element next-step-button-wrapper">
     <button
+      class="next-step-button"
       mat-button
       (click)="finishCurrentStep()"
       type="button">
       {{rb.get('finish-step')}}
     </button>
   </div>
-
-  <div *ngFor="let step of model">
-    <app-research-step [hidden]="step !== currentStep" [model]="step"></app-research-step>
-  </div>
 </div>
 
-<div *ngIf="finished">
+<div [hidden]="!finished" class="full-width-element all-steps-finished-wrapper">
   <p>{{rb.get('all-steps-finished')}}</p>
 </div>

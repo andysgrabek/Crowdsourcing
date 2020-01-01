@@ -1,0 +1,16 @@
+.video-tutorial-wrapper {
+  width: 50%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.image-tutorial-wrapper {
+  width: 50%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.image-tutorial {
+  width: 100%;
+  object-fit: contain;
+}

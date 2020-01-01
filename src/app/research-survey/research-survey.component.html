@@ -1,29 +1,21 @@
 <div *ngIf="survey">
+  <h2>{{survey.name}}</h2>
+  <p>{{survey.text}}</p>
 
-  <div>
-    <h2>{{survey.name}}</h2>
-  </div>
+  <mat-form-field class="full-width-element"
+                  *ngIf="survey.type === researchSurveyTypes.TEXT">
+    <input name="textAnswerInput"
+              [(ngModel)]="textAnswer"
+              class="full-width-element"
+              matInput placeholder="{{rb.get('type-answer')}}">
+  </mat-form-field>
 
-  <div>
-    <p>{{survey.text}}</p>
-  </div>
-
-  <div *ngIf="survey.type === researchSurveyTypes.TEXT">
-    <form>
-      <mat-form-field>
-        <input name="textAnswerInput" [(ngModel)]="textAnswer" matInput placeholder="{{rb.get('type-answer')}}">
-      </mat-form-field>
-    </form>
-  </div>
-
-  <div *ngIf="survey.type === researchSurveyTypes.RADIO">
-    <mat-radio-group name="radioAnswerGroup" [(ngModel)]="radioAnswer">
-      <mat-radio-button value="{{answer.val}}" *ngFor="let answer of survey.answers">{{answer.val}}</mat-radio-button>
-    </mat-radio-group>
-  </div>
+  <mat-radio-group *ngIf="survey.type === researchSurveyTypes.RADIO" name="radioAnswerGroup" [(ngModel)]="radioAnswer">
+    <mat-radio-button class="research-survey-answer-button" value="{{answer.val}}" *ngFor="let answer of survey.answers">{{answer.val}}</mat-radio-button>
+  </mat-radio-group>
 
   <div *ngIf="survey.type === researchSurveyTypes.CHECKBOX">
-    <mat-checkbox name="checkboxAnswerCheckbox" [(ngModel)]="checkboxAnswers[survey.answers.indexOf(answer)]" *ngFor="let answer of survey.answers">{{answer.val}}</mat-checkbox>
+    <mat-checkbox class="research-survey-answer-button" name="checkboxAnswerCheckbox" [(ngModel)]="checkboxAnswers[survey.answers.indexOf(answer)]" *ngFor="let answer of survey.answers">{{answer.val}}</mat-checkbox>
   </div>
 
   <mat-divider></mat-divider>

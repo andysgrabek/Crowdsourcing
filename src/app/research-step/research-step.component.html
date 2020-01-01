@@ -1,47 +1,67 @@
-<div *ngIf="model.type !== stepTypes.IMAGE">
-  <p>{{rb.get('unsupported-step-type')}}</p>
-</div>
-<div *ngIf="model.type === stepTypes.IMAGE">
-  <div>
-    <table [style.display]="(annotations && annotations.length > 0) ? '' : 'none'"  mat-table [dataSource]="annotations" class="table-aligned" #annotationsTable>
-      <ng-container matColumnDef="index">
-        <th mat-header-cell *matHeaderCellDef> {{rb.get('index-header')}} </th>
-        <td mat-cell *matCellDef="let element"> {{annotations.indexOf(element) + 1}} </td>
-      </ng-container>
+<div>
+  <p *ngIf="model.type !== stepTypes.IMAGE">{{rb.get('unsupported-step-type')}}</p>
+  <div *ngIf="model.type === stepTypes.IMAGE">
+    <div class="full-width-element">
+      <canvas class="research-step-canvas full-width-element"
+              (mousedown)="onMouseDown($event)"
+              (mouseup)="onMouseUpOrLeave($event)"
+              (mousemove)="onMouseMove($event)"
+              (mouseleave)="onMouseUpOrLeave($event)"
+              [style.background-image]="sanitizedUrl"
+              id="annotationCanvas">
+      </canvas>
+    </div>
 
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef> {{rb.get('action-header')}} </th>
-        <td mat-cell *matCellDef="let element" class="action-link">
-          <button mat-button (click)="onEdit(element)">{{rb.get('edit-annotation')}}</button>
-          <button mat-button (click)="onDeleteAnnotation(element)">{{rb.get('delete-annotation')}}</button>
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr (mouseover)="visualizeAnnotation(row)" (mouseout)="clearVisualizeAnnotation()" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    <div *ngIf="!annotations || annotations.length === 0">
-      {{rb.get('no-annotations')}}
+    <div class="table-comment-row">
+      <div class="table-column">
+        <div class="centered-text-wrapper">
+          <h3 class="centered-text-item">{{rb.get('annotations')}}</h3>
+        </div>
+        <table class="table-aligned" [style.display]="(annotations && annotations.length > 0) ? '' : 'none'"  mat-table [dataSource]="annotations" #annotationsTable>
+          <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef> {{rb.get('index-header')}} </th>
+            <td mat-cell *matCellDef="let element"> {{annotations.indexOf(element) + 1}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> {{rb.get('action-header')}} </th>
+            <td mat-cell *matCellDef="let element" class="action-link">
+              <button mat-button (click)="onEdit(element)">{{rb.get('edit-annotation')}}</button>
+              <button mat-button (click)="onDeleteAnnotation(element)">{{rb.get('delete-annotation')}}</button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr (mouseover)="visualizeAnnotation(row)" (mouseout)="clearVisualizeAnnotation()" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <div class="centered-text-wrapper" *ngIf="!annotations || annotations.length === 0">
+          <p class="centered-text-item">{{rb.get('no-annotations')}}</p>
+          <div class="centered-text-item" >
+            <button mat-raised-button [matMenuTriggerFor]="menu">{{rb.get('add-annotation')}}</button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="onAddAnnotation(availableAnnotationTypes.CIRCLE)">{{rb.get('circle')}}</button>
+              <button mat-menu-item (click)="onAddAnnotation(availableAnnotationTypes.RECTANGLE)">{{rb.get('rectangle')}}</button>
+              <button mat-menu-item (click)="onAddAnnotation(availableAnnotationTypes.FREE_CURVE)">{{rb.get('free-curve')}}</button>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+      <div class="comment-column">
+        <div class="centered-text-wrapper">
+          <h3 class="centered-text-item">{{rb.get('free-comment')}}</h3>
+        </div>
+        <mat-form-field class="full-width-element">
+          <mat-label>{{rb.get('free-comment-label')}}</mat-label>
+          <textarea matInput
+                    class="full-width-element"
+                    [(ngModel)]="freeComment"
+                    placeholder="{{rb.get('free-comment-placeholder')}}"
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="3"
+                    cdkAutosizeMaxRows="6">
+        </textarea>
+        </mat-form-field>
+      </div>
     </div>
   </div>
-  <div>
-    <button mat-raised-button [matMenuTriggerFor]="menu">{{rb.get('add-annotation')}}</button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="onAddAnnotation(availableAnnotationTypes.CIRCLE)">{{rb.get('circle')}}</button>
-      <button mat-menu-item (click)="onAddAnnotation(availableAnnotationTypes.RECTANGLE)">{{rb.get('rectangle')}}</button>
-      <button mat-menu-item (click)="onAddAnnotation(availableAnnotationTypes.FREE_CURVE)">{{rb.get('free-curve')}}</button>
-    </mat-menu>
-  </div>
-  <div>
-    <textarea [(ngModel)]="freeComment" matInput>Free comment area</textarea>
-  </div>
-  <div>
-    <canvas (mousedown)="onMouseDown($event)"
-            (mouseup)="onMouseUpOrLeave($event)"
-            (mousemove)="onMouseMove($event)"
-            (mouseleave)="onMouseUpOrLeave($event)"
-            [style.background-image]="sanitizedUrl"
-            id="annotationCanvas">
-    </canvas>
-  </div>
-
 </div>

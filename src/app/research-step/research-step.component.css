@@ -1,21 +1,28 @@
-/*.inner {*/
-/*  !*position: absolute;*!*/
-/*}*/
+.research-step-canvas {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 
-/*.image-container {*/
-/*  flex: 1;*/
-/*  z-index: auto;*/
-/*}*/
+.table-comment-row {
+  margin: 1rem;
+  display: flex;
+}
 
-/*.canvas-container {*/
-/*  background-color: aqua;*/
-/*  flex: 1;*/
-/*  z-index: 1;*/
-/*}*/
+.table-column {
+  margin: 1rem;
+  flex: 2;
+}
 
-/*.outer {*/
-/*  !*position: relative;*!*/
-/*  min-height: 300px;*/
-/*  margin: 0 auto;*/
-/*  display: flex;*/
-/*}*/
+.comment-column {
+  margin: 1rem;
+  flex: 1;
+}
+
+.centered-text-wrapper {
+  text-align: center;
+}
+
+.centered-text-item {
+  display: block;
+}

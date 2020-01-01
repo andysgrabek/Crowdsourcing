@@ -1,9 +1,5 @@
 <div *ngIf="consent">
-  <div>
-    <p>{{consent.text}}</p>
-  </div>
-  <div>
-    <mat-checkbox name="consentCheckbox" [(ngModel)]="marked" [required]="consent.mandatory">{{rb.get('agree')}}</mat-checkbox><span *ngIf="consent.mandatory"> * </span>
-  </div>
+  <p>{{consent.text}}</p>
+  <mat-checkbox class="research-consent-answer-button" name="consentCheckbox" [(ngModel)]="marked" [required]="consent.mandatory">{{rb.get('agree')}}</mat-checkbox><span *ngIf="consent.mandatory"> * </span>
   <mat-divider></mat-divider>
 </div>

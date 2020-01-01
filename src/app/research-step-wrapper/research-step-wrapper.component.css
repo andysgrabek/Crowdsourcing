@@ -1,0 +1,14 @@
+.all-steps-finished-wrapper {
+  text-align: center;
+}
+
+.next-step-button-wrapper {
+  text-align: center;
+}
+
+.next-step-button {
+  background-color: var(--color-primary-3);
+  color: white;
+  display: inline-block;
+  margin: 0 auto;
+}
