@@ -16,7 +16,7 @@
   </div>
   <div class="research-data-main mat-elevation-z4" *ngIf="(researchData | async) as data">
     <h3>{{rb.get('raw-data')}}</h3>
-    <ngx-json-viewer [json]="data"></ngx-json-viewer>
+    <ngx-json-viewer class="fix" [json]="data"></ngx-json-viewer>
   </div>
   <div class="research-data-sidebar"></div>
 </div>
