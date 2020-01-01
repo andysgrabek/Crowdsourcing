@@ -6,7 +6,7 @@ import ResearchAnnotation, {ResearchAnnotationType} from '../dto/ResearchAnnotat
 })
 export class AnnotationVisualizerService {
 
-  private readonly defaultLineWidth = 3;
+  private readonly defaultLineWidth = 1;
   private readonly defaultStrokeStyle = '#ffff00';
 
   constructor() {

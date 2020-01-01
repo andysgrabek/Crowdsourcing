@@ -95,17 +95,18 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
     this.currentDrawingState = AnnotationDrawingStates.NOT_LISTENING;
   }
 
-  private getPointInCanvas(canvas: HTMLCanvasElement, event: MouseEvent): {x: number, y: number} {
-    const rect = canvas.getBoundingClientRect();
-    const x = event.layerX - rect.left;
-    const y = event.layerY - rect.top;
+  private getPointInCanvas(event: MouseEvent): {x: number, y: number} {
+    const rect = this.canvas.getBoundingClientRect();
+    const scale = this.canvas.width / rect.width;
+    const x = event.layerX * scale;
+    const y = event.layerY * scale;
     return {x, y};
   }
 
   onMouseUpOrLeave(event: MouseEvent) {
     if (this.currentDrawingState === AnnotationDrawingStates.DRAWING) {
       this.currentDrawingState = AnnotationDrawingStates.NOT_LISTENING;
-      this.newAnnotation.points = this.annotationDelegate.end({x: event.layerX, y: event.layerY });
+      this.newAnnotation.points = this.annotationDelegate.end(this.getPointInCanvas(event));
       this.onFinalizeAddAnnotation();
       this.newAnnotation = undefined;
       this.annotationDelegate = undefined;
@@ -114,7 +115,7 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
 
   onMouseMove(event: MouseEvent) {
     if (this.currentDrawingState === AnnotationDrawingStates.DRAWING) {
-      this.annotationDelegate.move({x: event.layerX, y: event.layerY });
+      this.annotationDelegate.move(this.getPointInCanvas(event));
     }
   }
 
@@ -122,7 +123,7 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
     if (this.currentDrawingState === AnnotationDrawingStates.IDLE) {
       this.currentDrawingState = AnnotationDrawingStates.DRAWING;
       this.annotationDelegate = ResearchAnnotationDelegateFactory.createDelegate(this.newAnnotation.annotationType, this.canvas);
-      this.annotationDelegate.start({x: event.layerX, y: event.layerY });
+      this.annotationDelegate.start(this.getPointInCanvas(event));
     }
   }
 

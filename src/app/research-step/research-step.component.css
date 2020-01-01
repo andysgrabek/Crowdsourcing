@@ -9,6 +9,11 @@
   display: flex;
 }
 
+.canvas-column {
+  margin: 1rem;
+  flex: 2;
+}
+
 .table-column {
   margin: 1rem;
   flex: 1;
