@@ -7,6 +7,7 @@ import {ResearchConfigService} from '../service/research-config.service';
 import {TranslationBundle, TranslationService} from '../service/translation.service';
 import {ShareResearchDialogComponent} from '../share-research-dialog/share-research-dialog.component';
 import {UserService} from '../service/user.service';
+import {ConsentEditDialogComponent} from "../consent-edit-dialog/consent-edit-dialog.component";
 
 @Component({
   selector: 'app-research-config-list',
@@ -44,7 +45,7 @@ export class ResearchConfigListComponent implements OnInit {
   }
 
   async onDelete(id: string) {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {autoFocus: false});
     dialogRef.componentInstance.text = this.rb.get('delete-confirmation');
     dialogRef.componentInstance.onConfirm = () => {
       dialogRef.close();
@@ -66,7 +67,7 @@ export class ResearchConfigListComponent implements OnInit {
   }
 
   async onShare(id: string) {
-    const dialogRef = this.dialog.open(ShareResearchDialogComponent);
+    const dialogRef = this.dialog.open(ShareResearchDialogComponent, {autoFocus: false});
     dialogRef.componentInstance.researchId = id;
     dialogRef.componentInstance.userId = this.userService.getCurrentUser().uid;
   }

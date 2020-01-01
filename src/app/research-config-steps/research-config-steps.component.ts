@@ -10,6 +10,7 @@ import {AbstractStepEditor} from '../abstract-step-editor/abstract-step-editor';
 import {ImageStepEditorComponent} from '../image-step-editor/image-step-editor.component';
 import {VideoStepEditorComponent} from '../video-step-editor/video-step-editor.component';
 import {TranslationBundle, TranslationService} from '../service/translation.service';
+import {ConsentEditDialogComponent} from "../consent-edit-dialog/consent-edit-dialog.component";
 
 @Component({
   selector: 'app-research-config-steps',
@@ -45,7 +46,7 @@ export class ResearchConfigStepsComponent implements OnInit {
   }
 
   async onEdit(step: ResearchStep) {
-    const dialogRef = this.dialog.open(this.editors.get(step.type));
+    const dialogRef = this.dialog.open(this.editors.get(step.type), {autoFocus: false});
     dialogRef.componentInstance.step = Object.assign(new ResearchStep(), step);
     dialogRef.componentInstance.onConfirm = (newStep) => {
       dialogRef.close();
@@ -58,7 +59,7 @@ export class ResearchConfigStepsComponent implements OnInit {
   }
 
   async onDelete(step: ResearchStep) {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {autoFocus: false});
     dialogRef.componentInstance.text = this.rb.get('delete-confirmation');
     dialogRef.componentInstance.onConfirm = () => {
       dialogRef.close();

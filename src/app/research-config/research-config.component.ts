@@ -54,7 +54,7 @@ export class ResearchConfigComponent implements OnInit, OnDestroy {
   }
 
   async onPublish(researchConfig: ResearchConfig) {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {autoFocus: false});
     dialogRef.componentInstance.text = this.rb.get('publish-confirmation');
     dialogRef.componentInstance.onConfirm = () => {
       dialogRef.close();
@@ -66,7 +66,7 @@ export class ResearchConfigComponent implements OnInit, OnDestroy {
   }
 
   async onUnPublish(researchConfig: ResearchConfig) {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {autoFocus: false});
     dialogRef.componentInstance.text = this.rb.get('unpublish-confirmation');
     dialogRef.componentInstance.onConfirm = () => {
       dialogRef.close();

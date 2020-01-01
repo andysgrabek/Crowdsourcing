@@ -11,6 +11,7 @@ import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component
 import {MatTable} from '@angular/material/table';
 import {AnnotationVisualizerService} from '../service/annotation-visualizer.service';
 import ResearchStepData from '../dto/ResearchStepData';
+import {ConsentEditDialogComponent} from "../consent-edit-dialog/consent-edit-dialog.component";
 
 @Component({
   selector: 'app-research-step',
@@ -62,7 +63,7 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
   }
 
   onFinalizeAddAnnotation() {
-    const dialogRef = this.dialog.open(EditResearchAnnotationComponent);
+    const dialogRef = this.dialog.open(EditResearchAnnotationComponent, {autoFocus: false});
     dialogRef.componentInstance.annotation = this.newAnnotation;
     dialogRef.componentInstance.onConfirm = (ann: ResearchAnnotation) => {
       this.onConfirmFinalizeAddAnnotation(ann);
@@ -72,7 +73,7 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
   }
 
   async onEdit(annotation: ResearchAnnotation) {
-    const dialogRef = this.dialog.open(EditResearchAnnotationComponent);
+    const dialogRef = this.dialog.open(EditResearchAnnotationComponent, {autoFocus: false});
     const annotationCopy = new ResearchAnnotation();
     Object.assign(annotationCopy, annotation);
     dialogRef.componentInstance.annotation = annotationCopy;
@@ -143,7 +144,7 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
   }
 
   async onDeleteAnnotation(annotation: ResearchAnnotation) {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {autoFocus: false});
     dialogRef.componentInstance.text = this.rb.get('annotation-delete-confirmation');
     dialogRef.componentInstance.onConfirm = () => {
       this.annotations = this.annotations.filter(ann => annotation !== ann);

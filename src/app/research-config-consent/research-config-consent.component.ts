@@ -37,7 +37,7 @@ export class ResearchConfigConsentComponent implements OnInit {
   }
 
   async onEdit(consent: ResearchConsent) {
-    const dialogRef = this.dialog.open(ConsentEditDialogComponent);
+    const dialogRef = this.dialog.open(ConsentEditDialogComponent, {autoFocus: false});
     dialogRef.componentInstance.consent = Object.assign(new ResearchConsent(), consent);
     dialogRef.componentInstance.onConfirm = (newConsent) => {
       dialogRef.close();
@@ -50,7 +50,7 @@ export class ResearchConfigConsentComponent implements OnInit {
   }
 
   async onDelete(consent: ResearchConsent) {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {autoFocus: false});
     dialogRef.componentInstance.text = this.rb.get('delete-confirmation');
     dialogRef.componentInstance.onConfirm = () => {
       dialogRef.close();
@@ -63,7 +63,7 @@ export class ResearchConfigConsentComponent implements OnInit {
   }
 
   async onAddNew() {
-    const dialogRef = this.dialog.open(ConsentEditDialogComponent);
+    const dialogRef = this.dialog.open(ConsentEditDialogComponent, {autoFocus: false});
     dialogRef.componentInstance.consent = new ResearchConsent();
     dialogRef.componentInstance.onConfirm = (c) => this.onConfirmConsentAdd(dialogRef, c);
     dialogRef.componentInstance.onCancel = () => dialogRef.close();

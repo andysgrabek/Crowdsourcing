@@ -26,8 +26,8 @@
   </mat-list>
   <button mat-icon-button (click)="onAnswerAdd()">+</button>
   <div class="dialog-buttons-wrapper">
-    <button class="dialog-button" *ngIf="showCancel" mat-raised-button (click)="onCancel()">{{rb.get('cancel')}}</button>
-    <div class="dialog-button"></div>
-    <button class="dialog-button" *ngIf="showConfirm" mat-raised-button (click)="onConfirm(survey)">{{rb.get('confirm')}}</button>
+    <button class="dialog-button" *ngIf="showCancel" mat-button (click)="onCancel()">{{rb.get('cancel')}}</button>
+
+    <button class="dialog-button" *ngIf="showConfirm" mat-button (click)="onConfirm(survey)">{{rb.get('confirm')}}</button>
   </div>
 </div>

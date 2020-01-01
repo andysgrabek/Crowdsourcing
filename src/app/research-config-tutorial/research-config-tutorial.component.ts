@@ -12,6 +12,7 @@ import {ComponentType} from '@angular/cdk/overlay';
 import {AbstractTutorialEditor} from '../abstract-tutorial-editor/abstract-tutorial-editor';
 import ResearchConsent from '../dto/ResearchConsent';
 import {TranslationBundle, TranslationService} from '../service/translation.service';
+import {ConsentEditDialogComponent} from "../consent-edit-dialog/consent-edit-dialog.component";
 
 @Component({
   selector: 'app-research-config-tutorial',
@@ -48,14 +49,14 @@ export class ResearchConfigTutorialComponent implements OnInit {
   }
 
   async onEdit(tutorial: ResearchTutorial) {
-    const dialogRef = this.dialog.open(this.editors.get(tutorial.type));
+    const dialogRef = this.dialog.open(this.editors.get(tutorial.type), {autoFocus: false});
     dialogRef.componentInstance.tutorial = Object.assign(new ResearchTutorial(), tutorial);
     dialogRef.componentInstance.onConfirm = (newTutorial) => this.onConfirmTutorialEdit(dialogRef, tutorial, newTutorial);
     dialogRef.componentInstance.onCancel = () => dialogRef.close();
   }
 
   async onDelete(consent: ResearchTutorial) {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {autoFocus: false});
     dialogRef.componentInstance.text = this.rb.get('delete-confirmation');
     dialogRef.componentInstance.onConfirm = () => this.onConfirmTutorialDelete(dialogRef, consent);
     dialogRef.componentInstance.onCancel = () => dialogRef.close();
@@ -74,7 +75,7 @@ export class ResearchConfigTutorialComponent implements OnInit {
   }
 
   async onAddNew(type: ResearchTutorialType) {
-    const dialogRef = this.dialog.open(this.editors.get(type));
+    const dialogRef = this.dialog.open(this.editors.get(type), {autoFocus: false});
     const tutorial = new ResearchTutorial();
     tutorial.type = type;
     dialogRef.componentInstance.tutorial = tutorial;

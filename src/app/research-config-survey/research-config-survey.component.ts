@@ -10,6 +10,7 @@ import {TextSurveyEditorComponent} from '../text-survey-editor/text-survey-edito
 import {MultipleChoiceSurveyEditorComponent} from '../multiple-choice-survey-editor/multiple-choice-survey-editor.component';
 import ResearchSurvey, {ResearchSurveyType} from '../dto/ResearchSurvey';
 import {TranslationBundle, TranslationService} from '../service/translation.service';
+import {ConsentEditDialogComponent} from "../consent-edit-dialog/consent-edit-dialog.component";
 
 @Component({
   selector: 'app-research-config-survey',
@@ -46,21 +47,21 @@ export class ResearchConfigSurveyComponent implements OnInit {
   }
 
   async onEdit(survey: ResearchSurvey) {
-    const dialogRef = this.dialog.open(this.editors.get(survey.type));
+    const dialogRef = this.dialog.open(this.editors.get(survey.type), {autoFocus: false});
     dialogRef.componentInstance.survey = Object.assign(new ResearchSurvey(), survey);
     dialogRef.componentInstance.onConfirm = (newSurvey) => this.onConfirmSurveyEdit(dialogRef, survey, newSurvey);
     dialogRef.componentInstance.onCancel = () => dialogRef.close();
   }
 
   async onDelete(survey: ResearchSurvey) {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {autoFocus: false});
     dialogRef.componentInstance.text = this.rb.get('delete-confirmation');
     dialogRef.componentInstance.onConfirm = () => this.onConfirmSurveyDelete(dialogRef, survey);
     dialogRef.componentInstance.onCancel = () => dialogRef.close();
   }
 
   async onAddNew(type: ResearchSurveyType) {
-    const dialogRef = this.dialog.open(this.editors.get(type));
+    const dialogRef = this.dialog.open(this.editors.get(type), {autoFocus: false});
     const survey = new ResearchSurvey();
     survey.type = type;
     dialogRef.componentInstance.survey = survey;
