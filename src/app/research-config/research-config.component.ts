@@ -60,9 +60,6 @@ export class ResearchConfigComponent implements OnInit, OnDestroy {
       dialogRef.close();
       this.researchConfigService.setResearchLive(this.id, researchConfig, true);
     };
-    dialogRef.componentInstance.onCancel = () => {
-      dialogRef.close();
-    };
   }
 
   async onUnPublish(researchConfig: ResearchConfig) {
@@ -71,9 +68,6 @@ export class ResearchConfigComponent implements OnInit, OnDestroy {
     dialogRef.componentInstance.onConfirm = () => {
       dialogRef.close();
       this.researchConfigService.setResearchLive(this.id, researchConfig, false);
-    };
-    dialogRef.componentInstance.onCancel = () => {
-      dialogRef.close();
     };
   }
 

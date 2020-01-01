@@ -51,9 +51,6 @@ export class ResearchConfigListComponent implements OnInit {
       dialogRef.close();
       this.researchConfigService.deleteResearch(id);
     };
-    dialogRef.componentInstance.onCancel = () => {
-      dialogRef.close();
-    };
   }
 
   async onAddNew() {

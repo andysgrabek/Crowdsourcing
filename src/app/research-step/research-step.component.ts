@@ -11,7 +11,6 @@ import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component
 import {MatTable} from '@angular/material/table';
 import {AnnotationVisualizerService} from '../service/annotation-visualizer.service';
 import ResearchStepData from '../dto/ResearchStepData';
-import {ConsentEditDialogComponent} from "../consent-edit-dialog/consent-edit-dialog.component";
 
 @Component({
   selector: 'app-research-step',
@@ -69,7 +68,6 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
       this.onConfirmFinalizeAddAnnotation(ann);
       dialogRef.close();
     };
-    dialogRef.componentInstance.onCancel = () => dialogRef.close();
   }
 
   async onEdit(annotation: ResearchAnnotation) {
@@ -81,7 +79,6 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
       this.onConfirmEditAnnotation(ann, annotation);
       dialogRef.close();
     };
-    dialogRef.componentInstance.onCancel = () => dialogRef.close();
   }
 
   onConfirmEditAnnotation(annotation: ResearchAnnotation, originalAnnotation: ResearchAnnotation) {
@@ -152,7 +149,6 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
       this.clearVisualizeAnnotation();
       dialogRef.close();
     };
-    dialogRef.componentInstance.onCancel = () => dialogRef.close();
   }
 }
 

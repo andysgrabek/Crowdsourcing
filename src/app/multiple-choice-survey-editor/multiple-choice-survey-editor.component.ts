@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractSurveyEditor} from '../abstract-survey-editor/abstract-survey-editor';
 import {TranslationBundle, TranslationService} from '../service/translation.service';
+import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-multiple-choice-survey-editor',
@@ -10,8 +11,8 @@ import {TranslationBundle, TranslationService} from '../service/translation.serv
 export class MultipleChoiceSurveyEditorComponent extends AbstractSurveyEditor implements OnInit {
   rb: TranslationBundle;
 
-  constructor(private tr: TranslationService) {
-    super();
+  constructor(private tr: TranslationService, private dialogRefInj: MatDialogRef<MultipleChoiceSurveyEditorComponent>) {
+    super(dialogRefInj);
     this.rb = tr.getComponentBundle('MultipleChoiceSurveyEditorComponent');
   }
 

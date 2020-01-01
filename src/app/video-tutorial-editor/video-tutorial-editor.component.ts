@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AbstractTutorialEditor} from '../abstract-tutorial-editor/abstract-tutorial-editor';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {TranslationBundle, TranslationService} from '../service/translation.service';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-video-tutorial-editor',
@@ -13,8 +14,10 @@ export class VideoTutorialEditorComponent extends AbstractTutorialEditor impleme
   ytUrl: SafeResourceUrl;
   rb: TranslationBundle;
 
-  constructor(private sanitizer: DomSanitizer, private tr: TranslationService) {
-    super();
+  constructor(private sanitizer: DomSanitizer,
+              private tr: TranslationService,
+              private dialogRefInj: MatDialogRef<VideoTutorialEditorComponent>) {
+    super(dialogRefInj);
     this.rb = tr.getComponentBundle('VideoTutorialEditorComponent');
   }
 

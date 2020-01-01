@@ -53,9 +53,6 @@ export class ResearchConfigStepsComponent implements OnInit {
       Object.assign(this.researchConfig.steps.find(con => con === step), newStep);
       this.researchConfigService.updateResearch(this.id, this.researchConfig);
     };
-    dialogRef.componentInstance.onCancel = () => {
-      dialogRef.close();
-    };
   }
 
   async onDelete(step: ResearchStep) {
@@ -66,16 +63,12 @@ export class ResearchConfigStepsComponent implements OnInit {
       this.researchConfig.steps = this.researchConfig.steps.filter(con => con !== step);
       this.researchConfigService.updateResearch(this.id, this.researchConfig);
     };
-    dialogRef.componentInstance.onCancel = () => {
-      dialogRef.close();
-    };
   }
 
   async onAddNew(type: ResearchStepType) {
     const dialogRef = this.dialog.open(this.editors.get(type));
     dialogRef.componentInstance.step = new ResearchStep();
     dialogRef.componentInstance.onConfirm = (c) => this.onConfirmStepAdd(dialogRef, c);
-    dialogRef.componentInstance.onCancel = () => dialogRef.close();
   }
 
   private async onConfirmStepAdd(dialogRef, step: ResearchStep) {

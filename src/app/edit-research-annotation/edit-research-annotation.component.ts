@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import ResearchConsent from '../dto/ResearchConsent';
 import {TranslationBundle, TranslationService} from '../service/translation.service';
 import ResearchAnnotation from '../dto/ResearchAnnotation';
+import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-edit-research-annotation',
@@ -15,7 +16,7 @@ export class EditResearchAnnotationComponent implements OnInit {
   showConfirm = true;
   rb: TranslationBundle;
 
-  constructor(private tr: TranslationService) {
+  constructor(private tr: TranslationService, private dialogRef: MatDialogRef<EditResearchAnnotationComponent>) {
     this.rb = this.tr.getComponentBundle('EditResearchAnnotationComponent');
   }
 
@@ -25,7 +26,9 @@ export class EditResearchAnnotationComponent implements OnInit {
 
   onConfirm: (newAnnotation: ResearchAnnotation) => void = () => {};
 
-  onCancel: () => void = () => {};
+  onCancel() {
+    this.dialogRef.close();
+  }
 
   onTextChange(value: string) {
     this.annotation.comment = value;

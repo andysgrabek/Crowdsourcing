@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AbstractStepEditor} from '../abstract-step-editor/abstract-step-editor';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {TranslationBundle, TranslationService} from '../service/translation.service';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-video-step-editor',
@@ -13,8 +14,10 @@ export class VideoStepEditorComponent extends AbstractStepEditor implements OnIn
   ytUrl: SafeResourceUrl;
   rb: TranslationBundle;
 
-  constructor(private sanitizer: DomSanitizer, private tr: TranslationService) {
-    super();
+  constructor(private sanitizer: DomSanitizer,
+              private tr: TranslationService,
+              private dialogRefInj: MatDialogRef<VideoStepEditorComponent>) {
+    super(dialogRefInj);
     this.rb = tr.getComponentBundle('VideoStepEditorComponent');
   }
 

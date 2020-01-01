@@ -44,9 +44,6 @@ export class ResearchConfigConsentComponent implements OnInit {
       Object.assign(this.researchConfig.consents.find(con => con === consent), newConsent);
       this.researchConfigService.updateResearch(this.id, this.researchConfig);
     };
-    dialogRef.componentInstance.onCancel = () => {
-      dialogRef.close();
-    };
   }
 
   async onDelete(consent: ResearchConsent) {
@@ -57,16 +54,12 @@ export class ResearchConfigConsentComponent implements OnInit {
       this.researchConfig.consents = this.researchConfig.consents.filter(con => con !== consent);
       this.researchConfigService.updateResearch(this.id, this.researchConfig);
     };
-    dialogRef.componentInstance.onCancel = () => {
-      dialogRef.close();
-    };
   }
 
   async onAddNew() {
     const dialogRef = this.dialog.open(ConsentEditDialogComponent, {autoFocus: false});
     dialogRef.componentInstance.consent = new ResearchConsent();
     dialogRef.componentInstance.onConfirm = (c) => this.onConfirmConsentAdd(dialogRef, c);
-    dialogRef.componentInstance.onCancel = () => dialogRef.close();
   }
 
   private async onConfirmConsentAdd(dialogRef, consent: ResearchConsent) {

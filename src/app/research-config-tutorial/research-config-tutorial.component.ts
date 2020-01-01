@@ -12,7 +12,6 @@ import {ComponentType} from '@angular/cdk/overlay';
 import {AbstractTutorialEditor} from '../abstract-tutorial-editor/abstract-tutorial-editor';
 import ResearchConsent from '../dto/ResearchConsent';
 import {TranslationBundle, TranslationService} from '../service/translation.service';
-import {ConsentEditDialogComponent} from "../consent-edit-dialog/consent-edit-dialog.component";
 
 @Component({
   selector: 'app-research-config-tutorial',
@@ -52,14 +51,12 @@ export class ResearchConfigTutorialComponent implements OnInit {
     const dialogRef = this.dialog.open(this.editors.get(tutorial.type), {autoFocus: false});
     dialogRef.componentInstance.tutorial = Object.assign(new ResearchTutorial(), tutorial);
     dialogRef.componentInstance.onConfirm = (newTutorial) => this.onConfirmTutorialEdit(dialogRef, tutorial, newTutorial);
-    dialogRef.componentInstance.onCancel = () => dialogRef.close();
   }
 
   async onDelete(consent: ResearchTutorial) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {autoFocus: false});
     dialogRef.componentInstance.text = this.rb.get('delete-confirmation');
     dialogRef.componentInstance.onConfirm = () => this.onConfirmTutorialDelete(dialogRef, consent);
-    dialogRef.componentInstance.onCancel = () => dialogRef.close();
   }
 
   private async onConfirmTutorialEdit(dialogRef, tutorial: ResearchTutorial, newTutorial) {
@@ -80,7 +77,6 @@ export class ResearchConfigTutorialComponent implements OnInit {
     tutorial.type = type;
     dialogRef.componentInstance.tutorial = tutorial;
     dialogRef.componentInstance.onConfirm = (newSurvey) => this.onConfirmTutorialAdd(dialogRef, newSurvey);
-    dialogRef.componentInstance.onCancel = () => dialogRef.close();
   }
 
   private async onConfirmTutorialAdd(dialogRef, tutorial: ResearchTutorial) {
