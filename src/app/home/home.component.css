@@ -11,8 +11,7 @@
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
-  /*TODO: replace the url below*/
-  background-image: url('https://analyticsindiamag.com/wp-content/uploads/2019/07/image_rec_lib_banner.jpg');
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/42/A_computed_tomography_brain_scan_showing_bilateral_basal_ganglia_calcification.jpg');
   opacity: 0.7;
   top: 0;
   left: 0;
@@ -32,10 +31,12 @@
 
 .hero-image-title {
   color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .hero-image-text {
   color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .home-features-wrapper {
@@ -44,15 +45,21 @@
 
 .home-row {
   margin: 0 auto;
-  width: 80%;
+  max-width: 60%;
   justify-content: center;
   text-align: center;
   align-items: center;
   display: flex;
   flex-wrap: wrap;
+  object-fit: contain;
 }
 
 .home-column {
   flex: 45%;
   padding: 1rem;
+}
+
+.feature-image {
+  object-fit: contain;
+  width: 90%;
 }

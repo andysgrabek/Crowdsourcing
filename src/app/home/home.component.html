@@ -10,16 +10,16 @@
       <h2>{{rb.get('feature-one-heading')}}</h2>
       <p>{{rb.get('feature-one-text')}}</p>
     </div>
-    <div class="home-column">
-      <img src="https://pbs.twimg.com/profile_images/846659478120366082/K-kZVvT8_400x400.jpg">
+    <div *ngIf="(featureOneUrl | async) as f1url" class="home-column">
+      <img class="feature-image" [src]="f1url">
     </div>
 
     <div class="home-column">
       <h2>{{rb.get('feature-two-heading')}}</h2>
       <p>{{rb.get('feature-two-text')}}</p>
     </div>
-    <div class="home-column">
-      <img src="https://pbs.twimg.com/profile_images/846659478120366082/K-kZVvT8_400x400.jpg">
+    <div *ngIf="(featureTwoUrl | async) as f2url" class="home-column">
+      <img class="feature-image" [src]="f2url">
     </div>
   </div>
 </div>
