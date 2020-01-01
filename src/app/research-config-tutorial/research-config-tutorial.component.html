@@ -9,7 +9,7 @@
   </mat-menu>
   <div class="research-config-tutorial-item-sidebar"></div>
   <div class="research-config-tutorial-wrapper research-config-tutorial-item-main">
-    <div [hidden]="!researchConfig || !researchConfig.tutorials || researchConfig.tutorials.length === 0">
+    <div *ngIf="researchConfig && researchConfig.tutorials && researchConfig.tutorials.length > 0">
       <table mat-table [dataSource]="researchConfig.tutorials" class="table-aligned mat-elevation-z4" #researchTable>
         <ng-container matColumnDef="number">
           <th mat-header-cell *matHeaderCellDef> {{rb.get('number-header')}} </th>
