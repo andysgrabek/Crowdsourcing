@@ -1,19 +1,23 @@
 <div>
   <p *ngIf="model.type !== stepTypes.IMAGE">{{rb.get('unsupported-step-type')}}</p>
   <div *ngIf="model.type === stepTypes.IMAGE">
-    <div class="full-width-element">
-      <canvas class="research-step-canvas full-width-element"
-              (mousedown)="onMouseDown($event)"
-              (mouseup)="onMouseUpOrLeave($event)"
-              (mousemove)="onMouseMove($event)"
-              (mouseleave)="onMouseUpOrLeave($event)"
-              [style.background-image]="sanitizedUrl"
-              id="annotationCanvas">
-      </canvas>
-    </div>
-
     <div class="table-comment-row">
+      <div class="full-width-element table-column">
+        <canvas class="research-step-canvas full-width-element"
+                (mousedown)="onMouseDown($event)"
+                (mouseup)="onMouseUpOrLeave($event)"
+                (mousemove)="onMouseMove($event)"
+                (mouseleave)="onMouseUpOrLeave($event)"
+                [style.background-image]="sanitizedUrl"
+                id="annotationCanvas">
+        </canvas>
+      </div>
       <div class="table-column">
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="onAddAnnotation(availableAnnotationTypes.CIRCLE)">{{rb.get('circle')}}</button>
+          <button mat-menu-item (click)="onAddAnnotation(availableAnnotationTypes.RECTANGLE)">{{rb.get('rectangle')}}</button>
+          <button mat-menu-item (click)="onAddAnnotation(availableAnnotationTypes.FREE_CURVE)">{{rb.get('free-curve')}}</button>
+        </mat-menu>
         <div class="centered-text-wrapper">
           <h3 class="centered-text-item">{{rb.get('annotations')}}</h3>
         </div>
@@ -33,18 +37,16 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr (mouseover)="visualizeAnnotation(row)" (mouseout)="clearVisualizeAnnotation()" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <button *ngIf="!(!annotations || annotations.length === 0)" mat-raised-button [matMenuTriggerFor]="menu">{{rb.get('add-annotation')}}</button>
         <div class="centered-text-wrapper" *ngIf="!annotations || annotations.length === 0">
           <p class="centered-text-item">{{rb.get('no-annotations')}}</p>
           <div class="centered-text-item" >
             <button mat-raised-button [matMenuTriggerFor]="menu">{{rb.get('add-annotation')}}</button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="onAddAnnotation(availableAnnotationTypes.CIRCLE)">{{rb.get('circle')}}</button>
-              <button mat-menu-item (click)="onAddAnnotation(availableAnnotationTypes.RECTANGLE)">{{rb.get('rectangle')}}</button>
-              <button mat-menu-item (click)="onAddAnnotation(availableAnnotationTypes.FREE_CURVE)">{{rb.get('free-curve')}}</button>
-            </mat-menu>
           </div>
         </div>
       </div>
+    </div>
+    <div class="table-comment-row">
       <div class="comment-column">
         <div class="centered-text-wrapper">
           <h3 class="centered-text-item">{{rb.get('free-comment')}}</h3>
