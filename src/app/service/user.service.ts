@@ -65,9 +65,10 @@ export class UserService {
           handleCodeInApp: false
         };
         await res.user.sendEmailVerification(actionCodeSettings);
+        this.snackBar.open(this.rb.get('register-success'), undefined, {duration: 3000});
       }
-    } catch (err) {
-      console.log(err);
+    } catch {
+      this.snackBar.open(this.rb.get('register-fail'), undefined, {duration: 3000});
     }
     this.progressService.setLoadingState(false);
   }

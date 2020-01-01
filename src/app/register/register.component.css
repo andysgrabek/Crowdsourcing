@@ -1,0 +1,23 @@
+.register-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.register-form-item {
+  flex: 1;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+
+.register-page-wrapper {
+  display: flex;
+}
+
+.register-page-item {
+  flex: 1;
+  margin: 1rem;
+}

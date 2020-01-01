@@ -1,19 +1,29 @@
-<div >
+<div class="route-title">
   <h3>{{rb.get('register')}}</h3>
+</div>
 
-  <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
-
-    <div>
-      <label for="email">{{rb.get('email-address')}}</label>
-      <input type="email" [(ngModel)]="model.email" id="email" name="email" required>
+<div class="register-page-wrapper">
+  <div class="register-page-item"></div>
+  <div class="register-page-item">
+    <div class="register-form-wrapper mat-elevation-z4">
+      <mat-form-field class="register-form-item">
+        <mat-label>{{rb.get('email-address')}}</mat-label>
+        <input
+          matInput
+          type="email"
+          [(ngModel)]="model.email"
+          required>
+      </mat-form-field>
+      <mat-form-field class="register-form-item">
+        <mat-label>{{rb.get('password')}}</mat-label>
+        <input
+          type="password"
+          matInput
+          [(ngModel)]="model.password"
+          required>
+      </mat-form-field>
+      <button mat-raised-button (click)="onSubmit()">{{rb.get('submit')}}</button>
     </div>
-
-    <div>
-      <label for="password">{{rb.get('password')}}</label>
-      <input type="password" [(ngModel)]="model.password" id="password" name="email" required>
-    </div>
-
-    <button mat-raised-button type="submit">{{rb.get('submit')}}</button>
-
-  </form>
+  </div>
+  <div class="register-page-item"></div>
 </div>
