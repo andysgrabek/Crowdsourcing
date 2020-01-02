@@ -9,6 +9,7 @@ import {HttpClient} from '@angular/common/http';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {tap} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {ProgressService} from '../service/progress.service';
 
 @Component({
   selector: 'app-research-data',
@@ -31,7 +32,8 @@ export class ResearchDataComponent implements OnInit {
               private transformationService: TransformationService,
               private matSnackBar: MatSnackBar,
               private http: HttpClient,
-              private storage: AngularFireStorage) {
+              private storage: AngularFireStorage,
+              private progressService: ProgressService) {
     this.rb = tr.getComponentBundle('ResearchDataComponent');
   }
 
@@ -47,6 +49,7 @@ export class ResearchDataComponent implements OnInit {
   }
 
   async onDownloadTransformed(transform: TransformationDescriptor) {
+    this.progressService.setLoadingState(true);
     try {
       const result = await this.transformationService.invokeTransformation(transform.name, this.id);
       const ref = this.storage.ref(`results/${this.id}/${this.id}-${transform.name}.${transform.extension || 'data'}`);
@@ -56,18 +59,8 @@ export class ResearchDataComponent implements OnInit {
       this.matSnackBar.open(this.rb.get('downloading-file-success'), undefined, {duration: 3000});
     } catch {
       this.matSnackBar.open(this.rb.get('downloading-file-failure'), undefined, {duration: 3000});
-    }
-  }
-
-  async onDownloadUnTransformed() {
-    try {
-      const ref = this.storage.ref(`results/${this.id}/${this.id}-untransformed.json`);
-      const task = await ref.putString(this.dataString);
-      const url = await task.ref.getDownloadURL();
-      window.open(url);
-      this.matSnackBar.open(this.rb.get('downloading-file-success'), undefined, {duration: 3000});
-    } catch {
-      this.matSnackBar.open(this.rb.get('downloading-file-failure'), undefined, {duration: 3000});
+    } finally {
+      this.progressService.setLoadingState(false);
     }
   }
 }

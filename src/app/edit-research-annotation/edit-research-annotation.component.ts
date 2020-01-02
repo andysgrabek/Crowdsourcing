@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import ResearchConsent from '../dto/ResearchConsent';
 import {TranslationBundle, TranslationService} from '../service/translation.service';
 import ResearchAnnotation from '../dto/ResearchAnnotation';
-import {MatDialogRef} from "@angular/material/dialog";
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-research-annotation',
