@@ -56,7 +56,7 @@ export class AnnotationVisualizerService {
     context.stroke();
   }
 
-  visualizeFreeCurve(annotation: ResearchAnnotation, context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
+  visualizeFreeCurve(annotation: ResearchAnnotation, context: CanvasRenderingContext2D, canvas: HTMLCanvasElement, closed = false) {
     const points = annotation.points.map(point => {
       return { x: point.x * canvas.width, y: point.y * canvas.height };
     });
@@ -68,8 +68,10 @@ export class AnnotationVisualizerService {
       context.lineTo(points[i].x, points[i].y);
       context.stroke();
     }
-    context.lineTo(points[0].x, points[0].y);
-    context.stroke();
+    if (closed) {
+      context.lineTo(points[0].x, points[0].y);
+      context.stroke();
+    }
   }
 
 }
