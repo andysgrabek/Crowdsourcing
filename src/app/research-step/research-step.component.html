@@ -1,7 +1,7 @@
 <div>
   <p *ngIf="model.type !== stepTypes.IMAGE">{{rb.get('unsupported-step-type')}}</p>
   <div *ngIf="model.type === stepTypes.IMAGE">
-    <div class="table-comment-row">
+    <div class="table-comment-row" (window:resize)="onResize()">
       <div class="full-width-element canvas-column">
         <canvas class="research-step-canvas full-width-element"
                 (mousedown)="onMouseDown($event)"

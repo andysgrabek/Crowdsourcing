@@ -119,6 +119,7 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
 
   onMouseDown(event: MouseEvent) {
     if (this.currentDrawingState === AnnotationDrawingStates.IDLE) {
+      this.onResize();
       this.currentDrawingState = AnnotationDrawingStates.DRAWING;
       this.annotationDelegate = ResearchAnnotationDelegateFactory.createDelegate(this.newAnnotation.annotationType, this.canvas);
       this.annotationDelegate.start(this.getPointInCanvas(event));
@@ -150,6 +151,14 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
       dialogRef.close();
     };
   }
+
+  onResize() {
+    const targetHeight = this.canvas.getBoundingClientRect().height;
+    const targetWidth = this.canvas.getBoundingClientRect().width;
+    this.canvas.height = targetHeight;
+    this.canvas.width = targetWidth;
+  }
+
 }
 
 enum AnnotationDrawingStates {
