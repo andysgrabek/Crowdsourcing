@@ -102,7 +102,8 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
   }
 
   onMouseUpOrLeave(event: MouseEvent) {
-    if (this.currentDrawingState === AnnotationDrawingStates.DRAWING) {
+    if (this.currentDrawingState === AnnotationDrawingStates.DRAWING && event.buttons === 0) {
+      // only execute when all buttons were lifted
       this.currentDrawingState = AnnotationDrawingStates.NOT_LISTENING;
       this.newAnnotation.points = this.annotationDelegate.end(this.getPointInCanvas(event));
       this.onFinalizeAddAnnotation();
@@ -113,12 +114,13 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
 
   onMouseMove(event: MouseEvent) {
     if (this.currentDrawingState === AnnotationDrawingStates.DRAWING) {
-      this.annotationDelegate.move(this.getPointInCanvas(event));
+      this.annotationDelegate.move(this.getPointInCanvas(event), event);
     }
   }
 
   onMouseDown(event: MouseEvent) {
-    if (this.currentDrawingState === AnnotationDrawingStates.IDLE) {
+    if (this.currentDrawingState === AnnotationDrawingStates.IDLE && event.buttons === 1) {
+      // only execute when the left mouse button is pressed
       this.onResize();
       this.currentDrawingState = AnnotationDrawingStates.DRAWING;
       this.annotationDelegate = ResearchAnnotationDelegateFactory.createDelegate(this.newAnnotation.annotationType, this.canvas);
@@ -159,6 +161,9 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
     this.canvas.width = targetWidth;
   }
 
+  onContextMenu($event: MouseEvent) {
+    $event.preventDefault();
+  }
 }
 
 enum AnnotationDrawingStates {

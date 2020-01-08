@@ -4,6 +4,7 @@
     <div class="table-comment-row" (window:resize)="onResize()">
       <div class="full-width-element canvas-column">
         <canvas class="research-step-canvas full-width-element"
+                (contextmenu)="onContextMenu($event)"
                 (mousedown)="onMouseDown($event)"
                 (mouseup)="onMouseUpOrLeave($event)"
                 (mousemove)="onMouseMove($event)"
@@ -15,6 +16,7 @@
       <div class="table-column">
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="onAddAnnotation(availableAnnotationTypes.CIRCLE)">{{rb.get('circle')}}</button>
+          <button mat-menu-item (click)="onAddAnnotation(availableAnnotationTypes.ELLIPSE)">{{rb.get('ellipse')}}</button>
           <button mat-menu-item (click)="onAddAnnotation(availableAnnotationTypes.RECTANGLE)">{{rb.get('rectangle')}}</button>
           <button mat-menu-item (click)="onAddAnnotation(availableAnnotationTypes.FREE_CURVE)">{{rb.get('free-curve')}}</button>
         </mat-menu>

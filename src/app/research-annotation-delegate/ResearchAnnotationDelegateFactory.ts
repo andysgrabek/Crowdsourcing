@@ -3,6 +3,7 @@ import {ResearchAnnotationDelegate} from './ResearchAnnotationDelegate';
 import FreeCurveAnnotationDelegate from './FreeCurveAnnotationDelegate';
 import CircleAnnotationDelegate from './CircleAnnotationDelegate';
 import RectangleAnnotationDelegate from './RectangleAnnotationDelegate';
+import EllipseAnnotationDelegate from './EllipseAnnotationDelegate';
 
 export default class ResearchAnnotationDelegateFactory {
 
@@ -17,6 +18,8 @@ export default class ResearchAnnotationDelegateFactory {
         return new CircleAnnotationDelegate(canvas);
       case ResearchAnnotationType.FREE_CURVE:
         return new FreeCurveAnnotationDelegate(canvas);
+      case ResearchAnnotationType.ELLIPSE:
+        return new EllipseAnnotationDelegate(canvas);
     }
   }
 

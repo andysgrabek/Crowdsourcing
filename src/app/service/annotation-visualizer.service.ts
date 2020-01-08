@@ -24,6 +24,9 @@ export class AnnotationVisualizerService {
       case ResearchAnnotationType.FREE_CURVE:
         this.visualizeFreeCurve(annotation, context, canvas);
         break;
+      case ResearchAnnotationType.ELLIPSE:
+        this.visualizeEllipse(annotation, context, canvas);
+        break;
     }
   }
 
@@ -74,4 +77,24 @@ export class AnnotationVisualizerService {
     }
   }
 
+  visualizeEllipse(annotation: ResearchAnnotation, context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
+    const points = annotation.points.map(point => {
+      return { x: point.x * canvas.width, y: point.y * canvas.height };
+    });
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.beginPath();
+    context.strokeStyle = this.defaultStrokeStyle;
+    context.lineWidth = this.defaultLineWidth;
+    const majorSemiAxisLength = Math.hypot(points[0].x - points[1].x, points[0].y - points[1].y);
+    const minorSemiAxisLength = Math.hypot(points[0].x - points[2].x, points[0].y - points[2].y);
+    context.ellipse(
+      points[0].x,
+      points[0].y,
+      majorSemiAxisLength,
+      minorSemiAxisLength,
+      Math.atan2(points[1].y - points[0].y, points[1].x - points[0].x),
+      0,
+      2 * Math.PI);
+    context.stroke();
+  }
 }

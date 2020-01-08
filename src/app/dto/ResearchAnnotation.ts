@@ -15,5 +15,6 @@ export default class ResearchAnnotation {
 export enum ResearchAnnotationType {
   RECTANGLE,
   CIRCLE,
-  FREE_CURVE
+  FREE_CURVE,
+  ELLIPSE
 }
