@@ -102,8 +102,8 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
   }
 
   onMouseUpOrLeave(event: MouseEvent) {
-    if (this.currentDrawingState === AnnotationDrawingStates.DRAWING && event.buttons === 0) {
-      // only execute when all buttons were lifted
+    if (this.currentDrawingState === AnnotationDrawingStates.DRAWING && event.button === 0) {
+      // only execute when left mouse button is lifted
       this.currentDrawingState = AnnotationDrawingStates.NOT_LISTENING;
       this.newAnnotation.points = this.annotationDelegate.end(this.getPointInCanvas(event));
       this.onFinalizeAddAnnotation();
@@ -119,7 +119,7 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
   }
 
   onMouseDown(event: MouseEvent) {
-    if (this.currentDrawingState === AnnotationDrawingStates.IDLE && event.buttons === 1) {
+    if (this.currentDrawingState === AnnotationDrawingStates.IDLE && event.button === 0) {
       // only execute when the left mouse button is pressed
       this.onResize();
       this.currentDrawingState = AnnotationDrawingStates.DRAWING;
