@@ -98,10 +98,10 @@ export class ResearchStepComponent implements OnInit, AfterViewInit {
 
   private getPointInCanvas(event: MouseEvent): {x: number, y: number} {
     const rect = this.canvas.getBoundingClientRect();
-    const scale = this.canvas.width / rect.width;
-    const x = event.layerX * scale;
-    const y = event.layerY * scale;
-    return {x, y};
+    return {
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top
+    };
   }
 
   async onMouseUpOrLeave(event: MouseEvent) {
